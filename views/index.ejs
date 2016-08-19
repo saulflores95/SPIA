@@ -1,0 +1,279 @@
+<html>
+
+<head>
+    <title>SPIA</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
+    <link href="stylesheets/style.css" rel="stylesheet">
+    <script src="javascripts/function.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="javascripts/angularApp.js"></script>
+    <script src="javascripts/progress_bar.js"></script>
+
+    <style>
+        .glyphicon-thumbs-up {
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body ng-app="amacApp">
+    <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+        <ul class="nav navbar-nav">
+            <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
+            <li ng-show="isLoggedIn()"><a>{{ currentUserType() }}</a></li>
+
+            <li ng-show="isLoggedIn()"><a href="#" ng-click="logOut()">Log Out</a></li>
+            <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
+            <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+        </ul>
+    </nav>
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3" style="margin-top:69px;">
+            <ul class="nav nav-pills nav-justified">
+                <li class="navPill active"><a href="/#/catalogo">Catalogo</a></li>
+                <li class="navPill"><a href="/#/home">Crear Orden</a></li>
+                <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+            </ul>
+
+
+            <ui-view></ui-view>
+        </div>
+        <!--LOOOOL -->
+    </div>
+
+    <script type="text/ng-template" id="/home.html">
+        <div class="page-header">
+            <h1>SPIA</h1>
+        </div>
+
+        <div ng-repeat="post in posts | orderBy: '-upvotes'">
+            <!--
+            <span class="glyphicon glyphicon-thumbs-up" ng-click="upvote(post)"></span> {{post.upvotes}}
+            <span class="glyphicon glyphicon-thumbs-down" ng-click="downvote(post)"></span>
+            -->
+            <span style="font-size:20px;margin-left:10px">
+            <a ng-show="post.link" href="{{post.link}}">
+              {{post.title}}
+            </a>
+            <span ng-hide="post.link">
+              {{post.title}}
+            </span>
+            <span ng-show="post.author">
+    		  posted by <a>{{post.author}}</a>
+    		</span>
+            </span>
+            <span>
+            <a href="#/posts/{{post._id}}">ver orden</a>
+              ({{post.comments.length}})
+            </span>
+            <span ng-show="post.progress == 0"><b>No a Iniciado</b></span>
+            <span ng-show="post.progress == 20"><b>Diseño</b></span>
+            <span ng-show="post.progress == 30"><b>Almacen</b></span>
+            <span ng-show="post.progress == 40"><b>Produccion</b></span>
+            <span ng-show="post.progress == 50"><b>Preprensa</b></span>
+            <span ng-show="post.progress == 60"><b>Acabados</b></span>
+            <span ng-show="post.progress == 70"><b>Calidad</b></span>
+            <span ng-show="post.progress == 90"><b>Entregas</b></span>
+            <span ng-show="post.progress == 100"><b>Orden Completada</b></span>
+
+        </div>
+
+        <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:30px">
+            <h3>Agrega una Orden:</h3>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Title" ng-model="title">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Link" ng-model="link">
+            </div>
+
+            <div class"form-goup">
+                <input type="text" class="form-control" id="datepicker">
+            </div>
+            <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+        <div ng-hide="isLoggedIn()">
+            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
+        </div>
+
+    </script>
+
+    <script type="text/ng-template" id="/posts.html">
+        <div class="page-header">
+            <input class="btn" type="button" value="Refresh Page" onClick="window.location.reload()">
+            <!--
+            <h1>Ventas:     {{post.ventasConfirmation}}</h1>
+            <h1>Diseno:     {{post.disenoConfirmation}}</h1>
+            <h1>Almacen:    {{post.almacenConfirmation}}</h1>
+            <h1>Produccion: {{post.produccionConfirmation}}</h1>
+            <h1>PrePrensa:  {{post.preConfirmation}}</h1>
+            <h1>Acabados:   {{post.acabadosConfirmation}}</h1>
+            <h1>Calidad:    {{post.calidadConfirmation}}</h1>
+            <h1>Entregas:   {{post.entregasConfirmation}}</h1>
+        -->
+            <h3>
+                <a ng-show="post.link" href="{{post.link}}">
+                  {{post.title}}
+                </a>
+                <span ng-hide="post.link">
+                  {{post.title}}
+                </span>
+          </h3>
+        </div>
+        <div class="row" id="progressButtonOneRow">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{ventasStyle()}}" ng-disabled="currentUserType() != 'ventas' || post.ventasConfirmation == true" ng-click="ventasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Ventas</small></h5>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{disenoStyle()}}" ng-disabled="currentUserType() != 'diseno' || post.disenoConfirmation == true || post.ventasConfirmation == false" ng-click="disenoConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Diseno</small></h5>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.disenoConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Almacen</small></h5>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{produccionStyle()}}" ng-disabled="currentUserType() != 'produccion' || post.produccionConfirmation == true || post.almacenConfirmation == false" ng-click="produccionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Produccion</small></h5>
+            </div>
+        </div>
+        <div class="row" id="progressRow">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{post.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{post.progress}}%">
+                    {{post.progress}} % {{department()}}
+                </div>
+            </div>
+        </div>
+        <div class="row" id="progressButtonTwoRow">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{preStyle()}}" ng-disabled="currentUserType() != 'prePrensa' || post.preConfirmation == true || post.produccionConfirmation == false" ng-click="preConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Preprensa</small></h5>
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{acabadosStyle()}}" ng-disabled="currentUserType() != 'acabados' || post.acabadosConfirmation == true || post.preConfirmation == false" ng-click="acabadosConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Acabados</small></h5>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{calidadStyle()}}" ng-disabled="currentUserType() != 'calidad' || post.calidadConfirmation == true || post.acabadosConfirmation == false" ng-click="calidadConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Calidad</small></h5>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{entregasStyle()}}" ng-disabled="currentUserType() != 'entregas' || post.entregasConfirmation == true || post.calidadConfirmation == false" ng-click="entregasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Entregas</small></h5>
+            </div>
+        </div>
+        <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+            <span class="glyphicon glyphicon-thumbs-up" ng-click="upvote(comment)"></span> {{comment.upvotes}}
+            <span class="glyphicon glyphicon-thumbs-down" ng-click="downvote(comment)"></span> - by {{comment.author}}
+            <span style="font-size:20px; margin-left:10px;">
+                {{comment.body}}
+            </span>
+        </div>
+        <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
+            <h3>Agrega un Comentario</h3>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Comment" ng-model="body"></input>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+        <div ng-hide="isLoggedIn()">
+            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can comment.</h3>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="/catalogo.html">
+        <div class="form-group">
+            <label for="filter">Buscar:</label>
+            <input type="text" ng-model="filter.Descripcion" class="form-control">
+        </div>
+        <div class="productContainer">
+            <div ng-repeat="product in catalog | filter: filter ">
+                <div class="col-lg-4">
+                    <div class="thumbnail"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk4Kjetq_pQFOTl4MsHxdMvdDXE3G02blsU89QPgCUMSfKzrGYbA" />
+                        <div class="caption"><strong>{{product.Localidad}} </strong>
+                            <h4 class="text-center">{{product.Producto}} </h4>
+                            <p>{{product.Descripcion}} </p>
+                            <p>{{product.precio_unitario}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="/register.html">
+        <div class="page-header">
+            <h1>SPIA</h1>
+        </div>
+
+        <div ng-show="error" class="alert alert-danger row">
+            <span>{{ error.message }}</span>
+        </div>
+
+        <form ng-submit="register()" style="margin-top:30px;">
+            <h3>Register</h3>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
+            </div>
+
+            <div class="form-group">
+                <label for="sel1">Tipo de usuario list:</label>
+                <select ng-model="user.userType" class="form-control" id="sel1">
+                <option value="admin">Administridaor</option>
+                <option value="ventas">Ventas</option>
+                <option value="diseno">Diseño</option>
+                <option value="almacen">Almacen</option>
+                <option value="prePrensa">Preprensa</option>
+                <option value="produccion">Produccion</option>
+                <option value="acabados">Acabados</option>
+                <option value="calidad">Calidad</option>
+                <option value="entregas">Entregas</option>
+                <option value="test">Test</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </script>
+
+    <script type="text/ng-template" id="/login.html">
+        <div class="page-header">
+            <h1>SPIA</h1>
+        </div>
+
+        <div ng-show="error" class="alert alert-danger row">
+            <span>{{ error.message }}</span>
+        </div>
+
+        <form ng-submit="logIn()" style="margin-top:30px;">
+            <h3>Log In</h3>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+    </script>
+
+
+</body>
+
+</html>
