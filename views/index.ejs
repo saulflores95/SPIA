@@ -20,6 +20,7 @@
 </head>
 
 <body ng-app="amacApp">
+
     <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
         <ul class="nav navbar-nav">
             <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
@@ -92,10 +93,6 @@
 
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Link" ng-model="link">
-            </div>
-
-            <div class"form-goup">
-                <input type="text" class="form-control" id="datepicker">
             </div>
             <button type="submit" class="btn btn-primary">Post</button>
         </form>
