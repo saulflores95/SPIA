@@ -4,6 +4,7 @@ var router = express.Router();
 var passport = require('passport');
 var jwt = require('express-jwt');
 
+var Product = mongoose.model('Product');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
@@ -80,8 +81,29 @@ router.put('/posts/:post/disenoConfirmationCapture', auth, function(req, res, ne
     res.json(post);
   });
 });
+router.put('/posts/:post/planacionConfirmationCapture', auth, function(req, res, next) {
+  req.post.planacionConfirmationCapture(function(err, post){
+    if (err) { return next(err); }
+
+    res.json(post);
+  });
+});
+router.put('/posts/:post/productoTerConfirmationCapture', auth, function(req, res, next) {
+  req.post.productoTerConfirmationCapture(function(err, post){
+    if (err) { return next(err); }
+
+    res.json(post);
+  });
+});
 router.put('/posts/:post/almacenConfirmationCapture', auth, function(req, res, next) {
   req.post.almacenConfirmationCapture(function(err, post){
+    if (err) { return next(err); }
+
+    res.json(post);
+  });
+});
+router.put('/posts/:post/prensaConfirmationCapture', auth, function(req, res, next) {
+  req.post.prensaConfirmationCapture(function(err, post){
     if (err) { return next(err); }
 
     res.json(post);
@@ -128,16 +150,14 @@ router.put('/posts/:post/upvote', auth, function(req, res, next) {
 
     res.json(post);
   });
-});
-
+})
 router.put('/posts/:post/downvote', auth, function(req, res, next) {
   req.post.downvote(function(err, post){
     if (err) { return next(err); }
 
     res.json(post);
   });
-});
-
+})
 router.post('/posts/:post/comments', auth, function(req, res, next) {
   var comment = new Comment(req.body);
   comment.post = req.post;
@@ -153,23 +173,30 @@ router.post('/posts/:post/comments', auth, function(req, res, next) {
       res.json(comment);
     });
   });
-});
-
+})
 router.put('/posts/:post/comments/:comment/upvote', auth, function(req, res, next) {
   req.comment.upvote(function(err, comment){
     if (err) { return next(err); }
 
     res.json(comment);
   });
-});
-
+})
 router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, next) {
   req.comment.downvote(function(err, comment){
     if (err) { return next(err); }
 
     res.json(comment);
   });
-});
+})
+router.get('/products', function(req, res, next) {
+  Product.find(function(err, products){
+    if(err){
+      return next(err);
+    }
+
+    res.json(products);
+  });
+})
 
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){

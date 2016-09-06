@@ -49,7 +49,7 @@ function($stateProvider, $urlRouterProvider) {
 	}).state('catalogo', {
 		url : '/catalogo',
 		templateUrl : '/catalogo.html',
-		controller : 'CatCtrl'
+		controller : 'ProdCtrl'
 	});
 
 	$urlRouterProvider.otherwise('home');
@@ -116,6 +116,38 @@ function($http, $window) {
 	return auth;
 }]);
 
+app.factory('products', ['$http', 'auth',
+function($http, auth){
+  var p = {
+    products : []
+  };
+
+  p.getAll = function() {
+    return $http.get('/products').succes(function(data) {
+      angular.copy(data, p.products);
+    });
+  };
+  p.create = function(post) {
+	  return $http.post('/products', product, {
+	    headers: {Authorization: 'Bearer '+auth.getToken()}
+	  }).success(function(data){
+	    p.products.push(data);
+	  });
+	};
+  p.get = function(id) {
+		//use the express route to grab this post and return the response
+		//from that route, which is a json of the post data
+		//.then is a promise, a kind of newly native thing in JS that upon cursory research
+		//looks friggin sweet; TODO Learn to use them like a boss.  First, this.
+		return $http.get('/products/' + id).then(function(res) {
+			return res.data;
+		});
+	};
+
+	return p;
+
+}]);
+
 app.factory('posts', ['$http', 'auth',
 function($http, auth) {
 	var o = {
@@ -139,8 +171,7 @@ function($http, auth) {
 	    o.posts.push(data);
 	  });
 	};
-
-	o.upvote = function(post) {
+  o.upvote = function(post) {
 	  return $http.put('/posts/' + post._id + '/upvote', null, {
 	    headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
@@ -161,30 +192,42 @@ function($http, auth) {
 		post.disenoConfirmation = true;
 	  });
 	};
-	o.almacenConfirmationCapture = function(post) {
-	  return $http.put('/posts/' + post._id + '/almacenConfirmationCapture', null, {
-		headers: {Authorization: 'Bearer '+auth.getToken()}
-	  }).success(function(data){
-		post.almacenConfirmation = true;
-	  });
-	};
-
-	o.preConfirmationCapture = function(post) {
+  o.preConfirmationCapture = function(post) {
 	  return $http.put('/posts/' + post._id + '/preConfirmationCapture', null, {
 		headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
 		post.preConfirmation = true;
 	  });
 	};
-
-	o.produccionConfirmationCapture = function(post) {
+  o.planacionConfirmationCapture = function(post) {
+	  return $http.put('/posts/' + post._id + '/planacionConfirmationCapture', null, {
+		headers: {Authorization: 'Bearer '+auth.getToken()}
+	  }).success(function(data){
+		post.planacionConfirmation = true;
+	  });
+	};
+  o.produccionConfirmationCapture = function(post) {
 	  return $http.put('/posts/' + post._id + '/produccionConfirmationCapture', null, {
 		headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
 		post.produccionConfirmation = true;
 	  });
 	};
-	o.acabadosConfirmationCapture = function(post) {
+  o.almacenConfirmationCapture = function(post) {
+	  return $http.put('/posts/' + post._id + '/almacenConfirmationCapture', null, {
+		headers: {Authorization: 'Bearer '+auth.getToken()}
+	  }).success(function(data){
+		post.almacenConfirmation = true;
+	  });
+	};
+  o.prensaConfirmationCapture = function(post) {
+    return $http.put('/posts/' + post._id + '/prensaConfirmationCapture', null, {
+    headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+    post.prensaConfirmation = true;
+    });
+  };
+  o.acabadosConfirmationCapture = function(post) {
 	  return $http.put('/posts/' + post._id + '/acabadosConfirmationCapture', null, {
 		headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
@@ -198,6 +241,13 @@ function($http, auth) {
 		post.calidadConfirmation = true;
 	  });
 	};
+  o.productoTerConfirmationCapture = function(post) {
+    return $http.put('/posts/' + post._id + '/productoTerConfirmationCapture', null, {
+    headers: {Authorization: 'Bearer '+auth.getToken()}
+    }).success(function(data){
+    post.productoTerConfirmation = true;
+    });
+  };
 	o.entregasConfirmationCapture = function(post) {
 	  return $http.put('/posts/' + post._id + '/entregasConfirmationCapture', null, {
 		headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -229,8 +279,7 @@ function($http, auth) {
 	    headers: {Authorization: 'Bearer '+auth.getToken()}
 	  });
 	};
-
-	o.upvoteComment = function(post, comment) {
+  o.upvoteComment = function(post, comment) {
 	  return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/upvote', null, {
 	    headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
@@ -308,51 +357,68 @@ function($scope, posts, post, auth) {
 	$scope.ventasConfirmationCapture = function(post) {
 		console.log('Ventas Job Done:' + post.ventasConfirmation);
 		posts.ventasConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 	};
 
 	$scope.disenoConfirmationCapture = function(post) {
 		console.log('Diseno Job Done:' + post.disenoConfirmation);
 		posts.disenoConfirmationCapture(post);
-		window.location.reload(true)
-
-	};
-
-	$scope.almacenConfirmationCapture = function(post) {
-		console.log('Alamacen Job Done:' + post.alamcenConfirmation);
-		posts.almacenConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 
 	};
 
 	$scope.preConfirmationCapture = function(post) {
 		console.log('Preprensa Job Done:' + post.preConfirmation);
 		posts.preConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 
 	};
+
+	$scope.planacionConfirmationCapture = function(post) {
+		console.log('Preprensa Job Done:' + post.preConfirmation);
+		posts.planacionConfirmationCapture(post);
+		window.location.reload(true);
+
+	};
+
+	$scope.almacenConfirmationCapture = function(post) {
+		console.log('Alamacen Job Done:' + post.alamcenConfirmation);
+		posts.almacenConfirmationCapture(post);
+		window.location.reload(true);
+
+	};
+
+  $scope.prensaConfirmationCapture = function(post) {
+    console.log('Prensa Job Done: ' + post.prensaConfirmation);
+    posts.prensaConfirmationCapture(post);
+    window.location.reload(true);
+  };
 	$scope.produccionConfirmationCapture = function(post) {
 		console.log('Produccion Job Done:' + post.produccionConfirmation);
 		posts.produccionConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 
 	};
 	$scope.acabadosConfirmationCapture = function(post) {
 		console.log('Acabados Job Done:' + post.acabadosConfirmation);
 		posts.acabadosConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 
 	};
 	$scope.calidadConfirmationCapture = function(post) {
 		console.log('Calidad Job Done:' + post.calidadConfirmation);
 		posts.calidadConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 
 	};
+  $scope.productoTerConfirmationCapture = function(post){
+    console.log('Producto Terminado: ' + post.productoTerConfirmation);
+    window.location.reload(true);
+  }
 	$scope.entregasConfirmationCapture = function(post) {
 		console.log('Entregas Job Done:' + post.entregasConfirmation);
 		posts.entregasConfirmationCapture(post);
-		window.location.reload(true)
+		window.location.reload(true);
 
 	};
 
@@ -366,36 +432,52 @@ function($scope, posts, post, auth) {
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
-	$scope.alamcenStyle= function(){
-		if(post.almacenConfirmation == true){
-			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
-		}
-	}
-	$scope.preStyle= function(){
+  $scope.preStyle = function(){
 		if(post.preConfirmation == true){
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
-	$scope.produccionStyle= function(){
+  $scope.planacionStyle = function(){
+		if(post.planacionConfirmation == true){
+			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+		}
+	}
+	$scope.produccionStyle = function(){
 		if(post.produccionConfirmation == true){
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
-	$scope.acabadosStyle= function(){
+  $scope.alamcenStyle = function(){
+    if(post.almacenConfirmation == true){
+      return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+    }
+  }
+  $scope.prensaStyle = function(){
+    if(post.prensaConfirmation == true){
+      return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+    }
+  }
+	$scope.acabadosStyle = function(){
 		if(post.acabadosConfirmation == true){
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
-	$scope.calidadStyle= function(){
+	$scope.calidadStyle = function(){
 		if(post.calidadConfirmation == true){
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
-	$scope.entregasStyle= function(){
+  $scope.productoTer = function(){
+    if(post.productoTerConfirmation == true){
+      return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+    }
+  }
+	$scope.entregasStyle = function(){
 		if(post.entregasConfirmation == true){
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
+
 
 	$scope.department = function(){
 		if(post.progress < 20){
@@ -459,9 +541,29 @@ function($scope, auth) {
 	$scope.currentUserType = auth.currentUserType;
 }]);
 
-app.controller('CatCtrl',
+/*app.controller('CatCtrl',
 function($scope, $http) {
     $http.get('../sampledb.json').success(function(data) {
         $scope.catalog = data;
     });
-});
+});*/
+
+app.controller('ProdCtrl', ['$scope', 'products', 'auth',
+function($scope, products, auth) {
+	$scope.products = products.products;
+	$scope.isLoggedIn = auth.isLoggedIn;
+	//setting title to blank here to prevent empty products
+	$scope.title = '';
+
+	$scope.addProduct = function() {
+		if ($scope.title === '') {
+			return;
+		}
+		products.create({
+			title : $scope.title,
+		});
+		//clear the values
+		$scope.title = '';
+	};
+
+}]);
