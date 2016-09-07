@@ -340,16 +340,39 @@ function($scope, products, auth) {
 	//setting title to blank here to prevent empty products
 	$scope.title = '';
 
+	$scope.hoverIn = function(){
+			this.hoverEdit = true;
+	};
+
+	$scope.hoverOut = function(){
+			this.hoverEdit = false;
+	};
 	$scope.addProduct = function() {
 		if ($scope.title === '') {
 			return;
 		}
 		products.create({
 			title : $scope.title,
+			quantity: $scope.quantity,
+			weight: $scope.weight,
+			height: $scope.height,
+			description: $scope.description,
+			tags: $scope.tags,
+			suppplier: $scope.suppplier,
+			imgUrl: $scope.imgUrl,
+
 		});
 		//clear the values
 		$scope.title = '';
+		$scope.quantity = '';
+		$scope.weight = '';
+		$scope.height = '';
+		$scope.description = '';
+		$scope.tags = '';
+		$scope.suppplier = '';
+		$scope.imgUrl = '';
 	};
+
 
 }]);
 
@@ -401,7 +424,7 @@ function($scope, posts, post, auth) {
 	};
 
 	$scope.planacionConfirmationCapture = function(post) {
-		console.log('Preprensa Job Done:' + post.preConfirmation);
+		console.log('Preprensa Job Done:' + post.planacionConfirmation);
 		posts.planacionConfirmationCapture(post);
 		window.location.reload(true);
 

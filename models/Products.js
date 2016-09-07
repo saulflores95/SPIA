@@ -10,7 +10,7 @@ var ProductSchema = new mongoose.Schema({
   description: String,
   tags: String,
   suppplier: String,
-//  url:String
+  imgUrl:String,
 
 });
 

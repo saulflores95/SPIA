@@ -153,3 +153,23 @@ a {
   height: 300px;
   padding: 100px;
 }
+
+.previewImg{
+  max-height: 200px;
+  height: 100%;
+  width: 100%;
+}
+
+.modelContent{
+  padding: 40px;
+}
+
+.thumbnailImg{
+  max-height: 170px !important;
+  height: 200% !important;
+}
+
+.extraInformation{
+  background-color: gray;
+  opacity: 0.5;
+}
