@@ -26,7 +26,6 @@ router.get('/posts', function(req, res, next) {
     res.json(posts);
   });
 });
-
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
   post.author = req.payload.username;
@@ -37,7 +36,6 @@ router.post('/posts', auth, function(req, res, next) {
     res.json(post);
   });
 });
-
 router.param('post', function(req, res, next, id) {
   var query = Post.findById(id);
 
@@ -61,6 +59,38 @@ router.param('comment', function(req, res, next, id) {
     return next();
   });
 });
+//this may need to be removced if not working START
+router.get('/products', function(req, res, next) {
+  Product.find(function(err, products){
+    if(err){
+      return next(err);
+    }
+
+    res.json(products);
+  });
+});
+router.post('/products', auth, function(req, res, next) {
+  var product = new Product(req.body);
+  product.save(function(err, product){
+    if(err){ return next(err); }
+
+    res.json(product);
+  });
+});
+router.param('product', function(req, res, next, id) {
+  var query = Poduct.findById(id);
+
+  query.exec(function (err, product){
+    if (err) { return next(err); }
+    if (!product) { return next(new Error("can't find product")); }
+
+    req.product = product;
+    return next();
+  });
+});
+//this may need to be removced if not working END
+
+
 
 router.get('/posts/:post', function(req, res, next) {
   req.post.populate('comments', function(err, post) {
@@ -188,6 +218,10 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
     res.json(comment);
   });
 })
+
+
+
+/*Segment used previously
 router.get('/products', function(req, res, next) {
   Product.find(function(err, products){
     if(err){
@@ -196,7 +230,7 @@ router.get('/products', function(req, res, next) {
 
     res.json(products);
   });
-})
+})*/
 
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){

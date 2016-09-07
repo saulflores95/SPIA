@@ -12,7 +12,16 @@ function($stateProvider, $urlRouterProvider) {
 			function(posts) {
 				return posts.getAll();
 			}]
-
+		}
+	}).state('products', {
+		url : '/products',
+		templateUrl : '/products.html',
+		controller : 'ProdCtrl',
+		resolve : {
+			productsPromise : ['products',
+			function(products) {
+				return products.getAll();
+			}]
 		}
 	}).state('posts', {
 		url : '/posts/:id',
@@ -46,10 +55,7 @@ function($stateProvider, $urlRouterProvider) {
 				$state.go('home');
 			}
 		}]
-	}).state('catalogo', {
-		url : '/catalogo',
-		templateUrl : '/catalogo.html',
-		controller : 'ProdCtrl'
+
 	});
 
 	$urlRouterProvider.otherwise('home');
@@ -123,18 +129,18 @@ function($http, auth){
   };
 
   p.getAll = function() {
-    return $http.get('/products').succes(function(data) {
+    return $http.get('/products').success(function(data) {
       angular.copy(data, p.products);
     });
   };
-  p.create = function(post) {
+  p.create = function(product) {
 	  return $http.post('/products', product, {
 	    headers: {Authorization: 'Bearer '+auth.getToken()}
 	  }).success(function(data){
 	    p.products.push(data);
 	  });
 	};
-  p.get = function(id) {
+	p.get = function(id) {
 		//use the express route to grab this post and return the response
 		//from that route, which is a json of the post data
 		//.then is a promise, a kind of newly native thing in JS that upon cursory research
@@ -323,6 +329,26 @@ function($scope, posts, auth) {
 
 	$scope.downvote = function(post) {
 		posts.downvote(post);
+	};
+
+}]);
+
+app.controller('ProdCtrl', ['$scope', 'products', 'auth',
+function($scope, products, auth) {
+	$scope.products = products.products;
+	$scope.isLoggedIn = auth.isLoggedIn;
+	//setting title to blank here to prevent empty products
+	$scope.title = '';
+
+	$scope.addProduct = function() {
+		if ($scope.title === '') {
+			return;
+		}
+		products.create({
+			title : $scope.title,
+		});
+		//clear the values
+		$scope.title = '';
 	};
 
 }]);
@@ -547,23 +573,3 @@ function($scope, $http) {
         $scope.catalog = data;
     });
 });*/
-
-app.controller('ProdCtrl', ['$scope', 'products', 'auth',
-function($scope, products, auth) {
-	$scope.products = products.products;
-	$scope.isLoggedIn = auth.isLoggedIn;
-	//setting title to blank here to prevent empty products
-	$scope.title = '';
-
-	$scope.addProduct = function() {
-		if ($scope.title === '') {
-			return;
-		}
-		products.create({
-			title : $scope.title,
-		});
-		//clear the values
-		$scope.title = '';
-	};
-
-}]);
