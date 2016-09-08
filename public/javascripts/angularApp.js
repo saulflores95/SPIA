@@ -306,6 +306,17 @@ function($http, auth) {
 
 app.controller('MainCtrl', ['$scope', 'posts', 'auth',
 function($scope, posts, auth) {
+	$('input').filter('#datepicker').datepicker();
+	$("#datepicker").keypress(function(event) {event.preventDefault();});
+	$('input').filter('#datepicker2').datepicker();
+	$("#datepicker2").keypress(function(event) {event.preventDefault();});
+	$('input').filter('#datepicker3').datepicker();
+	$("#datepicker3").keypress(function(event) {event.preventDefault();});
+	$('input').filter('#datepicker4').datepicker();
+	$("#datepicker4").keypress(function(event) {event.preventDefault();});
+	$('input').filter('#datepicker5').datepicker();
+	$("#datepicker5").keypress(function(event) {event.preventDefault();});
+	
 	$scope.posts = posts.posts;
 	$scope.isLoggedIn = auth.isLoggedIn;
 	//setting title to blank here to prevent empty posts
