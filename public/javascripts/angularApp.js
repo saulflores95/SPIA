@@ -308,15 +308,21 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
 function($scope, posts, auth) {
 	$('input').filter('#datepicker').datepicker();
 	$("#datepicker").keypress(function(event) {event.preventDefault();});
+	$("#datepicker").keydown(function(event){if (event.keyCode == 8) {return false;}});
+	$('#datepicker').bind("cut copy paste",function(event) {event.preventDefault();});
 	$('input').filter('#datepicker2').datepicker();
 	$("#datepicker2").keypress(function(event) {event.preventDefault();});
+	$("#datepicker2").keydown(function(event){if (event.keyCode == 8) {return false;}});
+	$('#datepicker2').bind("cut copy paste",function(event) {event.preventDefault();});
 	$('input').filter('#datepicker3').datepicker();
 	$("#datepicker3").keypress(function(event) {event.preventDefault();});
+	$("#datepicker3").keydown(function(event){if (event.keyCode == 8) {return false;}});
+	$('#datepicker3').bind("cut copy paste",function(event) {event.preventDefault();});
 	$('input').filter('#datepicker4').datepicker();
 	$("#datepicker4").keypress(function(event) {event.preventDefault();});
-	$('input').filter('#datepicker5').datepicker();
-	$("#datepicker5").keypress(function(event) {event.preventDefault();});
-	
+	$("#datepicker4").keydown(function(event){if (event.keyCode == 8) {return false;}});
+	$('#datepicker4').bind("cut copy paste",function(event) {event.preventDefault();});
+
 	$scope.posts = posts.posts;
 	$scope.isLoggedIn = auth.isLoggedIn;
 	//setting title to blank here to prevent empty posts

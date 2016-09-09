@@ -303,6 +303,7 @@
         </div>
 
         <div class="productContainer">
+          <!-- Resolution problem 992-1307 -->
             <div ng-repeat="product in products | filter: filter ">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div  ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" class="thumbnail"><img class="thumbnailImg" src="{{product.imgUrl}}" />
