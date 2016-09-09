@@ -19,9 +19,11 @@ mongoose.connect('mongodb://localhost/amac', function(err,db){
     }
 });
 
+require('./models/Products');
 require('./models/Posts');
 require('./models/Comments');
 require('./models/Users');
+
 require('./config/passport');
 
 var routes = require('./routes/index');

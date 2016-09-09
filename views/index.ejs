@@ -7,7 +7,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
     <link href="stylesheets/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="javascripts/function.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
     <script src="javascripts/angularApp.js"></script>
     <script src="javascripts/progress_bar.js"></script>
@@ -30,58 +32,54 @@
             <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
         </ul>
     </nav>
-
-    <div class="row">
-
-        <div class="col-md-6 col-md-offset-3" style="margin-top:69px;">
-            <ul class="nav nav-pills nav-justified">
-                <li class="navPill active"><a href="/#/catalogo">Catalogo</a></li>
-                <li class="navPill"><a href="/#/home">Crear Orden</a></li>
-                <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
-            </ul>
-
-
-            <ui-view></ui-view>
-        </div>
-        <!--LOOOOL -->
+    <div class="row logo">
+        <img style="width:100; height:100;" src="images/logo_Spia.png" />
     </div>
+    <div class="col-md-6 col-md-offset-3" style="margin-top:69px;">
+        <ul class="nav nav-pills nav-justified">
+            <li class="navPill"><a href="/#/products">Catalogo</a></li>
+            <li class="navPill active"><a href="/#/home">Crear Orden</a></li>
+            <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+        </ul>
+
+        <ui-view></ui-view>
+    </div>
+    <!--LOOOOL -->
 
     <script type="text/ng-template" id="/home.html">
         <div class="page-header">
-            <h1>SPIA</h1>
+            <h1></h1>
         </div>
+        <table class="table table-hover">
 
-        <div ng-repeat="post in posts | orderBy: '-upvotes'">
-            <!--
-            <span class="glyphicon glyphicon-thumbs-up" ng-click="upvote(post)"></span> {{post.upvotes}}
-            <span class="glyphicon glyphicon-thumbs-down" ng-click="downvote(post)"></span>
-            -->
-            <span style="font-size:20px;margin-left:10px">
-            <a ng-show="post.link" href="{{post.link}}">
-              {{post.title}}
-            </a>
-            <span ng-hide="post.link">
-              {{post.title}}
-            </span>
-            <span ng-show="post.author">
-    		  posted by <a>{{post.author}}</a>
-    		</span>
-            </span>
-            <span>
-            <a href="#/posts/{{post._id}}">ver orden</a>
-              ({{post.comments.length}})
-            </span>
-            <span ng-show="post.progress == 0"><b>No a Iniciado</b></span>
-            <span ng-show="post.progress == 20"><b>Diseño</b></span>
-            <span ng-show="post.progress == 30"><b>Almacen</b></span>
-            <span ng-show="post.progress == 40"><b>Produccion</b></span>
-            <span ng-show="post.progress == 50"><b>Preprensa</b></span>
-            <span ng-show="post.progress == 60"><b>Acabados</b></span>
-            <span ng-show="post.progress == 70"><b>Calidad</b></span>
-            <span ng-show="post.progress == 90"><b>Entregas</b></span>
-            <span ng-show="post.progress == 100"><b>Orden Completada</b></span>
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Estatus</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="post in posts | orderBy: '-upvotes'">
+                <tr>
+                    <td><a ng-show="post.link" href="{{post.link}}">{{post.title}}</a><span ng-hide="post.link">{{post.title}}</span><span ng-show="post.author">posted by <a>{{post.author}}</a></span></td>
+                    <td>
+                        <span ng-show="post.progress == 0"><b>No a Iniciado</b></span>
+                        <span ng-show="post.progress == 20"><b>Diseño</b></span>
+                        <span ng-show="post.progress == 30"><b>Almacen</b></span>
+                        <span ng-show="post.progress == 40"><b>Produccion</b></span>
+                        <span ng-show="post.progress == 50"><b>Preprensa</b></span>
+                        <span ng-show="post.progress == 60"><b>Acabados</b></span>
+                        <span ng-show="post.progress == 70"><b>Calidad</b></span>
+                        <span ng-show="post.progress == 90"><b>Entregas</b></span>
+                        <span ng-show="post.progress == 100"><b>Orden Completada</b></span>
+                    </td>
+                    <td><span><a href="#/posts/{{post._id}}">ver orden</a>({{post.comments.length}})</span></td>
+                </tr>
+            </tbody>
+        </table>
 
-        </div>
+
+
 
         <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:30px">
             <h3>Agrega una Orden:</h3>
@@ -94,13 +92,36 @@
                 <input type="text" class="form-control" placeholder="Link" ng-model="link">
             </div>
 
-            <div class"form-goup">
-                <input type="text" class="form-control" id="datepicker">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class "form-group">
+                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class "form-group">
+                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class "form-group">
+                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3">
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class "form-group">
+                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4">
+                    </div>
+                </div>
             </div>
+            <br></br>
             <button type="submit" class="btn btn-primary">Post</button>
         </form>
         <div ng-hide="isLoggedIn()">
-            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
+            <h3>Ocupas <a href="/#/login">Ingresar</a> o <a href="/#/register">Registrarte</a> antes de poner una orden</h3>
         </div>
 
     </script>
@@ -125,24 +146,35 @@
                 <span ng-hide="post.link">
                   {{post.title}}
                 </span>
-          </h3>
+            </h3>
         </div>
         <div class="row" id="progressButtonOneRow">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <button style="{{ventasStyle()}}" ng-disabled="currentUserType() != 'ventas' || post.ventasConfirmation == true" ng-click="ventasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Ventas</small></h5>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <button style="{{disenoStyle()}}" ng-disabled="currentUserType() != 'diseno' || post.disenoConfirmation == true || post.ventasConfirmation == false" ng-click="disenoConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Diseno</small></h5>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.disenoConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
-                <h5><small>Almacen</small></h5>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button style="{{preStyle()}}" ng-disabled="currentUserType() != 'preprensa' || post.preConfirmation == true || post.disenoConfirmation == false" ng-click="preConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Preprensa</small></h5>
+
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{produccionStyle()}}" ng-disabled="currentUserType() != 'produccion' || post.produccionConfirmation == true || post.almacenConfirmation == false" ng-click="produccionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button style="{{planacionStyle()}}" ng-disabled="currentUserType() != 'planacion' || post.planacionConfirmation == true || post.preConfirmation == false" ng-click="planacionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Planacion</small></h5>
+
+            </div>
+            <!--ERROR HERE IN PRODDUCTION LIMITANT -->
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button style="{{produccionStyle()}}" ng-disabled="currentUserType() != 'produccion' || post.produccionConfirmation == true || post.planacionConfirmation == false" ng-click="produccionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Produccion</small></h5>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.produccionConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Almacen</small></h5>
             </div>
         </div>
         <div class="row" id="progressRow">
@@ -153,21 +185,24 @@
             </div>
         </div>
         <div class="row" id="progressButtonTwoRow">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{preStyle()}}" ng-disabled="currentUserType() != 'prePrensa' || post.preConfirmation == true || post.produccionConfirmation == false" ng-click="preConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
-                <h5><small>Preprensa</small></h5>
-
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button style="{{prensaStyle()}}" ng-disabled="currentUserType() != 'prensa' || post.prensaConfirmation == true || post.almacenConfirmation == false" ng-click="acabadosConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Prensa</small></h5>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{acabadosStyle()}}" ng-disabled="currentUserType() != 'acabados' || post.acabadosConfirmation == true || post.preConfirmation == false" ng-click="acabadosConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button style="{{acabadosStyle()}}" ng-disabled="currentUserType() != 'acabados' || post.acabadosConfirmation == true || post.almacenConfirmation == false" ng-click="acabadosConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Acabados</small></h5>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <button style="{{calidadStyle()}}" ng-disabled="currentUserType() != 'calidad' || post.calidadConfirmation == true || post.acabadosConfirmation == false" ng-click="calidadConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Calidad</small></h5>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{entregasStyle()}}" ng-disabled="currentUserType() != 'entregas' || post.entregasConfirmation == true || post.calidadConfirmation == false" ng-click="entregasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{productoTerStyle()}}" ng-disabled="currentUserType() != 'productoTer' || post.productoTerConfirmation == true || post.acabadosConfirmation == false" ng-click="productoTerConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>Producto Terminado</small></h5>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <button style="{{entregasStyle()}}" ng-disabled="currentUserType() != 'entregas' || post.entregasConfirmation == true || post.productoTerConfirmation == false" ng-click="productoTerConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Entregas</small></h5>
             </div>
         </div>
@@ -192,29 +227,126 @@
         </div>
     </script>
 
-    <script type="text/ng-template" id="/catalogo.html">
-        <div class="form-group">
+    <script type="text/ng-template" id="/products.html">
+        <div class="form-group" style="padding-top:50px;">
             <label for="filter">Buscar:</label>
-            <input type="text" ng-model="filter.Descripcion" class="form-control">
+            <input type="text" ng-model="filter" class="form-control">
         </div>
-        <div class="productContainer">
-            <div ng-repeat="product in catalog | filter: filter ">
-                <div class="col-lg-4">
-                    <div class="thumbnail"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk4Kjetq_pQFOTl4MsHxdMvdDXE3G02blsU89QPgCUMSfKzrGYbA" />
-                        <div class="caption"><strong>{{product.Localidad}} </strong>
-                            <h4 class="text-center">{{product.Producto}} </h4>
-                            <p>{{product.Descripcion}} </p>
-                            <p>{{product.precio_unitario}} </p>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agrega Producto</button>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modelContent">
+                    <form ng-submit="addProduct()" ng-show="isLoggedIn()" style="margin-top:30px">
+                        <h3 style="text-align:center;">Agrega un Producto</h3>
+                        <div class="form-group">
+                            <h3>Informacion Basica</h4>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="text" class="form-control" placeholder="Title" ng-model="title">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="text" class="form-control" placeholder="Descripcion" ng-model="description">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="text" class="form-control" placeholder="tina, azul, describeme..." ng-model="tags">
+                                    </div>
+                                </div>
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="text" class="form-control" placeholder="Provedor" ng-model="suppplier">
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="number" class="form-control" placeholder="Cantidad" ng-model="quantity">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h3>Dimensiones</h3>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="number" class="form-control" placeholder="Peso" ng-model="weight">
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="number" class="form-control" placeholder="Anchura" ng-model="width">
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="number" class="form-control" placeholder="Altura" ng-model="height">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="text" class="form-control" placeholder="Imagen" ng-model="imgUrl">
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <img class="previewImg" src="{{imgUrl}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </form>
+                    <div ng-hide="isLoggedIn()">
+                        <h3>Ocupas <a href="/#/login">Ingresar</a> o <a href="/#/register">Registrarte</a> antes de poner una orden</h3>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="productContainer">
+          <!-- Resolution problem 992-1307 -->
+            <div ng-repeat="product in products | filter: filter ">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div  ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" class="thumbnail"><img class="thumbnailImg" src="{{product.imgUrl}}" />
+                        <div class="caption"><strong>{{product.Localidad}} </strong>
+                            <h4 class="text-center">{{product.title}} </h4>
+                            <p>{{product.description}}</p>
+                            <p>{{product.precio_unitario}} </p>
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                    <input class="form-control" type="Number" ng-model="newQuantity" />
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </div>
+                            </div>
+                              <div class="extraInformation" ng-show="hoverEdit">
+                                <h5 class="text-center">{{product.quantity}} pz.</h5>
+                                <div class="row">
+                                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    W: {{product.width}},
+                                    H: {{product.height}}
+                                  </div>
+                                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <h5>Provedor: {{product.suppplier}}</h5>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blankspace">
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </script>
 
     <script type="text/ng-template" id="/register.html">
         <div class="page-header">
-            <h1>SPIA</h1>
+            <h1></h1>
         </div>
 
         <div ng-show="error" class="alert alert-danger row">
@@ -234,11 +366,15 @@
                 <option value="admin">Administridaor</option>
                 <option value="ventas">Ventas</option>
                 <option value="diseno">Diseño</option>
-                <option value="almacen">Almacen</option>
-                <option value="prePrensa">Preprensa</option>
+
+                <option value="preprensa">Preprensa</option>
+                <option value="planacion">Planacion</option>
                 <option value="produccion">Produccion</option>
+                <option value="almacen">Almacen</option>
+                <option value="prensa">Prensa</option>
                 <option value="acabados">Acabados</option>
                 <option value="calidad">Calidad</option>
+                <option value="productoTer">Producto Terminado</option>
                 <option value="entregas">Entregas</option>
                 <option value="test">Test</option>
               </select>
@@ -253,7 +389,7 @@
 
     <script type="text/ng-template" id="/login.html">
         <div class="page-header">
-            <h1>SPIA</h1>
+            <h1></h1>
         </div>
 
         <div ng-show="error" class="alert alert-danger row">

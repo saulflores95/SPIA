@@ -6,6 +6,20 @@ a {
   color: #00B7FF;
 }
 
+.logo{
+  position: relative;
+  margin: auto;
+  padding-top: 60px;
+  right: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.thumbnail{
+  height: 270px;
+}
+
 #progressButtonOneRow{
     margin-top: 50px;
     margin-bottom: 50px;
@@ -138,4 +152,24 @@ a {
 .box {
   height: 300px;
   padding: 100px;
+}
+
+.previewImg{
+  max-height: 200px;
+  height: 100%;
+  width: 100%;
+}
+
+.modelContent{
+  padding: 40px;
+}
+
+.thumbnailImg{
+  max-height: 170px !important;
+  height: 200% !important;
+}
+
+.extraInformation{
+  background-color: gray;
+  opacity: 0.5;
 }
