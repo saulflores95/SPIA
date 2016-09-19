@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 // connect MongoDB
-mongoose.connect(process.env.MONGOLAB_URI  || 'mongodb://localhost/amac', function(err,db){
+mongoose.connect(process.env.MONGOLAB_URI  || 'mongodb://heroku_c5z8splv:hypogrifo#2016@ds033106.mlab.com:33106/heroku_c5z8splv', function(err,db){
     if (!err){
         console.log('Connected to /amac!');
     } else{
@@ -56,17 +56,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-/*
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-*/
+
 if (app.get('env') === 'production') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
