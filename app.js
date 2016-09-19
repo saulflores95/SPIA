@@ -11,7 +11,13 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 // connect MongoDB
-mongoose.connect('mongodb://pekub:hypogrifo#2016@ds033106.mlab.com:33106/heroku_c5z8splv');
+mongoose.connect(process.env.MONGOLAB_URI ||'mongodb://localhost/amac', function(err,db){
+    if (!err){
+        console.log('Connected to /amac!');
+    } else{
+        console.dir(err); //failed to connect
+    }
+});
 
 require('./models/Products');
 require('./models/Posts');
@@ -50,7 +56,6 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -60,7 +65,6 @@ if (app.get('env') === 'development') {
         });
     });
 }
-
 
 // production error handler
 // no stacktraces leaked to user
