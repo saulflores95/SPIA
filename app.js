@@ -11,7 +11,9 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 // connect MongoDB
-mongoose.connect(process.env.MONGOLAB_URI  || 'mongodb://pekub:hypogrifo#2016@ds033106.mlab.com:33106/heroku_c5z8splv', function(err,db){
+var MONGOLAB_URI = 'mongodb://pekub:hypogrifo#2016@ds033106.mlab.com:33106/heroku_c5z8splv';
+
+mongoose.connect(process.env.MONGOLAB_URI, function(err,db){
     if (!err){
         console.log('Connected to /amac!');
     } else{
