@@ -10,14 +10,24 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+var herokudb = 'mongodb://<pekub:hypogrifo#2016@ds041556.mlab.com:41556/heroku_cqm1l378';
+
 // connect MongoDB
-mongoose.connect('mongodb://localhost/amac', function(err,db){
+mongoose.connect(herokudb, function(err,db){
     if (!err){
         console.log('Connected to /amac!');
     } else{
         console.dir(err); //failed to connect
     }
 });
+
+/*mongoose.connect('mongodb://localhost/amac', function(err,db){
+    if (!err){
+        console.log('Connected to /amac!');
+    } else{
+        console.dir(err); //failed to connect
+    }
+});*/
 
 require('./models/Products');
 require('./models/Posts');
