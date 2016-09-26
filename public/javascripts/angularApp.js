@@ -479,6 +479,8 @@ function($scope, posts, post, auth) {
 	};
   $scope.productoTerConfirmationCapture = function(post){
     console.log('Producto Terminado: ' + post.productoTerConfirmation);
+		posts.productoTerConfirmationCapture(post);
+
     window.location.reload(true);
   }
 	$scope.entregasConfirmationCapture = function(post) {
@@ -533,7 +535,7 @@ function($scope, posts, post, auth) {
 			return "border-color:green; color: green; box-shadow: 0 0 10px green;";
 		}
 	}
-  $scope.productoTer = function(){
+  $scope.productoTerStyle = function(){
     if(post.productoTerConfirmation == true){
       return "border-color:green; color: green; box-shadow: 0 0 10px green;";
     }
@@ -546,25 +548,34 @@ function($scope, posts, post, auth) {
 
 
 	$scope.department = function(){
-		if(post.progress < 20){
+		if(post.progress < 10){
 			return "No a inicializado";
 		}
-		if(post.progress == 20){
+		if(post.progress == 10){
 			return "Diseno";
 		}
-		if(post.progress == 30){
-			return "Almacen";
+		if(post.progress == 20){
+			return "Preprensa";
+		}
+		if(post.progress == 30 ){
+			return "Planacion";
 		}
 		if(post.progress == 40 ){
 			return "Produccion";
 		}
 		if(post.progress == 50 ){
-			return "Preprensa";
+			return "Almacen";
 		}
-		if(post.progress == 60 ){
-			return "Acabados";
+		if(post.progress == 60){
+			return "Prensa";
+		}
+		if(post.progress == 65){
+			return "Acabdos";
 		}
 		if(post.progress == 70){
+			return "Producto Terminado";
+		}
+		if(post.progress == 80){
 			return "Calidad";
 		}
 		if(post.progress == 90){
