@@ -10,7 +10,7 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-var herokudb = 'mongodb://<pekub:hypogrifo#2016@ds041556.mlab.com:41556/heroku_cqm1l378';
+var herokudb = 'mongodb://pekub:hypogrifo#2016@ds041556.mlab.com:41556/heroku_cqm1l378';
 
 // connect MongoDB
 mongoose.connect(herokudb, function(err,db){
