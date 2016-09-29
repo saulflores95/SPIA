@@ -18,6 +18,9 @@
         .glyphicon-thumbs-up {
             cursor: pointer
         }
+        .form-control[readonly], fieldset[disabled] {
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -98,25 +101,25 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker">
+                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" readonly>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2">
+                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" readonly="readonly">
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3">
+                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" readonly="readonly">
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4">
+                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" readonly="readonly">
                     </div>
                 </div>
             </div>
