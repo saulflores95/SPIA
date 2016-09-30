@@ -9,7 +9,6 @@ var PostSchema = new mongoose.Schema({
   disenoConfirmation: {type: Boolean, default: false},
   almacenConfirmation: {type: Boolean, default: false},
   preConfirmation: {type: Boolean, default: false},
-  produccionConfirmation: {type: Boolean, default: false},
   acabadosConfirmation: {type: Boolean, default: false},
   planacionConfirmation: {type: Boolean, default: false},
   calidadConfirmation: {type: Boolean, default: false},
@@ -17,7 +16,13 @@ var PostSchema = new mongoose.Schema({
   prensaConfirmation: {type: Boolean, default: false},
   entregasConfirmation: {type: Boolean, default: false},
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
-  progress: {type: Number, default:0}
+  progress: {type: Number, default:0},
+
+  dateEntrada: { type: Date, default: Date.now },
+  dateImpresion: { type: Date, default: Date.now },
+  dateAcabado: { type: Date, default: Date.now },
+  dateSalida: { type: Date, default: Date.now }
+
 
 });
 
@@ -41,13 +46,7 @@ PostSchema.methods.preConfirmationCapture = function(cb) {
 
 PostSchema.methods.planacionConfirmationCapture = function(cb) {
   this.planacionConfirmation = true;
-  this.progress += 10;
-  this.save(cb);
-};
-
-PostSchema.methods.produccionConfirmationCapture = function(cb) {
-  this.produccionConfirmation = true;
-  this.progress += 10;
+  this.progress += 20;
   this.save(cb);
 };
 

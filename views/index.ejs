@@ -8,10 +8,10 @@
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
     <link href="stylesheets/style.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-    <script src="javascripts/function.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
     <script src="javascripts/angularApp.js"></script>
+    <script src="javascripts/function.js"></script>
     <script src="javascripts/progress_bar.js"></script>
 
     <style>
@@ -22,7 +22,8 @@
 </head>
 
 <body ng-app="amacApp">
-    <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+  <div class="navigaton" ng-controller="NavCtrl">
+    <nav class="navbar navbar-default pull-right" >
         <ul class="nav navbar-nav">
             <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
             <li ng-show="isLoggedIn()"><a>{{ currentUserType() }}</a></li>
@@ -37,13 +38,15 @@
     </div>
     <div class="col-md-6 col-md-offset-3" style="margin-top:69px;">
         <ul class="nav nav-pills nav-justified">
-            <li class="navPill"><a href="/#/products">Catalogo</a></li>
-            <li class="navPill active"><a href="/#/home">Crear Orden</a></li>
-            <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+            <li class="navPill"><a ng-show="{{currentUserType() === 'almacen'}}" href="/#/products">Catalogo</a></li>
+            <li class="navPill active"><a ng-show="{{currentUserType() === 'ventas'}}" href="/#/home">Crear Orden</a><a ng-show="{{currentUserType() === 'almacen'}}" href="/#/endproducts">Producto Terminado</a></li>
+            <li class="navPill"><a ng-show="{{currentUserType() === 'admin'}}" href="/#/register">Agregar Usuario</a></li>
         </ul>
 
         <ui-view></ui-view>
     </div>
+  </div>
+
     <!--LOOOOL -->
 
     <script type="text/ng-template" id="/home.html">
@@ -67,7 +70,6 @@
                         <span ng-show="post.progress == 10"><b>Diseño</b></span>
                         <span ng-show="post.progress == 20"><b>Preprensa</b></span>
                         <span ng-show="post.progress == 30"><b>Planacion</b></span>
-                        <span ng-show="post.progress == 40"><b>Produccion</b></span>
                         <span ng-show="post.progress == 50"><b>Almacen</b></span>
                         <span ng-show="post.progress == 60"><b>Prensa</b></span>
                         <span ng-show="post.progress == 65"><b>Acabados</b></span>
@@ -173,11 +175,7 @@
             </div>
             <!--ERROR HERE IN PRODDUCTION LIMITANT -->
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{produccionStyle()}}" ng-disabled="currentUserType() != 'produccion' || post.produccionConfirmation == true || post.planacionConfirmation == false" ng-click="produccionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
-                <h5><small>Produccion</small></h5>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.produccionConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.planacionConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Almacen</small></h5>
             </div>
         </div>
@@ -233,9 +231,25 @@
 
     <script type="text/ng-template" id="/products.html">
         <div class="form-group" style="padding-top:50px;">
-            <label for="filter">Buscar:</label>
-            <input type="text" ng-model="filter" class="form-control">
-        </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <input type="text" placeholder="Buscar: " ng-model="filter" class="form-control">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <select ng-model="filter" class="form-control">
+                  <option value="Papel">Papel</option>
+                  <option value="Tintas">Tintas</option>
+                  <option value="Quimicos">Quimicos</option>
+                  <option value="Miscelanea">Miscelanea</option>
+                  <option value="Acetatos">Acetatos</option>
+                  <option value="Carton">Carton</option>
+                  <option value="Placas">Placas</option>
+                </select>
+            </div>
+          </div>
+      </div>
+
+
         <div class="form-group">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agrega Producto</button>
         </div>
@@ -267,6 +281,15 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <input type="number" class="form-control" placeholder="Cantidad" ng-model="quantity">
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <div class="form-group">
+                                      <select ng-model="unit" class="form-control">
+                                        <option value="piezas">Piezas</option>
+                                        <option value="libras">Lbs</option>
+                                        <option value="galones">Galones</option>
+                                      </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -343,6 +366,99 @@
                     <div class="blankspace">
                     </div>
                 </div>
+
+            </div>
+        </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="/endproducts.html">
+      <div class="form-group" style="padding-top:50px;">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <input type="text" placeholder="Buscar: " ng-model="filter" class="form-control">
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <select ng-model="filter" class="form-control">
+                <option value="Papel">Papel</option>
+                <option value="Tintas">Tintas</option>
+              </select>
+          </div>
+        </div>
+    </div>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agrega Producto Terminando</button>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modelContent">
+                    <form ng-submit="addProduct()" ng-show="isLoggedIn()" style="margin-top:30px">
+                        <h3 style="text-align:center;">Agrega un Producto</h3>
+                        <div class="form-group">
+                            <h3>Informacion Basica</h4>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="text" class="form-control" placeholder="Cliente" ng-model="client">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="number" class="form-control" placeholder="Numbero de parte" ng-model="partNumber">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="number" class="form-control" placeholder="Cantidad" ng-model="quantity">
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <div class="form-group">
+                                          <select ng-model="unit" class="form-control">
+                                            <option value="piezas">Piezas</option>
+                                            <option value="libras">Lbs</option>
+                                            <option value="galones">Galones</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                      <input type="number" class="form-control" placeholder="precio" ng-model="price">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <input type="text" class="form-control" placeholder="Imagen" ng-model="imgUrl">
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <img class="previewImg" src="{{imgUrl}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </form>
+                    <div ng-hide="isLoggedIn()">
+                        <h3>Ocupas <a href="/#/login">Ingresar</a> o <a href="/#/register">Registrarte</a> antes de poner una orden</h3>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="productContainer">
+          <!-- Resolution problem 992-1307 -->
+            <div ng-repeat="endproduct in endproducts | filter: filter ">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <div  ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" class="thumbnail"><img class="thumbnailImg" src="{{product.imgUrl}}" />
+                      <div class="caption"><strong>{{endproduct.client}} </strong>
+                          <h4 class="text-center">{{endproduct.partNumber}} </h4>
+                          <p class="text-center">{{endproduct.quantity}}</p>
+                      </div>
+                  </div>
+                  <div class="blankspace">
+                  </div>
+              </div>
+
             </div>
         </div>
         </div>
@@ -373,7 +489,6 @@
 
                 <option value="preprensa">Preprensa</option>
                 <option value="planacion">Planacion</option>
-                <option value="produccion">Produccion</option>
                 <option value="almacen">Almacen</option>
                 <option value="prensa">Prensa</option>
                 <option value="acabados">Acabados</option>

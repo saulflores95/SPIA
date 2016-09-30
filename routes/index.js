@@ -8,6 +8,7 @@ var Product = mongoose.model('Product');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
+var EndProduct = mongoose.model('EndProduct');
 
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
@@ -91,6 +92,37 @@ router.param('product', function(req, res, next, id) {
 //this may need to be removced if not working END
 
 
+//this may need to be removced if not working START
+router.get('/endproducts', function(req, res, next) {
+  EndProduct.find(function(err, endproducts){
+    if(err){
+      return next(err);
+    }
+
+    res.json(endproducts);
+  });
+});
+router.post('/endproducts', auth, function(req, res, next) {
+  var endproducts = new EndProduct(req.body);
+  endproducts.save(function(err, product){
+    if(err){ return next(err); }
+
+    res.json(endproducts);
+  });
+});
+router.param('endproduct', function(req, res, next, id) {
+  var query = EndProduct.findById(id);
+
+  query.exec(function (err, endproduct){
+    if (err) { return next(err); }
+    if (!endproduct) { return next(new Error("no se encuentro producto terminadno")); }
+
+    req.endproduct = endproduct;
+    return next();
+  });
+});
+//this may need to be removced if not working END
+
 
 router.get('/posts/:post', function(req, res, next) {
   req.post.populate('comments', function(err, post) {
@@ -141,13 +173,6 @@ router.put('/posts/:post/prensaConfirmationCapture', auth, function(req, res, ne
 });
 router.put('/posts/:post/preConfirmationCapture', auth, function(req, res, next) {
   req.post.preConfirmationCapture(function(err, post){
-    if (err) { return next(err); }
-
-    res.json(post);
-  });
-});
-router.put('/posts/:post/produccionConfirmationCapture', auth, function(req, res, next) {
-  req.post.produccionConfirmationCapture(function(err, post){
     if (err) { return next(err); }
 
     res.json(post);

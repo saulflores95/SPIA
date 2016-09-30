@@ -11,7 +11,13 @@ var ProductSchema = new mongoose.Schema({
   tags: String,
   suppplier: String,
   imgUrl:String,
+  unit: String,
 
 });
+
+ProductSchema.methods.quantityChanger = function(cb) {
+  this.save(cb);
+};
+
 
 mongoose.model('Product', ProductSchema);
