@@ -6,6 +6,10 @@ a {
   color: #00B7FF;
 }
 
+.form-control[readonly], fieldset[disabled] {
+    background-color: white;
+}
+
 .logo{
   position: relative;
   margin: auto;
