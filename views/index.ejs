@@ -18,6 +18,10 @@
         .glyphicon-thumbs-up {
             cursor: pointer
         }
+
+        .form-control[readonly], fieldset[disabled] {
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -98,25 +102,25 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker">
+                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" readonly>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2">
+                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" readonly>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3">
+                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" readonly>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4">
+                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" readonly>
                     </div>
                 </div>
             </div>
@@ -308,13 +312,16 @@
 
         <div class="productContainer">
           <!-- Resolution problem 992-1307 -->
+
             <div ng-repeat="product in products | filter: filter ">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div  ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()" class="thumbnail"><img class="thumbnailImg" src="{{product.imgUrl}}" />
-                        <div class="caption"><strong>{{product.Localidad}} </strong>
-                            <h4 class="text-center">{{product.title}} </h4>
-                            <p>{{product.description}}</p>
-                            <p>{{product.precio_unitario}} </p>
+                  <div class="card">
+                          <div class="card-image">
+                              <img class="img-responsive" src="http://lorempixel.com/555/300/sports">
+
+                          </div><!-- card image -->
+
+                          <div class="card-content">
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span class="glyphicon glyphicon-minus"></span>
@@ -325,29 +332,20 @@
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </div>
+                                <button type="button" id="show" class="btn btn-custom pull-right show" aria-label="Left Align">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </button>
                             </div>
-                              <div class="extraInformation" ng-show="hoverEdit">
-                                <h5 class="text-center">{{product.quantity}} pz.</h5>
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    W: {{product.width}},
-                                    H: {{product.height}}
-                                  </div>
-                                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <h5>Provedor: {{product.suppplier}}</h5>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blankspace">
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </script>
+                          </div><!-- card content -->
 
+                          <div class="card-reveal">
+                              <span class="card-title">Hola</span> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                          </div><!-- card reveal -->
+                      </div>
+        </div>
+
+      </div>
     <script type="text/ng-template" id="/register.html">
         <div class="page-header">
             <h1></h1>
