@@ -352,6 +352,13 @@ function($scope, posts, auth) {
 
 app.controller('ProdCtrl', ['$scope', 'products', 'auth',
 function($scope, products, auth) {
+	setTimeout(function(){$('.show').on('click',function(){
+			$(this).parent().parent().parent().find('.card-reveal').slideToggle('slow');
+	});
+
+	$('.card-reveal .close').on('click',function(){
+			$(this).parent().parent().parent().find('.card-reveal').slideToggle('slow');
+	});}, 300);
 	$scope.products = products.products;
 	$scope.isLoggedIn = auth.isLoggedIn;
 	//setting title to blank here to prevent empty products
