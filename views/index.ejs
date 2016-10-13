@@ -13,7 +13,6 @@
     <script src="javascripts/angularApp.js"></script>
     <script src="javascripts/function.js"></script>
     <script src="javascripts/progress_bar.js"></script>
-
     <style>
         .glyphicon-thumbs-up {
             cursor: pointer
@@ -37,12 +36,6 @@
         <img style="width:100; height:100;" src="images/logo_Spia.png" />
     </div>
     <div class="col-md-6 col-md-offset-3" style="margin-top:69px;">
-        <ul class="nav nav-pills nav-justified">
-            <li class="navPill"><a ng-show="{{currentUserType() === 'almacen'}}" href="/#/products">Catalogo</a></li>
-            <li class="navPill active"><a ng-show="{{currentUserType() === 'ventas'}}" href="/#/home">Crear Orden</a><a ng-show="{{currentUserType() === 'almacen'}}" href="/#/endproducts">Producto Terminado</a></li>
-            <li class="navPill"><a ng-show="{{currentUserType() === 'admin'}}" href="/#/register">Agregar Usuario</a></li>
-        </ul>
-
         <ui-view></ui-view>
     </div>
   </div>
@@ -50,9 +43,12 @@
     <!--LOOOOL -->
 
     <script type="text/ng-template" id="/home.html">
-        <div class="page-header">
-            <h1></h1>
-        </div>
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+      </ul>
         <table class="table table-hover">
 
             <thead>
@@ -86,7 +82,7 @@
 
 
 
-        <form ng-submit="addPost()" ng-show="isLoggedIn()" style="margin-top:30px">
+        <form ng-submit="addPost()" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planacion'" style="margin-top:30px">
             <h3>Agrega una Orden:</h3>
 
             <div class="form-group">
@@ -132,6 +128,12 @@
     </script>
 
     <script type="text/ng-template" id="/posts.html">
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+      </ul>
         <div class="page-header">
             <input class="btn" type="button" value="Refresh Page" onClick="window.location.reload()">
             <!--
@@ -230,6 +232,12 @@
     </script>
 
     <script type="text/ng-template" id="/products.html">
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+      </ul>
         <div class="form-group" style="padding-top:50px;">
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -376,6 +384,12 @@
     </script>
 
     <script type="text/ng-template" id="/endproducts.html">
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+      </ul>
       <div class="form-group" style="padding-top:50px;">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -388,7 +402,7 @@
               </select>
           </div>
         </div>
-    </div>
+      </div>
 
         <div class="form-group">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Agrega Producto Terminando</button>
@@ -497,51 +511,60 @@
     </script>
 
     <script type="text/ng-template" id="/register.html">
-        <div class="page-header">
-            <h1></h1>
-        </div>
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+      </ul>
+          <div class="page-header">
+              <h1></h1>
+          </div>
 
-        <div ng-show="error" class="alert alert-danger row">
-            <span>{{ error.message }}</span>
-        </div>
+          <div ng-show="error" class="alert alert-danger row">
+              <span>{{ error.message }}</span>
+          </div>
 
-        <form ng-submit="register()" style="margin-top:30px;">
-            <h3>Register</h3>
+          <form ng-submit="register()" style="margin-top:30px;">
+              <h3>Register</h3>
 
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
-            </div>
+              <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
+              </div>
 
-            <div class="form-group">
-                <label for="sel1">Tipo de usuario list:</label>
-                <select ng-model="user.userType" class="form-control" id="sel1">
-                <option value="admin">Administridaor</option>
-                <option value="ventas">Ventas</option>
-                <option value="diseno">Diseño</option>
+              <div class="form-group">
+                  <label for="sel1">Tipo de usuario list:</label>
+                  <select ng-model="user.userType" class="form-control" id="sel1">
+                  <option value="admin">Administridaor</option>
+                  <option value="ventas">Ventas</option>
+                  <option value="diseno">Diseño</option>
 
-                <option value="preprensa">Preprensa</option>
-                <option value="planacion">Planacion</option>
-                <option value="almacen">Almacen</option>
-                <option value="prensa">Prensa</option>
-                <option value="acabados">Acabados</option>
-                <option value="calidad">Calidad</option>
-                <option value="productoTer">Producto Terminado</option>
-                <option value="entregas">Entregas</option>
-                <option value="test">Test</option>
-              </select>
-            </div>
+                  <option value="preprensa">Preprensa</option>
+                  <option value="planacion">Planacion</option>
+                  <option value="almacen">Almacen</option>
+                  <option value="prensa">Prensa</option>
+                  <option value="acabados">Acabados</option>
+                  <option value="calidad">Calidad</option>
+                  <option value="productoTer">Producto Terminado</option>
+                  <option value="entregas">Entregas</option>
+                  <option value="test">Test</option>
+                </select>
+              </div>
 
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+              <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
+              </div>
+              <button type="submit" class="btn btn-primary">Register</button>
+          </form>
     </script>
 
     <script type="text/ng-template" id="/login.html">
-        <div class="page-header">
-            <h1></h1>
-        </div>
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+      </ul>
 
         <div ng-show="error" class="alert alert-danger row">
             <span>{{ error.message }}</span>

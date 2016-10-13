@@ -774,7 +774,7 @@ app.controller('NavCtrl', ['$scope', 'auth',
         $scope.currentUser = auth.currentUser;
         $scope.logOut = auth.logOut;
         $scope.currentUserType = auth.currentUserType;
-    }
+      }
 ]);
 
 /*
