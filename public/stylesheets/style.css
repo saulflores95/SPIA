@@ -256,3 +256,19 @@ import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
       font-size:18px;
       margin-top: 10px;
   }
+
+  #table-slide{
+    border-collapse: collapse;
+    border-style: hidden;
+  }
+
+  #table-slide td {
+    border: 3px solid #428bca;
+    text-align: center;
+    padding-right: 8px;
+    padding-left: 5px;
+  }
+
+  #description-slide{
+    margin-left: -3px;
+  }
