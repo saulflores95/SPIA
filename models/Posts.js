@@ -17,7 +17,6 @@ var PostSchema = new mongoose.Schema({
   entregasConfirmation: {type: Boolean, default: false},
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   progress: {type: Number, default:0},
-
   dateEntrada: { type: Date, default: Date.now },
   dateImpresion: { type: Date, default: Date.now },
   dateAcabado: { type: Date, default: Date.now },
@@ -98,5 +97,14 @@ PostSchema.methods.downvote = function (cb) {
   this.upvotes -= 1;
   this.save(cb);
 };
+
+PostSchema.methods.edit = function (newPost ,cb) {
+//  this.title = 'Hello From POSTS.JS';
+  if(newPost.title === ''){ return; }else{ this.title = newPost.title; }
+  if(newPost.nombreCliente === ''){ return; }else{ this.nombreCliente = newPost.nombreCliente; }
+
+  this.save(cb);
+};
+
 
 mongoose.model('Post', PostSchema);

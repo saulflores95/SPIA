@@ -21,7 +21,7 @@
 </head>
 
 <body ng-app="amacApp">
-  <div class="navigaton" ng-controller="NavCtrl">
+    <div class="navigaton" ng-controller="NavCtrl">
     <nav class="navbar navbar-default pull-right" >
         <ul class="nav navbar-nav">
             <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
@@ -39,8 +39,6 @@
         <ui-view></ui-view>
     </div>
   </div>
-
-    <!--LOOOOL -->
 
     <script type="text/ng-template" id="/home.html">
       <ul class="nav nav-pills nav-justified">
@@ -60,7 +58,7 @@
             </thead>
             <tbody ng-repeat="post in posts | orderBy: '-upvotes'">
                 <tr>
-                    <td><a ng-show="post.link" href="{{post.link}}">{{post.title}}</a><span ng-hide="post.link">{{post.title}}</span><span ng-show="post.author">posted by <a>{{post.author}}</a></span></td>
+                    <td><span ng-hide="post.link">{{post.title}}</span><span ng-show="post.author">posted by <a>{{post.author}}</a></span></td>
                     <td>
                         <span ng-show="post.progress == 0"><b>No a Iniciado</b></span>
                         <span ng-show="post.progress == 10"><b>Diseño</b></span>
@@ -78,9 +76,6 @@
                 </tr>
             </tbody>
         </table>
-
-
-
 
         <form ng-submit="addPost()" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planacion'" style="margin-top:30px">
             <h3>Agrega una Orden:</h3>
@@ -121,6 +116,7 @@
             <br></br>
             <button type="submit" class="btn btn-primary">Post</button>
         </form>
+
         <div ng-hide="isLoggedIn()">
             <h3>Ocupas <a href="/#/login">Ingresar</a> o <a href="/#/register">Registrarte</a> antes de poner una orden</h3>
         </div>
@@ -133,6 +129,7 @@
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+
       </ul>
         <div class="page-header">
             <input class="btn" type="button" value="Refresh Page" onClick="window.location.reload()">
@@ -146,15 +143,64 @@
             <h1>Calidad:    {{post.calidadConfirmation}}</h1>
             <h1>Entregas:   {{post.entregasConfirmation}}</h1>
         -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+              </div>
+              <div class="modal-body">
+                <form ng-submit="editPost()">
+                    <h3>Editar la Orden:</h3>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Titulo" ng-model="post.title">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nombre de Cliente" ng-model="post.nombreCliente">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" ng-value="post.dateEntrada" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" ng-value="post.dateImpresion" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" ng-value="post.dateAcabado" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" ng-value="post.dateSalida" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <br></br>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </form>
+            </div>
+          </div>
+        </div>
+        </div>
             <h3>
-                <a ng-show="post.link" href="{{post.link}}">
-                  {{post.title}}
-                </a>
-                <span ng-hide="post.link">
-                  {{post.title}}
+                <span>
+                  {{post.title}}  por: {{post.nombreCliente}}
                 </span>
             </h3>
-            <h4>{{post.nombreCliente}}</h4>
+            <button type="button" class="btn btn-primary" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planacion'" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit Order</button></span></td>
+
         </div>
         <div class="row" id="progressButtonOneRow">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -366,14 +412,32 @@
 
                           <div class="card-reveal">
                               <span class="card-title">{{product.title}}</span> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                              <p>
-                                {{product.quantity}}
-                                {{product.weight}}
-                                {{product.height}}
-                                {{product.suppplier}}
-                                {{product.unit}}
+                              <table id="table-slide">
+                              <tr>
+                                <td>Cantidad</td>
+                                <td>{{product.quantity}}</td>
+                              </tr>
+                              <tr>
+                                <td>Peso</td>
+                                <td>{{product.weight}}</td>
+                              </tr>
+                              <tr>
+                                <td>Altura</td>
+                                <td>{{product.height}}</td>
+                              </tr>
+                              <tr>
+                                <td>Provedor</td>
+                                <td>{{product.suppplier}}</td>
+                              </tr>
+                              </table>
+                              <!--  {{product.unit}} -->
+                              <p id="description-slide">
+                                <b>
+                                Descripcion:
+                               </b>
                               </p>
-                          </div><!-- card reveal -->
+                          </div><!-- casrd reveal -->
+
 
                         <div class="blankspace">
                         </div>
@@ -490,18 +554,34 @@
                               </div>
                             </div><!-- card content -->
 
-                            <div class="card-reveal">
-                                <span class="card-title">{{endproduct.client}}</span> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                <p>
-                                  {{endproduct.partNumber}}
-                                  {{endproduct.price}}
-                                  {{endproduct.unit}}
-                                  {{endproduct.suppplier}}
-                                  {{endproduct.quantity}}
-                                </p>
-                            </div><!-- card reveal -->
-
-                        <div class="blankspace">
+                                <div class="card-reveal">
+                                    <span class="card-title">{{endproduct.client}}</span> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <table id="table-slide">
+                                    <tr>
+                                      <td>Numero de Parte</td>
+                                      <td>{{endproduct.partNumber}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Precio</td>
+                                      <td>{{endproduct.price}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Provedor</td>
+                                      <td>{{endproduct.suppplier}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Cantidad</td>
+                                      <td>{{endproduct.quantity}}</td>
+                                    </tr>
+                                    </table>
+                                    <!--  {{product.unit}} -->
+                                    <p id="description-slide">
+                                      <b>
+                                      Descripcion:
+                                     </b>
+                                    </p>
+                                </div><!-- casrd reveal -->
+                                <div class="blankspace">
                         </div>
                     </div>
                 </div>

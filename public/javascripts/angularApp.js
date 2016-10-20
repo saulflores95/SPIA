@@ -319,7 +319,18 @@ app.factory('posts', ['$http', 'auth',
                 return res.data;
             });
         };
-        //comments, once again using express
+        //edit POST title
+        o.editPost = function(post, newPost) {
+            return $http.put('/posts/' + post._id + '/edit', newPost, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+              if(newPost.title === ''){ return post.title; }else{ post.title = newPost.title; }
+              if(newPost.nombreCliente === ''){ return post.nombreCliente; }else{ post.nombreCliente = newPost.nombreCliente; }
+            });
+        };
+        //comments, once again using expresss
         o.addComment = function(id, comment) {
             return $http.post('/posts/' + id + '/comments', comment, {
                 headers: {
@@ -389,6 +400,31 @@ app.factory('endproducts', ['$http', 'auth',
 
 app.controller('MainCtrl', ['$scope', 'posts', 'auth',
     function($scope, posts, auth) {
+
+        $scope.posts = posts.posts;
+        $scope.isLoggedIn = auth.isLoggedIn;
+        //setting title to blank here to prevent empty posts
+        $scope.title = '';
+        $scope.addPost = function() {
+            if ($scope.title === '') {
+                return;
+            }
+            posts.create({
+                title: $scope.title,
+                nombreCliente: $scope.nombreCliente,
+            });
+            //clear the values
+            $scope.title = '';
+            $scope.nombreCliente = '';
+        };
+        $scope.upvote = function(post) {
+            posts.upvote(post);
+        };
+        $scope.downvote = function(post) {
+            posts.downvote(post);
+        };
+
+
         $('input').filter('#datepicker').datepicker();
         $("#datepicker").keypress(function(event) {
             event.preventDefault();
@@ -437,32 +473,6 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $('#datepicker4').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-
-        $scope.posts = posts.posts;
-        $scope.isLoggedIn = auth.isLoggedIn;
-        //setting title to blank here to prevent empty posts
-        $scope.title = '';
-
-        $scope.addPost = function() {
-            if ($scope.title === '') {
-                return;
-            }
-            posts.create({
-                title: $scope.title,
-                link: $scope.link,
-            });
-            //clear the values
-            $scope.title = '';
-            $scope.link = '';
-        };
-        $scope.upvote = function(post) {
-            posts.upvote(post);
-        };
-
-        $scope.downvote = function(post) {
-            posts.downvote(post);
-        };
-
     }
 ]);
 
@@ -524,6 +534,25 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
 
+        $scope.editPost = function() {
+            console.log('Edit Post Form Pressed!')
+            posts.editPost(post, {
+                title: $scope.post.title,
+                nombreCliente: $scope.post.nombreCliente
+            });
+
+            $scope.post.title = '';
+            $scope.post.nombreCliente = '';
+
+        };
+          /*
+            posts.editPost(post._id,{
+              title: $scope.title,
+            }).success(function(post) {
+                //$scope.post.put(post);
+                console.log(post.title);
+            });
+            */
         $scope.addComment = function() {
             if ($scope.body === '') {
                 return;
@@ -539,7 +568,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.upvote = function(comment) {
             posts.upvoteComment(post, comment);
         };
-
         $scope.downvote = function(comment) {
             posts.downvoteComment(post, comment);
         };
@@ -592,7 +620,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         };
         $scope.calidadConfirmationCapture = function(post) {
             console.log('Calidad Job Done:' + post.calidadConfirmation);
-            posts.calidadConfirmationCapture(post);
+            posts.calidadConfirmationCapture(post)   ;
             window.location.reload(true);
 
         };

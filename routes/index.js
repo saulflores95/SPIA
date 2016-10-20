@@ -129,6 +129,19 @@ router.get('/posts/:post', function(req, res, next) {
     res.json(post);
   });
 });
+
+router.put('/posts/:post/edit', auth, function(req, res, next) {
+
+  var newPost = req.body;
+
+  req.post.edit(newPost, function(err, post){
+    if (err) { return next(err); }
+
+    res.json(post);
+  });
+
+});
+
 router.put('/posts/:post/ventasConfirmationCapture', auth, function(req, res, next) {
   req.post.ventasConfirmationCapture(function(err, post){
     if (err) { return next(err); }
@@ -252,7 +265,6 @@ router.get('/products', function(req, res, next) {
     if(err){
       return next(err);
     }
-
     res.json(products);
   });
 })*/
