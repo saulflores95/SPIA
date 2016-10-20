@@ -327,8 +327,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
               if(newPost.title === ''){ return post.title; }else{ post.title = newPost.title; }
-              if(newPost.nombreCliente === ''){ return post.nombreCliente; }else{ post.nombreCliente = newPost.
-                ; }
+              if(newPost.nombreCliente === ''){ return post.nombreCliente; }else{ post.nombreCliente = newPost.nombreCliente; }
             });
         };
         //comments, once again using expresss
