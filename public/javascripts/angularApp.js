@@ -327,7 +327,8 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
               if(newPost.title === ''){ return post.title; }else{ post.title = newPost.title; }
-              if(newPost.nombreCliente === ''){ return post.nombreCliente; }else{ post.nombreCliente = newPost.nombreCliente; }
+              if(newPost.nombreCliente === ''){ return post.nombreCliente; }else{ post.nombreCliente = newPost.
+                ; }
             });
         };
         //comments, once again using expresss
@@ -423,7 +424,6 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $scope.downvote = function(post) {
             posts.downvote(post);
         };
-
 
         $('input').filter('#datepicker').datepicker();
         $("#datepicker").keypress(function(event) {
@@ -724,6 +724,55 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 return "Orden Completada :)";
             }
         }
+
+        $('input').filter('#datepicker').datepicker();
+        $("#datepicker").keypress(function(event) {
+            event.preventDefault();
+        });
+        $("#datepicker").keydown(function(event) {
+            if (event.keyCode == 8) {
+                return false;
+            }
+        });
+        $('#datepicker').bind("cut copy paste", function(event) {
+            event.preventDefault();
+        });
+        $('input').filter('#datepicker2').datepicker();
+        $("#datepicker2").keypress(function(event) {
+            event.preventDefault();
+        });
+        $("#datepicker2").keydown(function(event) {
+            if (event.keyCode == 8) {
+                return false;
+            }
+        });
+        $('#datepicker2').bind("cut copy paste", function(event) {
+            event.preventDefault();
+        });
+        $('input').filter('#datepicker3').datepicker();
+        $("#datepicker3").keypress(function(event) {
+            event.preventDefault();
+        });
+        $("#datepicker3").keydown(function(event) {
+            if (event.keyCode == 8) {
+                return false;
+            }
+        });
+        $('#datepicker3').bind("cut copy paste", function(event) {
+            event.preventDefault();
+        });
+        $('input').filter('#datepicker4').datepicker();
+        $("#datepicker4").keypress(function(event) {
+            event.preventDefault();
+        });
+        $("#datepicker4").keydown(function(event) {
+            if (event.keyCode == 8) {
+                return false;
+            }
+        });
+        $('#datepicker4').bind("cut copy paste", function(event) {
+            event.preventDefault();
+        });
 
 
     }
