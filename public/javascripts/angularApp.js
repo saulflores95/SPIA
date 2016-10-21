@@ -544,6 +544,9 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.post = post;
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
+      //  $scope.dateAcabadosDisplay = post.dateAcabado.toISOString().substring(0, 10);
+      //  $scope.dateImpresionDisplay = post.dateImpresion.toISOString().substring(0, 10);
+      //  $scope.dateSalidaDisplay = post.dateSalida.toISOString().substring(0, 10);
 
         $scope.editPost = function() {
             console.log('Edit Post Form Pressed!')

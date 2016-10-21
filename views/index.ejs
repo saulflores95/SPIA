@@ -198,6 +198,20 @@
                 <span>
                   {{post.title}}  por: {{post.nombreCliente}}
                 </span>
+                <div class="row">
+                  <div class="col-lg-3">
+                    <h3> Entrada: {{post.dateEntrada | date : "dd.MM.y"}}</h3>
+                  </div>
+                  <div class="col-lg-3">
+                    <h3> Impresion: {{post.dateAcabado | date : "dd.MM.y"}}</h3>
+                  </div>
+                  <div class="col-lg-3">
+                    <h3> Acabados: {{post.dateImpresion | date : "dd.MM.y"}}</h3>
+                  </div>
+                  <div class="col-lg-3">
+                    <h3> Salida: {{post.dateSalida | date : "dd.MM.y"}}</h3>
+                  </div>
+                </div>
             </h3>
             <button type="button" class="btn btn-primary" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planacion'" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit Order</button></span></td>
 
