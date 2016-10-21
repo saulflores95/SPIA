@@ -99,10 +99,12 @@ PostSchema.methods.downvote = function (cb) {
 };
 
 PostSchema.methods.edit = function (newPost ,cb) {
-//  this.title = 'Hello From POSTS.JS';
-  if(newPost.title === ''){ return; }else{ this.title = newPost.title; }
-  if(newPost.nombreCliente === ''){ return; }else{ this.nombreCliente = newPost.nombreCliente; }
-
+  this.title = newPost.title;
+  this.nombreCliente = newPost.nombreCliente;
+  this.dateEntrada = newPost.dateEntrada;
+  this.dateImpresion = newPost.dateImpresion;
+  this.dateAcabado = newPost.dateAcabado;
+  this.dateSalida = newPost.dateSalida;
   this.save(cb);
 };
 

@@ -326,8 +326,12 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-              if(newPost.title === ''){ return post.title; }else{ post.title = newPost.title; }
-              if(newPost.nombreCliente === ''){ return post.nombreCliente; }else{ post.nombreCliente = newPost.nombreCliente; }
+              post.title = newPost.title;
+              post.nombreCliente = newPost.nombreCliente;
+              post.dateEntrada = newPost.dateEntrada;
+              post.dateImpresion = newPost.dateAcabado;
+              post.nombreCliente = newPost.nombreCliente;
+              post.dateSalida = newPost.dateSalida;
             });
         };
         //comments, once again using expresss
@@ -412,10 +416,18 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
             posts.create({
                 title: $scope.title,
                 nombreCliente: $scope.nombreCliente,
+                dateEntrada: $scope.dateEntrada,
+                dateImpresion: $scope.dateImpresion,
+                dateAcabado: $scope.dateAcabado,
+                dateSalida: $scope.dateSalida
             });
             //clear the values
             $scope.title = '';
             $scope.nombreCliente = '';
+            $scope.dateEntrada = '';
+            $scope.dateAcabado = '';
+            $scope.dateSalida = '';
+            $scope.dateImpresion = '';
         };
         $scope.upvote = function(post) {
             posts.upvote(post);
@@ -538,12 +550,12 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             console.log('Edit Post Form Pressed!')
             posts.editPost(post, {
                 title: $scope.post.title,
-                nombreCliente: $scope.post.nombreCliente
+                nombreCliente: $scope.post.nombreCliente,
+                dateEntrada: $scope.post.dateEntrada,
+                dateImpresion: $scope.post.dateImpresion,
+                dateAcabado: $scope.post.dateAcabado,
+                dateSalida: $scope.post.dateSalida
             });
-
-            $scope.post.title = '';
-            $scope.post.nombreCliente = '';
-
         };
           /*
             posts.editPost(post._id,{

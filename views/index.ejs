@@ -91,25 +91,25 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" readonly>
+                        <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" readonly  ng-model="dateEntrada">
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" readonly>
+                        <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" readonly ng-model="dateImpresion">
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" readonly>
+                        <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" readonly  ng-model="dateAcabado">
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                     <div class "form-group">
-                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" readonly>
+                        <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" readonly ng-model="dateSalida">
                     </div>
                 </div>
             </div>
@@ -165,25 +165,25 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" ng-value="post.dateEntrada" readonly>
+                                <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" ng-model="post.dateEntrada" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" ng-value="post.dateImpresion" readonly>
+                                <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" ng-model="post.dateImpresion" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" ng-value="post.dateAcabado" readonly>
+                                <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" ng-model="post.dateAcabado" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" ng-value="post.dateSalida" readonly>
+                                <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" ng-model="post.dateSalida" readonly>
                             </div>
                         </div>
                     </div>
@@ -662,7 +662,6 @@
             <button type="submit" class="btn btn-primary">Log In</button>
         </form>
     </script>
-
 
 </body>
 
