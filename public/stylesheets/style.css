@@ -272,3 +272,11 @@ import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
    #description-slide{
      margin-left: -3px;
    }
+
+   .Blink {
+     animation: blinker .5s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+   }
+   @keyframes blinker {
+     from { opacity: 1; }
+     to { opacity: 0; }
+   }

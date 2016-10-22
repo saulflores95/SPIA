@@ -13,11 +13,12 @@
     <script src="javascripts/angularApp.js"></script>
     <script src="javascripts/function.js"></script>
     <script src="javascripts/progress_bar.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <style>
         .glyphicon-thumbs-up {
             cursor: pointer
         }
-    </style>
+  </style>
 </head>
 
 <body ng-app="amacApp">
@@ -73,6 +74,7 @@
                         <span ng-show="post.progress == 100"><b>Orden Completada</b></span>
                     </td>
                     <td><span><a href="#/posts/{{post._id}}">ver orden</a>({{post.comments.length}})</span></td>
+                    <td><div class="fa fa-circle text-danger Blink"></div></td>
                 </tr>
             </tbody>
         </table>
