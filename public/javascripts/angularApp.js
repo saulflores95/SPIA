@@ -216,6 +216,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.ventasConfirmation = true;
+                post.progress += 10;
             });
         };
         o.disenoConfirmationCapture = function(post) {
@@ -225,6 +226,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.disenoConfirmation = true;
+                post.progress += 10;
             });
         };
         o.preConfirmationCapture = function(post) {
@@ -234,6 +236,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.preConfirmation = true;
+                post.progress +=10;
             });
         };
         o.planacionConfirmationCapture = function(post) {
@@ -243,6 +246,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.planacionConfirmation = true;
+                post.progress += 20;
             });
         };
         o.almacenConfirmationCapture = function(post) {
@@ -252,6 +256,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.almacenConfirmation = true;
+                post.progress += 10;
             });
         };
         o.prensaConfirmationCapture = function(post) {
@@ -261,6 +266,8 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.prensaConfirmation = true;
+                post.progress += 5;
+
             });
         };
         o.acabadosConfirmationCapture = function(post) {
@@ -270,6 +277,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.acabadosConfirmation = true;
+                post.progress += 5;
             });
         };
         o.calidadConfirmationCapture = function(post) {
@@ -279,6 +287,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.calidadConfirmation = true;
+                post.progress += 10;
             });
         };
         o.productoTerConfirmationCapture = function(post) {
@@ -288,6 +297,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.productoTerConfirmation = true;
+                post.progress += 10;
             });
         };
         o.entregasConfirmationCapture = function(post) {
@@ -297,6 +307,7 @@ app.factory('posts', ['$http', 'auth',
                 }
             }).success(function(data) {
                 post.entregasConfirmation = true;
+                post.progress += 10;
             });
         };
         //downvotes
@@ -590,65 +601,63 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.ventasConfirmationCapture = function(post) {
             console.log('Ventas Job Done:' + post.ventasConfirmation);
             posts.ventasConfirmationCapture(post);
-            window.location.reload(true);
+          //  window.location.reload(true);
         };
 
         $scope.disenoConfirmationCapture = function(post) {
             console.log('Diseno Job Done:' + post.disenoConfirmation);
             posts.disenoConfirmationCapture(post);
-            window.location.reload(true);
+      //      window.location.reload(true);
 
         };
 
         $scope.preConfirmationCapture = function(post) {
             console.log('Preprensa Job Done:' + post.preConfirmation);
             posts.preConfirmationCapture(post);
-            window.location.reload(true);
+        //    window.location.reload(true);
 
         };
 
         $scope.planacionConfirmationCapture = function(post) {
             console.log('Preprensa Job Done:' + post.planacionConfirmation);
             posts.planacionConfirmationCapture(post);
-            window.location.reload(true);
+          //  window.location.reload(true);
 
         };
 
         $scope.almacenConfirmationCapture = function(post) {
             console.log('Alamacen Job Done:' + post.alamcenConfirmation);
             posts.almacenConfirmationCapture(post);
-            window.location.reload(true);
+            //window.location.reload(true);
 
         };
 
         $scope.prensaConfirmationCapture = function(post) {
             console.log('Prensa Job Done: ' + post.prensaConfirmation);
             posts.prensaConfirmationCapture(post);
-            window.location.reload(true);
+            //window.location.reload(true);
         };
         $scope.acabadosConfirmationCapture = function(post) {
             console.log('Acabados Job Done:' + post.acabadosConfirmation);
             posts.acabadosConfirmationCapture(post);
-            window.location.reload(true);
+            //window.location.reload(true);
 
         };
         $scope.calidadConfirmationCapture = function(post) {
             console.log('Calidad Job Done:' + post.calidadConfirmation);
             posts.calidadConfirmationCapture(post)   ;
-            window.location.reload(true);
+            //window.location.reload(true);
 
         };
         $scope.productoTerConfirmationCapture = function(post) {
             console.log('Producto Terminado: ' + post.productoTerConfirmation);
             posts.productoTerConfirmationCapture(post);
-
-            window.location.reload(true);
+            //window.location.reload(true);
         }
         $scope.entregasConfirmationCapture = function(post) {
             console.log('Entregas Job Done:' + post.entregasConfirmation);
             posts.entregasConfirmationCapture(post);
-            window.location.reload(true);
-
+            //window.location.reload(true);
         };
 
         $scope.ventasStyle = function() {

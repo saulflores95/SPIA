@@ -133,16 +133,7 @@
       </ul>
         <div class="page-header">
             <input class="btn" type="button" value="Refresh Page" onClick="window.location.reload()">
-            <!--
-            <h1>Ventas:     {{post.ventasConfirmation}}</h1>
-            <h1>Diseno:     {{post.disenoConfirmation}}</h1>
-            <h1>Almacen:    {{post.almacenConfirmation}}</h1>
-            <h1>Produccion: {{post.produccionConfirmation}}</h1>
-            <h1>PrePrensa:  {{post.preConfirmation}}</h1>
-            <h1>Acabados:   {{post.acabadosConfirmation}}</h1>
-            <h1>Calidad:    {{post.calidadConfirmation}}</h1>
-            <h1>Entregas:   {{post.entregasConfirmation}}</h1>
-        -->
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -199,16 +190,16 @@
                   {{post.title}}  por: {{post.nombreCliente}}
                 </span>
                 <div class="row">
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <h3> Entrada: {{post.dateEntrada | date : "dd.MM.y"}}</h3>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <h3> Impresion: {{post.dateAcabado | date : "dd.MM.y"}}</h3>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <h3> Acabados: {{post.dateImpresion | date : "dd.MM.y"}}</h3>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <h3> Salida: {{post.dateSalida | date : "dd.MM.y"}}</h3>
                   </div>
                 </div>
@@ -300,10 +291,10 @@
       </ul>
         <div class="form-group" style="padding-top:50px;">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               <input type="text" placeholder="Buscar: " ng-model="filter" class="form-control">
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <select ng-model="filter" class="form-control">
                   <option value="Papel">Papel</option>
                   <option value="Tintas">Tintas</option>
@@ -331,26 +322,26 @@
                         <div class="form-group">
                             <h3>Informacion Basica</h4>
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                         <input type="text" class="form-control" placeholder="Title" ng-model="title">
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                         <input type="text" class="form-control" placeholder="Descripcion" ng-model="description">
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                         <input type="text" class="form-control" placeholder="tina, azul, describeme..." ng-model="tags">
                                     </div>
                                 </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                     <input type="text" class="form-control" placeholder="Provedor" ng-model="suppplier">
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                                     <input type="number" class="form-control" placeholder="Cantidad" ng-model="quantity">
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                     <div class="form-group">
                                       <select ng-model="unit" class="form-control">
                                         <option value="piezas">Piezas</option>
@@ -377,10 +368,10 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <input type="text" class="form-control" placeholder="Imagen" ng-model="imgUrl">
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <img class="previewImg" src="{{imgUrl}}" />
                                 </div>
                             </div>
@@ -400,7 +391,7 @@
 
         <div ng-repeat="product in products | filter: filter ">
           <!-- Resolution problem 992-1307 -->
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="card">
                           <div class="card-image">
                               <img class="img-responsive thumbnailImg" src="{{product.imgUrl}}">
@@ -544,7 +535,7 @@
 
           <div ng-repeat="endproduct in endproducts | filter: filter ">
             <!-- Resolution problem 992-1307 -->
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="card">
                             <div class="card-image">
                                 <img class="img-responsive thumbnailImg" src="{{endproduct.imgUrl}}">
