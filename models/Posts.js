@@ -20,7 +20,7 @@ var PostSchema = new mongoose.Schema({
   dateEntrada: { type: Date, default: Date.now },
   dateImpresion: { type: Date, default: Date.now },
   dateAcabado: { type: Date, default: Date.now },
-  dateSalida: { type: Date, default: Date.now }
+  dateSalida: { type: Date, default: Date.now },
 
 
 });

@@ -447,6 +447,25 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
             posts.downvote(post);
         };
 
+        $scope.BlinkerActivator = function(post){
+          var dateSalida = new Date(post);
+          var dateCurrent = new Date();
+          var diff = dateSalida - dateCurrent;
+          var day = 0;
+
+          if(diff > 0){
+            day = Math.abs(diff/86400000).toFixed(2);
+          }else{
+            day = 0;
+          }
+          if(day > 0 && day <= 4)
+            return true;
+        }
+
+
+          //dateSalida = dateSalida.replace("T00:00:00.000Z", "");
+          //  var dateSalida = post.dateSalida.replace(/-/g,'/');
+
         $('input').filter('#datepicker').datepicker();
         $("#datepicker").keypress(function(event) {
             event.preventDefault();
@@ -558,6 +577,22 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
       //  $scope.dateAcabadosDisplay = post.dateAcabado.toISOString().substring(0, 10);
       //  $scope.dateImpresionDisplay = post.dateImpresion.toISOString().substring(0, 10);
       //  $scope.dateSalidaDisplay = post.dateSalida.toISOString().substring(0, 10);
+
+      $scope.DateComparer = function(){
+        //dateSalida = dateSalida.replace("T00:00:00.000Z", "");
+        //  var dateSalida = post.dateSalida.replace(/-/g,'/');
+        var dateSalida = new Date(post.dateSalida);
+        var dateCurrent = new Date();
+        var diff = dateSalida - dateCurrent;
+        var day = 0;
+        if(diff > 0){
+          var day = Math.abs(diff/86400000).toFixed(2);
+        }else{
+
+        }
+        return day;
+      }
+
 
         $scope.editPost = function() {
             console.log('Edit Post Form Pressed!')

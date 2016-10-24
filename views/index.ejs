@@ -74,7 +74,7 @@
                         <span ng-show="post.progress == 100"><b>Orden Completada</b></span>
                     </td>
                     <td><span><a href="#/posts/{{post._id}}">ver orden</a>({{post.comments.length}})</span></td>
-                    <td><div class="fa fa-circle text-danger Blink"></div></td>
+                    <td><div ng-show="BlinkerActivator(post.dateSalida)" class="fa fa-circle text-danger Blink"></div></td>
                 </tr>
             </tbody>
         </table>
@@ -192,17 +192,21 @@
                   {{post.title}}  por: {{post.nombreCliente}}
                 </span>
                 <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <h3> Entrada: {{post.dateEntrada | date : "dd.MM.y"}}</h3>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <h3> Entrada: {{post.dateEntrada | date : "dd/MM/y"}}</h3>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <h3> Impresion: {{post.dateAcabado | date : "dd.MM.y"}}</h3>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <h3> Impresion: {{post.dateAcabado | date : "dd/MM/y"}}</h3>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <h3> Acabados: {{post.dateImpresion | date : "dd.MM.y"}}</h3>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <h3> Acabados: {{post.dateImpresion | date : "dd/MM/y"}}</h3>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <h3> Salida: {{post.dateSalida | date : "dd.MM.y"}}</h3>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <h3> Salida: {{post.dateSalida | date : "dd/MM/y"}}</h3>
+                  </div>
+
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <h3> New Date: {{DateComparer()}}</h3>
                   </div>
                 </div>
             </h3>
@@ -393,7 +397,7 @@
 
         <div ng-repeat="product in products | filter: filter ">
           <!-- Resolution problem 992-1307 -->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                   <div class="card">
                           <div class="card-image">
                               <img class="img-responsive thumbnailImg" src="{{product.imgUrl}}">
@@ -537,7 +541,7 @@
 
           <div ng-repeat="endproduct in endproducts | filter: filter ">
             <!-- Resolution problem 992-1307 -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                             <div class="card-image">
                                 <img class="img-responsive thumbnailImg" src="{{endproduct.imgUrl}}">
