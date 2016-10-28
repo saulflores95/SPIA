@@ -565,10 +565,13 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
 
         $scope.subtract = function(product, newProduct) {
             products.subtract(product, newProduct);
+            alert('Restado Confirmado!');
         };
 
         $scope.add = function(product, newProduct) {
             products.add(product, newProduct);
+            alert('Suma Exitosa!');
+
         };
 
 
