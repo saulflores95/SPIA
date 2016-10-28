@@ -43,9 +43,9 @@
 
     <script type="text/ng-template" id="/home.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
         <table class="table table-hover">
@@ -64,7 +64,7 @@
                         <span ng-show="post.progress == 0"><b>No a Iniciado</b></span>
                         <span ng-show="post.progress == 10"><b>Diseño</b></span>
                         <span ng-show="post.progress == 20"><b>Preprensa</b></span>
-                        <span ng-show="post.progress == 30"><b>Planacion</b></span>
+                        <span ng-show="post.progress == 30"><b>planeacion</b></span>
                         <span ng-show="post.progress == 50"><b>Almacen</b></span>
                         <span ng-show="post.progress == 60"><b>Prensa</b></span>
                         <span ng-show="post.progress == 65"><b>Acabados</b></span>
@@ -79,7 +79,7 @@
             </tbody>
         </table>
 
-        <form ng-submit="addPost()" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planacion'" style="margin-top:30px">
+        <form ng-submit="addPost()" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planeacion'" style="margin-top:30px">
             <h3>Agrega una Orden:</h3>
 
             <div class="form-group">
@@ -127,9 +127,9 @@
 
     <script type="text/ng-template" id="/posts.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
 
       </ul>
@@ -210,7 +210,7 @@
                   </div>
                 </div>
             </h3>
-            <button type="button" class="btn btn-primary" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planacion'" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit Order</button></span></td>
+            <button type="button" class="btn btn-primary" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planeacion'" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit Order</button></span></td>
 
         </div>
         <div class="row" id="progressButtonOneRow">
@@ -228,13 +228,13 @@
 
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{planacionStyle()}}" ng-disabled="currentUserType() != 'planacion' || post.planacionConfirmation == true || post.preConfirmation == false" ng-click="planacionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
-                <h5><small>Planacion</small></h5>
+                <button style="{{planeacionStyle()}}" ng-disabled="currentUserType() != 'planeacion' || post.planeacionConfirmation == true || post.preConfirmation == false" ng-click="planeacionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <h5><small>planeacion</small></h5>
 
             </div>
             <!--ERROR HERE IN PRODDUCTION LIMITANT -->
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.planacionConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{alamcenStyle()}}" ng-disabled="currentUserType() != 'almacen' || post.almacenConfirmation == true || post.planeacionConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Almacen</small></h5>
             </div>
         </div>
@@ -290,9 +290,9 @@
 
     <script type="text/ng-template" id="/product.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
 
       </ul>
@@ -361,9 +361,9 @@
 
     <script type="text/ng-template" id="/products.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
         <div class="form-group" style="padding-top:50px;">
@@ -531,9 +531,9 @@
 
     <script type="text/ng-template" id="/endproducts.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
       <div class="form-group" style="padding-top:50px;">
@@ -674,9 +674,9 @@
 
     <script type="text/ng-template" id="/register.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
           <div class="page-header">
@@ -702,7 +702,7 @@
                   <option value="diseno">Diseño</option>
 
                   <option value="preprensa">Preprensa</option>
-                  <option value="planacion">Planacion</option>
+                  <option value="planeacion">planeacion</option>
                   <option value="almacen">Almacen</option>
                   <option value="prensa">Prensa</option>
                   <option value="acabados">Acabados</option>
@@ -723,9 +723,9 @@
 
     <script type="text/ng-template" id="/login.html">
       <ul class="nav nav-pills nav-justified">
-          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill active"><a href="/#/home">Ordenes</a></li>
-          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
 
