@@ -15,9 +15,17 @@ var ProductSchema = new mongoose.Schema({
 
 });
 
-ProductSchema.methods.quantityChanger = function(cb) {
+ProductSchema.methods.subtract = function(newProduct, cb) {
+  this.quantity -= newProduct.diffQuantity;
   this.save(cb);
 };
+
+ProductSchema.methods.add = function(newProduct, cb) {
+  this.quantity += newProduct.diffQuantity;
+  this.save(cb);
+};
+
+
 
 
 mongoose.model('Product', ProductSchema);

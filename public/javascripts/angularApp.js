@@ -48,6 +48,17 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 ]
 
             }
+        }).state('product', {
+            url: '/products/:id',
+            templateUrl: '/product.html',
+            controller: 'ProductCtrl',
+            resolve: {
+                product: ['$stateParams', 'products',
+                    function($stateParams, products) {
+                        return products.get($stateParams.id);
+                    }
+                ]
+            }
         }).state('login', {
             url: '/login',
             templateUrl: '/login.html',
@@ -167,6 +178,26 @@ app.factory('products', ['$http', 'auth',
             //looks friggin sweet; TODO Learn to use them like a boss.  First, this.
             return $http.get('/products/' + id).then(function(res) {
                 return res.data;
+            });
+        };
+
+        p.add = function(product, newProduct) {
+            return $http.put('/products/' + product._id + '/add', newProduct, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+                product.quantity += newProduct.diffQuantity;
+            });
+        };
+
+        p.subtract = function(product, newProduct) {
+            return $http.put('/products/' + product._id + '/subtract', newProduct, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+                product.quantity -= newProduct.diffQuantity;
             });
         };
 
@@ -532,6 +563,15 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
         //setting title to blank here to prevent empty products
         $scope.title = '';
 
+        $scope.subtract = function(product, newProduct) {
+            products.subtract(product, newProduct);
+        };
+
+        $scope.add = function(product, newProduct) {
+            products.add(product, newProduct);
+        };
+
+
         $scope.hoverIn = function() {
             this.hoverEdit = true;
         };
@@ -566,6 +606,25 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
         };
 
 
+    }
+]);
+
+app.controller('ProductCtrl', ['$scope', 'products', 'product', 'auth',
+    function($scope, products, product, auth) {
+        $scope.product = product;
+        $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.currentUserType = auth.currentUserType;
+        $scope.editPost = function() {
+            console.log('Edit Post Form Pressed!')
+            posts.editPost(post, {
+                title: $scope.post.title,
+                nombreCliente: $scope.post.nombreCliente,
+                dateEntrada: $scope.post.dateEntrada,
+                dateImpresion: $scope.post.dateImpresion,
+                dateAcabado: $scope.post.dateAcabado,
+                dateSalida: $scope.post.dateSalida
+            });
+        };
     }
 ]);
 

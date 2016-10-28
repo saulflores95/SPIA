@@ -260,6 +260,7 @@ import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
   #table-slide{
      border-collapse: collapse;
      border-style: hidden;
+     width: 100%;
    }
 
    #table-slide td {

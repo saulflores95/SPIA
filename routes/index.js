@@ -79,7 +79,7 @@ router.post('/products', auth, function(req, res, next) {
   });
 });
 router.param('product', function(req, res, next, id) {
-  var query = Poduct.findById(id);
+  var query = Product.findById(id);
 
   query.exec(function (err, product){
     if (err) { return next(err); }
@@ -129,7 +129,6 @@ router.get('/posts/:post', function(req, res, next) {
     res.json(post);
   });
 });
-
 router.put('/posts/:post/edit', auth, function(req, res, next) {
 
   var newPost = req.body;
@@ -258,6 +257,32 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
 })
 
 
+
+router.get('/products/:product', function(req, res, next) {
+  req.product.populate('products', function(err, product) {
+    res.json(product);
+  });
+});
+
+
+router.put('/products/:product/add', auth, function(req, res, next) {
+  var newProduct = req.body;
+  req.product.add(newProduct, function(err, product){
+    if (err) { return next(err); }
+
+    res.json(product);
+  });
+})
+
+
+router.put('/products/:product/subtract', auth, function(req, res, next) {
+  var newProduct = req.body;
+  req.product.subtract(newProduct, function(err, product){
+    if (err) { return next(err); }
+
+    res.json(product);
+  });
+})
 
 /*Segment used previously
 router.get('/products', function(req, res, next) {

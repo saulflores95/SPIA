@@ -288,6 +288,77 @@
         </div>
     </script>
 
+    <script type="text/ng-template" id="/product.html">
+      <ul class="nav nav-pills nav-justified">
+          <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
+          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
+          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+
+      </ul>
+        <div class="page-header">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Editar producto/h4>
+              </div>
+              <div class="modal-body">
+                <form ng-submit="editPost()">
+                    <h3>Editar la Orden:</h3>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Titulo" ng-model="post.title">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nombre de Cliente" ng-model="post.nombreCliente">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" ng-model="post.dateEntrada" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" ng-model="post.dateImpresion" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" ng-model="post.dateAcabado" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class "form-group">
+                                <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" ng-model="post.dateSalida" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <br></br>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </form>
+              </div>
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>{{product.title}}</h4>
+            <h4>{{product.quantity}}</h4>
+          </div>
+        </div>
+    </script>
+
+
     <script type="text/ng-template" id="/products.html">
       <ul class="nav nav-pills nav-justified">
           <li class="navPill" ng-show="{{currentUserType() == 'planacion' || currentUserType == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
@@ -407,13 +478,13 @@
                           <div class="card-content">
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <span class="glyphicon glyphicon-minus"></span>
+                                    <span ng-click="subtract(product, newProduct)" class="glyphicon glyphicon-minus"></span>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                    <input class="form-control" type="Number" ng-model="newQuantity" />
+                                    <input class="form-control" type="Number" ng-model="newProduct.diffQuantity" />
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <span ng-click="add(product, newProduct)" class="glyphicon glyphicon-plus"></span>
                                 </div>
                                 <button type="button" id="show" class="btn btn-custom pull-right show" aria-label="Left Align">
                                     <i class="fa fa-ellipsis-v"></i>
@@ -648,6 +719,7 @@
               <button type="submit" class="btn btn-primary">Register</button>
           </form>
     </script>
+
 
     <script type="text/ng-template" id="/login.html">
       <ul class="nav nav-pills nav-justified">
