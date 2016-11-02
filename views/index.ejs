@@ -450,7 +450,7 @@
                                   <input type="file" file-model="myFile"/>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <img class="previewImg" width:'100%' src="{{imgUrl}}" />
+                                    <img class="previewImg" width:'100%' src="{{myFile}}" />
                                 </div>
                             </div>
                         </div>
@@ -590,7 +590,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                    <input type="text" class="form-control" placeholder="Imagen" ng-model="imgUrl">
+                                  <input type="file" file-model="myFile"/>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <img class="previewImg" src="{{imgUrl}}" />
@@ -616,7 +616,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                             <div class="card-image">
-                                <img class="img-responsive thumbnailImg" src="{{endproduct.imgUrl}}">
+                              <img class="img-responsive thumbnailImg" width="100%" src="{{endproduct.url}}"/>
 
                             </div><!-- card image -->
 
@@ -642,7 +642,7 @@
                                     <table id="table-slide">
                                     <tr>
                                       <td>Numero de Parte</td>
-                                      <td>{{endproduct.partNumber}}</td>
+                                      <td>{{endproduct.partNumber}}{{endproduct.url}}</td>
                                     </tr>
                                     <tr>
                                       <td>Precio</td>

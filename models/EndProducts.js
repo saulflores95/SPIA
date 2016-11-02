@@ -7,6 +7,10 @@ var EndProductSchema = new mongoose.Schema({
   price: {type: Number, default: 0},
   unit: String,
   imgUrl: String,
+  fileName:String,
+  dateCreated: String,
+  url: String,
+
 });
 
 

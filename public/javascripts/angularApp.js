@@ -946,8 +946,8 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
     }
 ]);
 
-app.controller('EndProdCtrl', ['$scope', 'endproducts', 'auth',
-    function($scope, endproducts, auth) {
+app.controller('EndProdCtrl', ['$scope', 'endproducts', '$http', 'auth',
+    function($scope, endproducts, $http, auth) {
           setTimeout(function(){$('.show').on('click',function(){
          			$(this).parent().parent().parent().find('.card-reveal').slideToggle('slow');
          	});
@@ -968,17 +968,44 @@ app.controller('EndProdCtrl', ['$scope', 'endproducts', 'auth',
         $scope.hoverOut = function() {
             this.hoverEdit = false;
         };
+
+
+
         $scope.addProduct = function() {
             if ($scope.client === '') {
                 alert('No se agrego el producto');
                 return;
             }
+            var file = $scope.myFile;
+            var uploadUrl = '/testupload';
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl,fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function(){
+              console.log("success!!");
+            })
+            .error(function(){
+              console.log("error!!");
+            });
+
+            var fileName = $scope.fileName.name.toString();
+            var dateCreated = Date.now().toString();
+            var url = "https://s3.amazonaws.com/spiaimagebuckit/" + fileName;
+            console.log($scope.fileName.name);
+            console.log(fileName);
+            console.log(url);
+
             endproducts.create({
                 client: $scope.client,
                 partNumber: $scope.partNumber,
                 quantity: $scope.quantity,
                 price: $scope.price,
                 unit: $scope.unit,
+                url: url,
+                fileName:fileName,
             });
             //clear the values
             $scope.client = '';
