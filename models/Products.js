@@ -12,6 +12,7 @@ var ProductSchema = new mongoose.Schema({
   suppplier: String,
   imgUrl:String,
   unit: String,
+  dateCreated: { type: Date, default: Date.now },
 
 });
 

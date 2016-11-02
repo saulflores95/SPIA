@@ -623,8 +623,7 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
               console.log("error!!");
             });
 
-            var FileName = Date.now().toString() + '-' + file.originalname;
-            console.log(FileName);
+
 
             products.create({
                 title: $scope.title,
@@ -633,8 +632,7 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
                 height: $scope.height,
                 description: $scope.description,
                 tags: $scope.tags,
-                suppplier: $scope.suppplier
-                imgUrl :
+                suppplier: $scope.suppplier,
             });
 
             //clear the values
