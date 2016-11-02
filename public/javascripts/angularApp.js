@@ -634,7 +634,6 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
                 description: $scope.description,
                 tags: $scope.tags,
                 suppplier: $scope.suppplier
-                imgUrl :
             });
 
             //clear the values
@@ -935,7 +934,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $('#datepicker4').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-
 
     }
 ]);
