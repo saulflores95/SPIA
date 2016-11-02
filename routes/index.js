@@ -48,7 +48,7 @@ router.post('/testupload', upload.single('file'), function (req, res, next) {
     })
       res.redirect('/#/products');
   });
-})
+});
 
 router.post('/upload', upload.single('file'), function (req, res, next) {
   // req.files is array of `photos` files
@@ -315,12 +315,12 @@ router.get('/products/:product', function(req, res, next) {
 
 router.put('/products/:product/add', auth, function(req, res, next) {
   var newProduct = req.body;
-  req.product.add(newProduct, function(err, product){zsa
+  req.product.add(newProduct, function(err, product){
     if (err) { return next(err); }
 
     res.json(product);
   });
-})
+});
 
 
 router.put('/products/:product/subtract', auth, function(req, res, next) {

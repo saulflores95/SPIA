@@ -630,11 +630,13 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
             console.log($scope.fileName.name);
             console.log(fileName);
             console.log(url);
+            console.log($scope.unit);
 
             products.create({
                 title: $scope.title,
                 quantity: $scope.quantity,
                 weight: $scope.weight,
+                unit: $scope.unit,
                 height: $scope.height,
                 description: $scope.description,
                 tags: $scope.tags,
@@ -649,6 +651,7 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
             $scope.weight = '';
             $scope.height = '';
             $scope.description = '';
+            $scope.unit ='';
             $scope.tags = '';
             $scope.suppplier = '';
             $scope.imgUrl = '';
