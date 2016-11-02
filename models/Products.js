@@ -10,9 +10,10 @@ var ProductSchema = new mongoose.Schema({
   description: String,
   tags: String,
   suppplier: String,
-  imgUrl:String,
+  fileName:String,
   unit: String,
-  dateCreated: { type: Date, default: Date.now },
+  dateCreated: String,
+  url: String,
 
 });
 

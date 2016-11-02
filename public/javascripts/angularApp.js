@@ -216,6 +216,8 @@ return {
         element.bind('change', function(){
             scope.$apply(function(){
                 modelSetter(scope, element[0].files[0]);
+                scope.fileName = element[0].files[0]
+
             });
         });
     }
@@ -582,7 +584,6 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
         $scope.isLoggedIn = auth.isLoggedIn;
         //setting title to blank here to prevent empty products
         $scope.title = '';
-        $scope.productImg = {};
 
         $scope.subtract = function(product, newProduct) {
             products.subtract(product, newProduct);
@@ -623,7 +624,12 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
               console.log("error!!");
             });
 
-
+            var fileName = $scope.fileName.name.toString();
+            var dateCreated = Date.now().toString();
+            var url = "https://s3.amazonaws.com/spiaimagebuckit/" + fileName;
+            console.log($scope.fileName.name);
+            console.log(fileName);
+            console.log(url);
 
             products.create({
                 title: $scope.title,
@@ -633,6 +639,8 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
                 description: $scope.description,
                 tags: $scope.tags,
                 suppplier: $scope.suppplier,
+                fileName: $scope.fileName.name,
+                url : url,
             });
 
             //clear the values

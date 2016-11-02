@@ -38,7 +38,7 @@ router.post('/testupload', upload.single('file'), function (req, res, next) {
   var file = req.file;
   var filePath = path.resolve(__dirname, '..', file.path)
   var stream = fs.createReadStream(filePath);
-  var FileName = Date.now().toString() + '-' + file.originalname;
+  var FileName = file.originalname;
   console.log(FileName);
 
   return s3fsImpl.writeFile(FileName, stream).then(function(){

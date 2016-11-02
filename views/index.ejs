@@ -11,8 +11,6 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
     <script src="javascripts/angularApp.js"></script>
-    <script src="javascripts/fileModel.js"></script>
-    <script src="javascripts/multiPartForm.js"></script>
     <script src="javascripts/function.js"></script>
     <script src="javascripts/progress_bar.js"></script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -452,7 +450,7 @@
                                   <input type="file" file-model="myFile"/>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <img class="previewImg" src="{{imgUrl}}" />
+                                    <img class="previewImg" width:'100%' src="{{imgUrl}}" />
                                 </div>
                             </div>
                         </div>
@@ -474,7 +472,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                   <div class="card">
                           <div class="card-image">
-                              <img class="img-responsive thumbnailImg" src="https://s3.amazonaws.com/spiaimagebuckit/1478059313440-dibujo.jpg">
+                              <img class="img-responsive thumbnailImg" width="100%" src="{{product.url}}">
 
                           </div><!-- card image -->
 
@@ -498,6 +496,10 @@
                           <div class="card-reveal">
                               <span class="card-title">{{product.title}}</span> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               <table id="table-slide">
+                                <tr>
+                                  <td>Cantidad</td>
+                                  <td>{{product.fileName}}</td>
+                                </tr>
                               <tr>
                                 <td>Cantidad</td>
                                 <td>{{product.quantity}}</td>
