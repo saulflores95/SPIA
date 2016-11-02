@@ -5,11 +5,12 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-  "engines" : {
-    "node":"4.2.6",
-    "npm":"3.8.7"
+  "engines": {
+    "node": "4.2.6",
+    "npm": "3.8.7"
   },
   "dependencies": {
+    "aws-sdk": "",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
@@ -19,6 +20,9 @@
     "jsonwebtoken": "^7.1.7",
     "mongoose": "^4.5.7",
     "morgan": "~1.7.0",
+    "multer": "^1.2.0",
+    "multer-s3": "^2.3.2",
+    "multiparty": "^4.1.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0"

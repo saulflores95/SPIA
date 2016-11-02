@@ -206,6 +206,22 @@ app.factory('products', ['$http', 'auth',
     }
 ]);
 
+app.directive('fileModel', ['$parse', function ($parse) {
+return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+            scope.$apply(function(){
+                modelSetter(scope, element[0].files[0]);
+            });
+        });
+    }
+};
+}]);
+
 app.factory('posts', ['$http', 'auth',
     function($http, auth) {
         var o = {
@@ -453,6 +469,8 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $scope.title = '';
         $scope.addPost = function() {
             if ($scope.title === '') {
+                alert('No se agrego la orden');
+
                 return;
             }
             posts.create({
@@ -470,6 +488,8 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
             $scope.dateAcabado = '';
             $scope.dateSalida = '';
             $scope.dateImpresion = '';
+            alert('Orden agregada');
+
         };
         $scope.upvote = function(post) {
             posts.upvote(post);
@@ -548,8 +568,8 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
     }
 ]);
 
-app.controller('ProdCtrl', ['$scope', 'products', 'auth',
-    function($scope, products, auth) {
+app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
+    function($scope, $http, products, auth) {
 
         setTimeout(function(){$('.show').on('click',function(){
        			$(this).parent().parent().parent().find('.card-reveal').slideToggle('slow');
@@ -562,6 +582,7 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
         $scope.isLoggedIn = auth.isLoggedIn;
         //setting title to blank here to prevent empty products
         $scope.title = '';
+        $scope.productImg = {};
 
         $scope.subtract = function(product, newProduct) {
             products.subtract(product, newProduct);
@@ -584,8 +605,27 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
         };
         $scope.addProduct = function() {
             if ($scope.title === '') {
+                console.log("No se agrego el producto!");
                 return;
             }
+            var file = $scope.myFile;
+            var uploadUrl = '/testupload';
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl,fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function(){
+              console.log("success!!");
+            })
+            .error(function(){
+              console.log("error!!");
+            });
+
+            var FileName = Date.now().toString() + '-' + file.originalname;
+            console.log(FileName);
+
             products.create({
                 title: $scope.title,
                 quantity: $scope.quantity,
@@ -593,10 +633,10 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
                 height: $scope.height,
                 description: $scope.description,
                 tags: $scope.tags,
-                suppplier: $scope.suppplier,
-                imgUrl: $scope.imgUrl,
-
+                suppplier: $scope.suppplier
+                imgUrl :
             });
+
             //clear the values
             $scope.title = '';
             $scope.quantity = '';
@@ -606,8 +646,8 @@ app.controller('ProdCtrl', ['$scope', 'products', 'auth',
             $scope.tags = '';
             $scope.suppplier = '';
             $scope.imgUrl = '';
+            alert('Producto agregado.');
         };
-
 
     }
 ]);
@@ -628,6 +668,7 @@ app.controller('ProductCtrl', ['$scope', 'products', 'product', 'auth',
                 dateSalida: $scope.post.dateSalida
             });
         };
+
     }
 ]);
 
@@ -689,6 +730,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         };
         $scope.upvote = function(comment) {
             posts.upvoteComment(post, comment);
+
         };
         $scope.downvote = function(comment) {
             posts.downvoteComment(post, comment);
@@ -922,6 +964,7 @@ app.controller('EndProdCtrl', ['$scope', 'endproducts', 'auth',
         };
         $scope.addProduct = function() {
             if ($scope.client === '') {
+                alert('No se agrego el producto');
                 return;
             }
             endproducts.create({
@@ -937,6 +980,7 @@ app.controller('EndProdCtrl', ['$scope', 'endproducts', 'auth',
             $scope.weight = '';
             $scope.price = '';
             $scope.unit = '';
+            alert('Producto agregado.');
         };
 
 

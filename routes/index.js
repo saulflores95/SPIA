@@ -1,3 +1,4 @@
+var path = require('path');
 var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
@@ -12,11 +13,52 @@ var EndProduct = mongoose.model('EndProduct');
 
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 
+var fs = require('fs');
+var S3FS = require('s3fs');
+var s3fsImpl = new S3FS('spiaimagebuckit',{
+  accessKeyId : 'AKIAJCWADR7A2YLOIWOA',
+  secretAccessKey :  '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'
+});
+
+s3fsImpl.create();
+
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index');
 });
+
+router.post('/testupload', upload.single('file'), function (req, res, next) {
+  // req.files is array of `photos` files
+  // req.body will contain the text fields, if there were any
+  console.log(req.file);
+
+  var file = req.file;
+  var filePath = path.resolve(__dirname, '..', file.path)
+  var stream = fs.createReadStream(filePath);
+  var FileName = Date.now().toString() + '-' + file.originalname;
+  console.log(FileName);
+
+  return s3fsImpl.writeFile(FileName, stream).then(function(){
+    fs.unlink(file.path, function(err){
+      if(err)
+        console.error(err);
+    })
+      res.redirect('/#/products');
+  });
+})
+
+router.post('/upload', upload.single('file'), function (req, res, next) {
+  // req.files is array of `photos` files
+  // req.body will contain the text fields, if there were any
+  console.log(req.file);
+  console.log(req.body);
+  res.json({success:true});
+});
+
+
 
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
@@ -27,6 +69,7 @@ router.get('/posts', function(req, res, next) {
     res.json(posts);
   });
 });
+
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
   post.author = req.payload.username;
@@ -37,6 +80,7 @@ router.post('/posts', auth, function(req, res, next) {
     res.json(post);
   });
 });
+
 router.param('post', function(req, res, next, id) {
   var query = Post.findById(id);
 
@@ -70,14 +114,19 @@ router.get('/products', function(req, res, next) {
     res.json(products);
   });
 });
-router.post('/products', auth, function(req, res, next) {
+
+router.post('/products', upload.single('image'),function(req, res, next) {
+
   var product = new Product(req.body);
   product.save(function(err, product){
     if(err){ return next(err); }
 
     res.json(product);
   });
+
 });
+
+
 router.param('product', function(req, res, next, id) {
   var query = Product.findById(id);
 
@@ -257,7 +306,6 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
 })
 
 
-
 router.get('/products/:product', function(req, res, next) {
   req.product.populate('products', function(err, product) {
     res.json(product);
@@ -267,7 +315,7 @@ router.get('/products/:product', function(req, res, next) {
 
 router.put('/products/:product/add', auth, function(req, res, next) {
   var newProduct = req.body;
-  req.product.add(newProduct, function(err, product){
+  req.product.add(newProduct, function(err, product){zsa
     if (err) { return next(err); }
 
     res.json(product);
