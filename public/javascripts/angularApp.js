@@ -59,6 +59,17 @@ app.config(['$stateProvider', '$urlRouterProvider',
                     }
                 ]
             }
+        }).state('endproduct', {
+            url: '/endproducts/:id',
+            templateUrl: '/endproduct.html',
+            controller: 'EndProductCtrl',
+            resolve: {
+                endproduct: ['$stateParams', 'endproducts',
+                    function($stateParams, endproducts) {
+                        return endproducts.get($stateParams.id);
+                    }
+                ]
+            }
         }).state('login', {
             url: '/login',
             templateUrl: '/login.html',
@@ -457,6 +468,26 @@ app.factory('endproducts', ['$http', 'auth',
             });
         };
 
+        e.add = function(endproduct, newProduct) {
+            return $http.put('/endproducts/' + endproduct._id + '/add', newProduct, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+                endproduct.quantity += newProduct.diffQuantity;
+            });
+        };
+
+        e.subtract = function(endproduct, newProduct) {
+            return $http.put('/endproducts/' + endproduct._id + '/subtract', newProduct, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+                endproduct.quantity -= newProduct.diffQuantity;
+            });
+        };
+
         return e;
 
     }
@@ -664,6 +695,26 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
 app.controller('ProductCtrl', ['$scope', 'products', 'product', 'auth',
     function($scope, products, product, auth) {
         $scope.product = product;
+        $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.currentUserType = auth.currentUserType;
+        $scope.editPost = function() {
+            console.log('Edit Post Form Pressed!')
+            posts.editPost(post, {
+                title: $scope.post.title,
+                nombreCliente: $scope.post.nombreCliente,
+                dateEntrada: $scope.post.dateEntrada,
+                dateImpresion: $scope.post.dateImpresion,
+                dateAcabado: $scope.post.dateAcabado,
+                dateSalida: $scope.post.dateSalida
+            });
+        };
+
+    }
+]);
+
+app.controller('EndProductCtrl', ['$scope', 'endproducts', 'endproduct', 'auth',
+    function($scope, endproducts, endproduct, auth) {
+        $scope.endproduct = endproduct;
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
         $scope.editPost = function() {
@@ -963,7 +1014,7 @@ app.controller('EndProdCtrl', ['$scope', 'endproducts', '$http', 'auth',
         $scope.isLoggedIn = auth.isLoggedIn;
         //setting title to blank here to prevent empty products
         $scope.title = '';
-
+        var newProduct = $scope.newProduct;
         $scope.hoverIn = function() {
             this.hoverEdit = true;
         };
@@ -972,7 +1023,16 @@ app.controller('EndProdCtrl', ['$scope', 'endproducts', '$http', 'auth',
             this.hoverEdit = false;
         };
 
+        $scope.subtract = function(endproduct, newProduct) {
+            endproducts.subtract(endproduct, newProduct);
+            alert('Restado Confirmado!');
+        };
 
+        $scope.add = function(endproduct, newProduct) {
+            endproducts.add(endproduct, newProduct);
+            alert('Suma Exitosa!');
+
+        };
 
         $scope.addProduct = function() {
             if ($scope.client === '') {

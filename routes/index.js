@@ -159,6 +159,26 @@ router.post('/endproducts', auth, function(req, res, next) {
     res.json(endproducts);
   });
 });
+router.put('/endproducts/:endproduct/add', auth, function(req, res, next) {
+  var newProduct = req.body;
+  req.endproduct.add(newProduct, function(err, endproduct){
+    if (err) { return next(err); }
+
+    res.json(endproduct);
+  });
+});
+
+
+router.put('/endproducts/:endproduct/subtract', auth, function(req, res, next) {
+  var newProduct = req.body;
+  req.endproduct.subtract(newProduct, function(err, endproduct){
+    if (err) { return next(err); }
+
+    res.json(endproduct);
+  });
+});
+
+
 router.param('endproduct', function(req, res, next, id) {
   var query = EndProduct.findById(id);
 
