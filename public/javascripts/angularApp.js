@@ -299,13 +299,13 @@ app.factory('posts', ['$http', 'auth',
                 post.progress +=10;
             });
         };
-        o.planacionConfirmationCapture = function(post) {
-            return $http.put('/posts/' + post._id + '/planacionConfirmationCapture', null, {
+        o.planeacionConfirmationCapture = function(post) {
+            return $http.put('/posts/' + post._id + '/planeacionConfirmationCapture', null, {
                 headers: {
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.planacionConfirmation = true;
+                post.planeacionConfirmation = true;
                 post.progress += 20;
             });
         };
@@ -817,9 +817,9 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
 
         };
 
-        $scope.planacionConfirmationCapture = function(post) {
-            console.log('Preprensa Job Done:' + post.planacionConfirmation);
-            posts.planacionConfirmationCapture(post);
+        $scope.planeacionConfirmationCapture = function(post) {
+            console.log('Preprensa Job Done:' + post.planeacionConfirmation);
+            posts.planeacionConfirmationCapture(post);
           //  window.location.reload(true);
 
         };
@@ -874,8 +874,8 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
             }
         }
-        $scope.planacionStyle = function() {
-            if (post.planacionConfirmation == true) {
+        $scope.planeacionStyle = function() {
+            if (post.planeacionConfirmation == true) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
             }
         }
@@ -922,7 +922,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 return "Preprensa";
             }
             if (post.progress == 30) {
-                return "Planacion";
+                return "planeacion";
             }
             if (post.progress == 50) {
                 return "Almacen";

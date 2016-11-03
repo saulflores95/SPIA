@@ -219,8 +219,8 @@ router.put('/posts/:post/disenoConfirmationCapture', auth, function(req, res, ne
     res.json(post);
   });
 });
-router.put('/posts/:post/planacionConfirmationCapture', auth, function(req, res, next) {
-  req.post.planacionConfirmationCapture(function(err, post){
+router.put('/posts/:post/planeacionConfirmationCapture', auth, function(req, res, next) {
+  req.post.planeacionConfirmationCapture(function(err, post){
     if (err) { return next(err); }
 
     res.json(post);

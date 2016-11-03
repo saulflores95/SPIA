@@ -10,7 +10,7 @@ var PostSchema = new mongoose.Schema({
   almacenConfirmation: {type: Boolean, default: false},
   preConfirmation: {type: Boolean, default: false},
   acabadosConfirmation: {type: Boolean, default: false},
-  planacionConfirmation: {type: Boolean, default: false},
+  planeacionConfirmation: {type: Boolean, default: false},
   calidadConfirmation: {type: Boolean, default: false},
   productoTerConfirmation: {type: Boolean, default: false},
   prensaConfirmation: {type: Boolean, default: false},
@@ -43,8 +43,8 @@ PostSchema.methods.preConfirmationCapture = function(cb) {
   this.save(cb);
 };
 
-PostSchema.methods.planacionConfirmationCapture = function(cb) {
-  this.planacionConfirmation = true;
+PostSchema.methods.planeacionConfirmationCapture = function(cb) {
+  this.planeacionConfirmation = true;
   this.progress += 20;
   this.save(cb);
 };
