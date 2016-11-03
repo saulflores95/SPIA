@@ -350,9 +350,26 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-12">
-            <h4>{{product.title}}</h4>
-            <h4>{{product.quantity}}</h4>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <img src="{{product.url}}" width="100%" height="450" />
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <table>
+              <form ng-submit="editPost()">
+                  <h3>Editar la Producto: {{product.title}}</h3>
+
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Cliente" ng-model="product.title">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="numero de parte" ng-model="product.quantity">
+                  </div>
+                  <br></br>
+                  <button type="submit" class="btn btn-primary">Confirmar</button>
+              </form>
+              <button class="btn btn-warning">Delete</button>
+            </table>
           </div>
         </div>
 
@@ -474,7 +491,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                   <div class="card">
                           <div class="card-image">
-                              <img class="img-responsive thumbnailImg" width="100%" src="{{product.url}}">
+                              <a href="#/products/{{product._id}}"><img class="img-responsive thumbnailImg" width="100%" src="{{product.url}}"></a>
 
                           </div><!-- card image -->
 
@@ -624,7 +641,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="card">
                             <div class="card-image">
-                              <img class="img-responsive thumbnailImg" width="100%" src="{{endproduct.url}}"/>
+                              <a href="#/endproducts/{{endproduct._id}}"><img class="img-responsive thumbnailImg" width="100%" src="{{endproduct.url}}"/></a>
 
                             </div><!-- card image -->
 
@@ -689,64 +706,27 @@
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
 
       </ul>
-        <div class="page-header">
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar producto/h4>
-              </div>
-              <div class="modal-body">
-                <form ng-submit="editPost()">
-                    <h3>Editar la Orden:</h3>
 
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Titulo" ng-model="post.title">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nombre de Cliente" ng-model="post.nombreCliente">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" ng-model="post.dateEntrada" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" ng-model="post.dateImpresion" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" ng-model="post.dateAcabado" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <div class "form-group">
-                                <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" ng-model="post.dateSalida" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <br></br>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                </form>
-              </div>
+        <div class="row" style="margin-top:20px;">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <img src="{{endproduct.url}}" width="100%" height="450" />
           </div>
-        </div>
-        </div>
-        </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <table>
+              <form ng-submit="editPost()">
+                  <h3>Editar la Producto: {{endproduct.partNumber}}</h3>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <h4>{{endproduct.title}}</h4>
-            <h4>{{endproduct.quantity}}</h4>
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Cliente" ng-model="endproduct.client">
+                  </div>
+
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="numero de parte" ng-model="endproduct.partNumber">
+                  </div>
+                  <br></br>
+                  <button type="submit" class="btn btn-primary">Confirmar</button>
+              </form>
+            </table>
           </div>
         </div>
 
@@ -797,6 +777,7 @@
                   <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
               </div>
               <button type="submit" class="btn btn-primary">Register</button>
+              <button class="btn btn-warning">Delete</button>
           </form>
     </script>
 

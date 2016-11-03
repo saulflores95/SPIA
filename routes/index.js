@@ -59,7 +59,6 @@ router.post('/upload', upload.single('file'), function (req, res, next) {
 });
 
 
-
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
     if(err){
@@ -126,7 +125,6 @@ router.post('/products', upload.single('image'),function(req, res, next) {
 
 });
 
-
 router.param('product', function(req, res, next, id) {
   var query = Product.findById(id);
 
@@ -140,7 +138,6 @@ router.param('product', function(req, res, next, id) {
 });
 //this may need to be removced if not working END
 
-
 //this may need to be removced if not working START
 router.get('/endproducts', function(req, res, next) {
   EndProduct.find(function(err, endproducts){
@@ -149,6 +146,11 @@ router.get('/endproducts', function(req, res, next) {
     }
 
     res.json(endproducts);
+  });
+});
+router.get('/endproducts/:endproduct', function(req, res, next) {
+  req.endproduct.populate('endproducts', function(err, endproduct) {
+    res.json(endproduct);
   });
 });
 router.post('/endproducts', auth, function(req, res, next) {
@@ -167,8 +169,6 @@ router.put('/endproducts/:endproduct/add', auth, function(req, res, next) {
     res.json(endproduct);
   });
 });
-
-
 router.put('/endproducts/:endproduct/subtract', auth, function(req, res, next) {
   var newProduct = req.body;
   req.endproduct.subtract(newProduct, function(err, endproduct){
@@ -177,8 +177,6 @@ router.put('/endproducts/:endproduct/subtract', auth, function(req, res, next) {
     res.json(endproduct);
   });
 });
-
-
 router.param('endproduct', function(req, res, next, id) {
   var query = EndProduct.findById(id);
 
@@ -191,8 +189,6 @@ router.param('endproduct', function(req, res, next, id) {
   });
 });
 //this may need to be removced if not working END
-
-
 router.get('/posts/:post', function(req, res, next) {
   req.post.populate('comments', function(err, post) {
     res.json(post);
@@ -209,7 +205,6 @@ router.put('/posts/:post/edit', auth, function(req, res, next) {
   });
 
 });
-
 router.put('/posts/:post/ventasConfirmationCapture', auth, function(req, res, next) {
   req.post.ventasConfirmationCapture(function(err, post){
     if (err) { return next(err); }
@@ -324,15 +319,11 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
     res.json(comment);
   });
 })
-
-
 router.get('/products/:product', function(req, res, next) {
   req.product.populate('products', function(err, product) {
     res.json(product);
   });
 });
-
-
 router.put('/products/:product/add', auth, function(req, res, next) {
   var newProduct = req.body;
   req.product.add(newProduct, function(err, product){
@@ -341,8 +332,6 @@ router.put('/products/:product/add', auth, function(req, res, next) {
     res.json(product);
   });
 });
-
-
 router.put('/products/:product/subtract', auth, function(req, res, next) {
   var newProduct = req.body;
   req.product.subtract(newProduct, function(err, product){
@@ -351,17 +340,6 @@ router.put('/products/:product/subtract', auth, function(req, res, next) {
     res.json(product);
   });
 })
-
-/*Segment used previously
-router.get('/products', function(req, res, next) {
-  Product.find(function(err, products){
-    if(err){
-      return next(err);
-    }
-    res.json(products);
-  });
-})*/
-
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
@@ -381,7 +359,6 @@ router.post('/register', function(req, res, next){
     return res.json({token: user.generateJWT()})
   });
 });
-
 router.post('/login', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
