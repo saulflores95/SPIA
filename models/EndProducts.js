@@ -13,5 +13,16 @@ var EndProductSchema = new mongoose.Schema({
 
 });
 
+EndProductSchema.methods.subtract = function(newProduct, cb) {
+  this.quantity -= newProduct.diffQuantity;
+  this.save(cb);
+};
+
+EndProductSchema.methods.add = function(newProduct, cb) {
+  this.quantity += newProduct.diffQuantity;
+  this.save(cb);
+};
+
+
 
 mongoose.model('EndProduct', EndProductSchema);
