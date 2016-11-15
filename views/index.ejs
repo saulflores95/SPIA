@@ -12,7 +12,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
     <script src="javascripts/angularApp.js"></script>
     <script src="javascripts/function.js"></script>
-    <script src="javascripts/progress_bar.js"></script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <style>
@@ -574,18 +573,18 @@
                                         <input type="number" step="0.001" class="form-control" placeholder="Cantidad" ng-model="quantity">
                                     </div>
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2">
+                                <div class="row form-group" style="margin-top:10px;">
+                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2">
                                         <div class="form-group">
                                           <select ng-model="unit" class="form-control">
                                             <option value="piezas">Piezas</option>
                                           </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                       <input type="number" step="0.001" class="form-control" placeholder="precio" ng-model="price">
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                       <input type="text" class="form-control" placeholder="Descripción" ng-model="description">
                                     </div>
                                 </div>
@@ -652,11 +651,7 @@
                                       <td>{{endproduct.price}}</td>
                                     </tr>
                                     <tr>
-                                      <td>Provedor</td>
-                                      <td>{{endproduct.suppplier}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Provedor</td>
+                                      <td>Numero de Orden</td>
                                       <td>{{endproduct.orderNumber}}</td>
                                     </tr>
                                     <tr>
