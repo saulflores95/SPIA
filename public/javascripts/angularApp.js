@@ -725,7 +725,9 @@ app.controller('EndProductCtrl', ['$scope', 'endproducts', 'endproduct', 'auth',
                 dateEntrada: $scope.post.dateEntrada,
                 dateImpresion: $scope.post.dateImpresion,
                 dateAcabado: $scope.post.dateAcabado,
-                dateSalida: $scope.post.dateSalida
+                dateSalida: $scope.post.dateSalida,
+                description: $scope.post.description
+
             });
         };
 
@@ -1064,6 +1066,8 @@ app.controller('EndProdCtrl', ['$scope', 'endproducts', '$http', 'auth',
             endproducts.create({
                 client: $scope.client,
                 partNumber: $scope.partNumber,
+                orderNumber: $scope.orderNumber,
+                description: $scope.description,
                 quantity: $scope.quantity,
                 price: $scope.price,
                 unit: $scope.unit,

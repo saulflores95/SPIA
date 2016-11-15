@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 
 var EndProductSchema = new mongoose.Schema({
   client: String,
-  partNumber: {type: Number, default: 0},
+  partNumber: String,
+  description: String,
+  orderNumber: String,
   quantity: {type: Number, default: 0},
   price: {type: Number, default: 0},
   unit: String,
