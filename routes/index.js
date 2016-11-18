@@ -205,6 +205,13 @@ router.put('/posts/:post/edit', auth, function(req, res, next) {
   });
 
 });
+router.put('/posts/:post/cancel', auth, function(req, res, next) {
+  req.post.cancel(function(err, post){
+    if (err) { return next(err); }
+
+    res.json(post);
+  });
+});
 router.put('/posts/:post/ventasConfirmationCapture', auth, function(req, res, next) {
   req.post.ventasConfirmationCapture(function(err, post){
     if (err) { return next(err); }

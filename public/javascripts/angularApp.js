@@ -269,6 +269,15 @@ app.factory('posts', ['$http', 'auth',
                 post.upvotes += 1;
             });
         };
+        o.cancel = function(post) {
+            return $http.put('/posts/' + post._id + '/cancel', null, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+                post.cancelOrder = true;
+            });
+        };
         o.ventasConfirmationCapture = function(post) {
             return $http.put('/posts/' + post._id + '/ventasConfirmationCapture', null, {
                 headers: {
@@ -797,7 +806,11 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.downvote = function(comment) {
             posts.downvoteComment(post, comment);
         };
-
+        $scope.cancelOrder = function(post) {
+            alert('Seguro que quieres cancelar Order?');
+            posts.cancel(post);
+            console.log(post.cancelOrder);
+        };
 
         $scope.ventasConfirmationCapture = function(post) {
             console.log('Ventas Job Done:' + post.ventasConfirmation);

@@ -5,6 +5,7 @@ var PostSchema = new mongoose.Schema({
   nombreCliente: String,
   link: String,
   upvotes: {type: Number, default: 0},
+  cancelOrder: {type: Boolean, default: false},
   ventasConfirmation: {type: Boolean, default: false},
   disenoConfirmation: {type: Boolean, default: false},
   almacenConfirmation: {type: Boolean, default: false},
@@ -85,6 +86,11 @@ PostSchema.methods.entregasConfirmationCapture = function(cb) {
   if(this.progress > 100){
       this.progress = 100;
   }
+  this.save(cb);
+};
+
+PostSchema.methods.cancel = function(cb) {
+  this.cancelOrder = true;
   this.save(cb);
 };
 
