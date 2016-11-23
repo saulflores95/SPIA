@@ -769,7 +769,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
 
 
         $scope.editPost = function() {
-            console.log('Edit Post Form Pressed!')
+            console.log('Edit Post Form Pressed!');
             posts.editPost(post, {
                 title: $scope.post.title,
                 nombreCliente: $scope.post.nombreCliente,
@@ -778,6 +778,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 dateAcabado: $scope.post.dateAcabado,
                 dateSalida: $scope.post.dateSalida
             });
+            alert('Orden Editada');
         };
           /*
             posts.editPost(post._id,{
@@ -807,9 +808,11 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             posts.downvoteComment(post, comment);
         };
         $scope.cancelOrder = function(post) {
-            alert('Seguro que quieres cancelar Order?');
-            posts.cancel(post);
-            console.log(post.cancelOrder);
+            if(confirm('Quieres cancelar la orden?')){
+              posts.cancel(post);
+              console.log(post.cancelOrder);
+            }
+
         };
 
         $scope.ventasConfirmationCapture = function(post) {

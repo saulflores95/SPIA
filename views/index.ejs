@@ -44,7 +44,7 @@
     <script type="text/ng-template" id="/home.html">
       <ul class="nav nav-pills nav-justified">
           <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
@@ -54,6 +54,7 @@
                 <tr>
                     <th>Orden</th>
                     <th>Estatus</th>
+                    <th>Cliente</th>
                     <th></th>
                 </tr>
             </thead>
@@ -73,6 +74,9 @@
                         <span ng-show="post.progress == 90 && post.cancelOrder == false"><b>Entregas</b></span>
                         <span ng-show="post.progress == 100 && post.cancelOrder == false"><b>Orden Completada</b></span>
                         <span ng-show="post.cancelOrder == true"><b style="color:red">CANCELADA</b></span>
+                    </td>
+                    <td>
+                      {{post.nombreClientec}}
                     </td>
                     <td><span ng-show="post.cancelOrder == false"><a href="#/posts/{{post._id}}">ver orden</a>({{post.comments.length}})</span></td>
                     <td><div ng-show="BlinkerActivator(post.dateSalida)" class="fa fa-circle text-danger Blink"></div></td>
@@ -129,7 +133,7 @@
     <script type="text/ng-template" id="/posts.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
 
@@ -159,24 +163,28 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
+                                Entrada:
                                 <input type="text" class="form-control" placeholder="Entrada" autocomplete="off" id="datepicker" ng-model="post.dateEntrada" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
+                                Impresion:
                                 <input type="text" class="form-control" placeholder="Impresión" autocomplete="off" id="datepicker2" ng-model="post.dateImpresion" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
+                                Acabados:
                                 <input type="text" class="form-control" placeholder="Acabado" autocomplete="off" id="datepicker3" ng-model="post.dateAcabado" readonly>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class "form-group">
+                              Salida:
                                 <input type="text" class="form-control" placeholder="Salida" autocomplete="off" id="datepicker4" ng-model="post.dateSalida" readonly>
                             </div>
                         </div>
@@ -271,7 +279,9 @@
 
         <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
             <span style="font-size:20px; margin-left:10px;">
-                {{comment.body}}
+              <div class="col-lg-12">
+                <b>{{comment.author}}</b> - {{comment.body}}
+              </div>
             </span>
         </div>
         <form ng-submit="addComment()" ng-show="isLoggedIn()" style="margin-top:30px;">
@@ -291,7 +301,7 @@
     <script type="text/ng-template" id="/product.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
 
@@ -350,7 +360,7 @@
     <script type="text/ng-template" id="/products.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill "><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
@@ -470,6 +480,11 @@
 
                           <div class="card-content">
                             <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h4 style="text-align:center;">{{product.title}}</h4>
+                              </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span ng-click="subtract(product, newProduct)" class="glyphicon glyphicon-minus"></span>
                                 </div>
@@ -531,7 +546,7 @@
     <script type="text/ng-template" id="/endproducts.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
@@ -626,6 +641,11 @@
 
                             <div class="card-content">
                               <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <h4 style="text-align:center;">{{endproduct.partNumber}}</h4>
+                                </div>
+                              </div>
+                              <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span ng-click="subtract(endproduct, newProduct)" class="glyphicon glyphicon-minus"></span>
                                 </div>
@@ -682,7 +702,7 @@
     <script type="text/ng-template" id="/endproduct.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
 
@@ -726,7 +746,7 @@
     <script type="text/ng-template" id="/register.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
@@ -774,7 +794,7 @@
     <script type="text/ng-template" id="/login.html">
       <ul class="nav nav-pills nav-justified">
         <li class="navPill" ng-show="{{currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
-          <li class="navPill active"><a href="/#/home">Ordenes</a></li>
+          <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
           <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
       </ul>
