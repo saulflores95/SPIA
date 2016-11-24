@@ -25,6 +25,16 @@ EndProductSchema.methods.add = function(newProduct, cb) {
   this.save(cb);
 };
 
+EndProductSchema.methods.edit = function (newProduct ,cb) {
+  this.client = newProduct.client;
+  this.partNumber = newProduct.partNumber;
+  this.description = newProduct.description;
+  this.orderNumber = newProduct.orderNumber;
+  this.quantity = newProduct.quantity;
+  this.price = newProduct.price;
+  this.save(cb);
+};
+
 
 
 mongoose.model('EndProduct', EndProductSchema);

@@ -177,6 +177,15 @@ router.put('/endproducts/:endproduct/subtract', auth, function(req, res, next) {
     res.json(endproduct);
   });
 });
+
+router.put('/endproducts/:endproduct/edit', auth, function(req, res, next) {
+  var newProduct = req.body;
+  req.endproduct.edit(newProduct, function(err, endproduct){
+    if (err) { return next(err); }
+
+    res.json(endproduct);
+  });
+});
 router.param('endproduct', function(req, res, next, id) {
   var query = EndProduct.findById(id);
 
@@ -347,6 +356,17 @@ router.put('/products/:product/subtract', auth, function(req, res, next) {
     res.json(product);
   });
 })
+router.put('/products/:product/edit', auth, function(req, res, next) {
+
+  var newProduct = req.body;
+
+  req.product.edit(newProduct, function(err, product){
+    if (err) { return next(err); }
+
+    res.json(product);
+  });
+
+});
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});

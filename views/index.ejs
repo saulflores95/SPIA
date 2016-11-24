@@ -76,7 +76,7 @@
                         <span ng-show="post.cancelOrder == true"><b style="color:red">CANCELADA</b></span>
                     </td>
                     <td>
-                      {{post.nombreClientec}}
+                      {{post.nombreCliente}}
                     </td>
                     <td><span ng-show="post.cancelOrder == false"><a href="#/posts/{{post._id}}">ver orden</a>({{post.comments.length}})</span></td>
                     <td><div ng-show="BlinkerActivator(post.dateSalida)" class="fa fa-circle text-danger Blink"></div></td>
@@ -326,31 +326,16 @@
                                 <option value="libras">Lbs</option>
                                 <option value="galones">Galones</option>
                               </select>
-              </div>
-              <div class="form-group">
+                </div>
+                <div class="form-group">
                   <h3>Dimensiones</h3>
                   <input type="number" step="0.001" class="form-control" placeholder="Peso" ng-model="product.weight">
                   <input type="number" step="0.001" class="form-control" placeholder="Anchura" ng-model="product.width">
                   <input type="number" step="0.001" class="form-control" placeholder="Altura" ng-model="product.height">
+                  <button type="submit" class="btn btn-primary">Editar producto</button>
               </div>
-              </div>
-              <div class="form-group">
-                  <div class="row">
-                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <input id="uploadFile" placeholder="Subir archivo" disabled="disabled" />
-                        <div class="fileUpload btn btn-primary">
-                          <span>Subir Archivo</span>
-                          <input id="uploadBtn" type="file" class="upload" file-model="myFile" />
-                        </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Agregar</button>
-              </div>
-              </div>
-
             </form>
+          </div>
 
           </div>
         </div>
@@ -591,13 +576,6 @@
                                     </div>
                                 </div>
                                 <div class="row form-group" style="margin-top:10px;">
-                                    <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2">
-                                        <div class="form-group">
-                                          <select ng-model="unit" class="form-control">
-                                            <option value="piezas">Piezas</option>
-                                          </select>
-                                        </div>
-                                    </div>
                                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
                                       <input type="number" step="0.001" class="form-control" placeholder="precio" ng-model="price">
                                     </div>
@@ -713,8 +691,7 @@
             <img src="{{endproduct.url}}" width="100%" height="450" />
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <table>
-              <form ng-submit="editProduct()" ng-show="isLoggedIn()">
+              <form ng-submit="editEndProduct()" ng-show="isLoggedIn()">
                   <div class="form-group">
                     <h3>Informacion Basica</h4>
                     <input type="text" class="form-control" placeholder="client" ng-model="endproduct.client">
@@ -723,21 +700,10 @@
                   <div class="form-group">
                         <input type="text" class="form-control" placeholder="Provedor" ng-model="endproduct.price">
                         <input type="number" class="form-control" placeholder="Cantidad" ng-model="endproduct.quantity">
-                          <select ng-model="unit" class="form-control">
-                            <option value="piezas">Piezas</option>
-                            <option value="libras">Lbs</option>
-                            <option value="galones">Galones</option>
-                          </select>
-                  </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button type="submit" class="btn btn-primary">Editar Producto</button>
                 </div>
-                </div>
-
               </form>
-
-            </table>
+            </div>
           </div>
         </div>
 

@@ -202,6 +202,25 @@ app.factory('products', ['$http', 'auth',
             });
         };
 
+        p.edit = function(product, newProduct) {
+            return $http.put('/products/' + product._id + '/edit', newProduct, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+              product.title = newProduct.title;
+              product.description = newProduct.description;
+              product.quantity = newProduct.quantity;
+              product.tags = newProduct.tags;
+              product.suppplier = newProduct.suppplier;
+              product.unit = newProduct.unit;
+              product.weight = newProduct.weight;
+              product.width = newProduct.width;
+              product.height = newProduct.height;
+
+            });
+        };
+
         p.subtract = function(product, newProduct) {
             return $http.put('/products/' + product._id + '/subtract', newProduct, {
                 headers: {
@@ -497,6 +516,22 @@ app.factory('endproducts', ['$http', 'auth',
             });
         };
 
+        e.edit = function(endproduct, newProduct) {
+            return $http.put('/endproducts/' + endproduct._id + '/edit', newProduct, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+              endproduct.client = newProduct.client;
+              endproduct.partNumber = newProduct.partNumber;
+              endproduct.description = newProduct.description;
+              endproduct.orderNumber = newProduct.orderNumber;
+              endproduct.quantity = newProduct.quantity;
+              endproduct.price = newProduct.price;
+
+            });
+        };
+
         return e;
 
     }
@@ -636,7 +671,6 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
 
         };
 
-
         $scope.hoverIn = function() {
             this.hoverEdit = true;
         };
@@ -706,16 +740,25 @@ app.controller('ProductCtrl', ['$scope', 'products', 'product', 'auth',
         $scope.product = product;
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
-        $scope.editPost = function() {
-            console.log('Edit Post Form Pressed!')
-            posts.editPost(post, {
-                title: $scope.post.title,
-                nombreCliente: $scope.post.nombreCliente,
-                dateEntrada: $scope.post.dateEntrada,
-                dateImpresion: $scope.post.dateImpresion,
-                dateAcabado: $scope.post.dateAcabado,
-                dateSalida: $scope.post.dateSalida
-            });
+
+        $scope.editProduct = function() {
+            console.log('Edit Post Form Pressed!');
+            if(confirm('Seguro que quieres editar el producto?')){
+              products.edit(product, {
+                  title: $scope.product.title,
+                  description: $scope.product.description,
+                  tags: $scope.product.tags,
+                  suppplier: $scope.product.suppplier,
+                  quantity: $scope.product.quantity,
+                  dateSalida: $scope.product.dateSalida,
+                  unit: $scope.product.unit,
+                  weight: $scope.product.weight,
+                  width: $scope.product.width,
+                  height: $scope.product.height
+
+              });
+              alert('Orden Editada');
+            }
         };
 
     }
@@ -726,18 +769,18 @@ app.controller('EndProductCtrl', ['$scope', 'endproducts', 'endproduct', 'auth',
         $scope.endproduct = endproduct;
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
-        $scope.editPost = function() {
-            console.log('Edit Post Form Pressed!')
-            posts.editPost(post, {
-                title: $scope.post.title,
-                nombreCliente: $scope.post.nombreCliente,
-                dateEntrada: $scope.post.dateEntrada,
-                dateImpresion: $scope.post.dateImpresion,
-                dateAcabado: $scope.post.dateAcabado,
-                dateSalida: $scope.post.dateSalida,
-                description: $scope.post.description
-
+        $scope.editEndProduct = function() {
+            console.log('Edit endproduct Form Pressed!')
+            if(confirm('Seguro que quieres editar el producto?')){
+            endproducts.edit(endproduct, {
+                client: $scope.endproduct.client,
+                partNumber: $scope.endproduct.partNumber,
+                description: $scope.endproduct.description,
+                orderNumber: $scope.endproduct.orderNumber,
+                quantity: $scope.endproduct.quantity,
+                price: $scope.endproduct.price,
             });
+          }
         };
 
     }

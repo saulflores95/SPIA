@@ -27,7 +27,18 @@ ProductSchema.methods.add = function(newProduct, cb) {
   this.save(cb);
 };
 
-
+ProductSchema.methods.edit = function (newProduct ,cb) {
+  this.title = newProduct.title;
+  this.quantity = newProduct.quantity;
+  this.description = newProduct.description;
+  this.tags = newProduct.tags;
+  this.suppplier = newProduct.suppplier;
+  this.unit = newProduct.unit;
+  this.weight = newProduct.weight;
+  this.width = newProduct.width;
+  this.height = newProduct.height;
+  this.save(cb);
+};
 
 
 mongoose.model('Product', ProductSchema);
