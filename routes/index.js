@@ -399,7 +399,7 @@ router.post('/login', function(req, res, next){
 
 console.log('calling passport)');
   passport.authenticate('local', function(err, user, info){
-    if(err){ return next(err); }        EndProdCtrl
+    if(err){ return next(err); }
 
     if(user){
       return res.json({token: user.generateJWT()});
