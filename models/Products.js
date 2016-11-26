@@ -27,6 +27,7 @@ ProductSchema.methods.add = function(newProduct, cb) {
   this.save(cb);
 };
 
+
 ProductSchema.methods.edit = function (newProduct ,cb) {
   this.title = newProduct.title;
   this.quantity = newProduct.quantity;

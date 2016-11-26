@@ -231,6 +231,16 @@ app.factory('products', ['$http', 'auth',
             });
         };
 
+        p.remove = function(product) {
+            return $http.delete('/products/' + product._id, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+              p.products.delete(product);
+            });
+        };
+
         return p;
 
     }
@@ -532,6 +542,16 @@ app.factory('endproducts', ['$http', 'auth',
             });
         };
 
+        e.remove = function(endproduct) {
+            return $http.delete('/endproducts/' + endproduct._id, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.getToken()
+                }
+            }).success(function(data) {
+              e.endproducts.delete(endproduct);
+            });
+        };
+
         return e;
 
     }
@@ -741,6 +761,14 @@ app.controller('ProductCtrl', ['$scope', 'products', 'product', 'auth',
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
 
+        $scope.delete = function(product){
+          if(confirm('Seguro que quieres eliminar este producto?')){
+            console.log('producto eliminado');
+            products.remove(product);
+          }
+        }
+
+
         $scope.editProduct = function() {
             console.log('Edit Post Form Pressed!');
             if(confirm('Seguro que quieres editar el producto?')){
@@ -769,6 +797,13 @@ app.controller('EndProductCtrl', ['$scope', 'endproducts', 'endproduct', 'auth',
         $scope.endproduct = endproduct;
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
+        $scope.delete = function(endproduct){
+          if(confirm('Seguro que quieres eliminar este producto?')){
+            console.log('producto eliminado');
+            endproducts.remove(endproduct);
+          }
+        }
+
         $scope.editEndProduct = function() {
             console.log('Edit endproduct Form Pressed!')
             if(confirm('Seguro que quieres editar el producto?')){

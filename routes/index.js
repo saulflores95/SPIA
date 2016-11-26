@@ -367,6 +367,12 @@ router.put('/products/:product/edit', auth, function(req, res, next) {
   });
 
 });
+router.delete('/products/:product', auth, function(req, res, next) {
+  req.product.remove();
+});
+router.delete('/endproducts/:endproduct', auth, function(req, res, next) {
+  req.endproduct.remove();
+});
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
@@ -393,7 +399,7 @@ router.post('/login', function(req, res, next){
 
 console.log('calling passport)');
   passport.authenticate('local', function(err, user, info){
-    if(err){ return next(err); }
+    if(err){ return next(err); }        EndProdCtrl
 
     if(user){
       return res.json({token: user.generateJWT()});

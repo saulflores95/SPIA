@@ -165,7 +165,7 @@
                     <h3>Editar la Orden:</h3>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Titulo" ng-model="post.title">
+                        <input maxlength="22" type="text" class="form-control" placeholder="Titulo" ng-model="post.title">
                     </div>
 
                     <div class="form-group">
@@ -345,6 +345,7 @@
                   <input type="number" step="0.001" class="form-control" placeholder="Anchura" ng-model="product.width">
                   <input type="number" step="0.001" class="form-control" placeholder="Altura" ng-model="product.height">
                   <button type="submit" class="btn btn-primary">Editar producto</button>
+                  <button type="button" class="btn btn-danger" ng-click="delete(product)">Borrar producto</button>
               </div>
             </form>
           </div>
@@ -395,7 +396,7 @@
                             <h3>Informacion Basica</h4>
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                        <input type="text" class="form-control" placeholder="Title" ng-model="title">
+                                        <input type="text" maxlength="22" class="form-control" placeholder="Title" ng-model="title">
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                         <input type="text" class="form-control" placeholder="Descripcion" ng-model="description">
@@ -486,7 +487,7 @@
                                     <span ng-click="subtract(product, newProduct)" class="glyphicon glyphicon-minus"></span>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                    <input class="form-control" type="Number" ng-model="newProduct.diffQuantity" />
+                                    <input class="form-control" type="Number" ng-model="newProduct.diffQuantity" placeholder="{{product.quantity}}"/>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span ng-click="add(product, newProduct)" class="glyphicon glyphicon-plus"></span>
@@ -713,6 +714,8 @@
                         <input type="text" class="form-control" placeholder="Provedor" ng-model="endproduct.price">
                         <input type="number" class="form-control" placeholder="Cantidad" ng-model="endproduct.quantity">
                         <button type="submit" class="btn btn-primary">Editar Producto</button>
+                        <button type="button" class="btn btn-danger" ng-click="delete(endproduct)">Borrar producto</button>
+
                 </div>
               </form>
             </div>
