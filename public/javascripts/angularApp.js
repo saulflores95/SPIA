@@ -614,7 +614,21 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
           //dateSalida = dateSalida.replace("T00:00:00.000Z", "");
           //  var dateSalida = post.dateSalida.replace(/-/g,'/');
 
-        $('input').filter('#datepicker').datepicker();
+        $('input').filter('#datepicker').datepicker({
+          minDate: 0,
+        	beforeShow: function (textbox, instance) {
+                var txtBoxOffset = $(this).offset();
+                var top = txtBoxOffset.top;
+                var left = txtBoxOffset.left;
+                var textBoxHeight = $(this).outerHeight();
+                setTimeout(function () {
+                    instance.dpDiv.css({
+                       top: top-$("#ui-datepicker-div").outerHeight(),
+                       left: left
+                    });
+                }, 0);
+            }
+        });
         $("#datepicker").keypress(function(event) {
             event.preventDefault();
         });
@@ -626,7 +640,21 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $('#datepicker').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-        $('input').filter('#datepicker2').datepicker();
+        $('input').filter('#datepicker2').datepicker({
+          minDate: 0,
+          beforeShow: function (textbox, instance) {
+                var txtBoxOffset = $(this).offset();
+                var top = txtBoxOffset.top;
+                var left = txtBoxOffset.left;
+                var textBoxHeight = $(this).outerHeight();
+                setTimeout(function () {
+                    instance.dpDiv.css({
+                       top: top-$("#ui-datepicker-div").outerHeight(),
+                       left: left
+                    });
+                }, 0);
+            }
+        });
         $("#datepicker2").keypress(function(event) {
             event.preventDefault();
         });
@@ -638,7 +666,21 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $('#datepicker2').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-        $('input').filter('#datepicker3').datepicker();
+        $('input').filter('#datepicker3').datepicker({
+          minDate: 0,
+          beforeShow: function (textbox, instance) {
+                var txtBoxOffset = $(this).offset();
+                var top = txtBoxOffset.top;
+                var left = txtBoxOffset.left;
+                var textBoxHeight = $(this).outerHeight();
+                setTimeout(function () {
+                    instance.dpDiv.css({
+                       top: top-$("#ui-datepicker-div").outerHeight(),
+                       left: left
+                    });
+                }, 0);
+            }
+        });
         $("#datepicker3").keypress(function(event) {
             event.preventDefault();
         });
@@ -650,7 +692,21 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $('#datepicker3').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-        $('input').filter('#datepicker4').datepicker();
+        $('input').filter('#datepicker4').datepicker({
+          minDate: 0,
+          beforeShow: function (textbox, instance) {
+                var txtBoxOffset = $(this).offset();
+                var top = txtBoxOffset.top;
+                var left = txtBoxOffset.left;
+                var textBoxHeight = $(this).outerHeight();
+                setTimeout(function () {
+                    instance.dpDiv.css({
+                       top: top-$("#ui-datepicker-div").outerHeight(),
+                       left: left
+                    });
+                }, 0);
+            }
+        });
         $("#datepicker4").keypress(function(event) {
             event.preventDefault();
         });
@@ -1043,7 +1099,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             }
         }
 
-        $('input').filter('#datepicker').datepicker();
+        $('input').filter('#datepicker').datepicker({ minDate: 0 });
         $("#datepicker").keypress(function(event) {
             event.preventDefault();
         });
@@ -1055,7 +1111,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $('#datepicker').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-        $('input').filter('#datepicker2').datepicker();
+        $('input').filter('#datepicker2').datepicker({ minDate: 0 });
         $("#datepicker2").keypress(function(event) {
             event.preventDefault();
         });
@@ -1067,7 +1123,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $('#datepicker2').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-        $('input').filter('#datepicker3').datepicker();
+        $('input').filter('#datepicker3').datepicker({ minDate: 0 });
         $("#datepicker3").keypress(function(event) {
             event.preventDefault();
         });
@@ -1079,7 +1135,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $('#datepicker3').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-        $('input').filter('#datepicker4').datepicker();
+        $('input').filter('#datepicker4').datepicker({ minDate: 0 });
         $("#datepicker4").keypress(function(event) {
             event.preventDefault();
         });
