@@ -233,7 +233,7 @@
                   </div>
                 </div>
             </h3>
-            <button type="button" class="btn btn-primary" ng-show="isLoggedIn() && currentUserType() == 'planeacion'" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar Orden</button></span></td>
+            <button type="button" class="btn btn-primary" ng-show="isLoggedIn() && EnableCancel(currentUserType())" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Editar Orden</button></span></td>
             <button class=" btn btn-danger" ng-show="isLoggedIn() && EnableCancel(currentUserType())" ng-click="cancelOrder(post)">Cancelar Orden</button>
         </div>
         <div class="row" id="progressButtonOneRow">
