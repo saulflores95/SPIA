@@ -730,27 +730,23 @@ app.controller('ProdCtrl', ['$scope', '$http', 'products', 'auth',
 
        	$('.card-reveal .close').on('click',function(){
        			$(this).parent().parent().parent().find('.card-reveal').slideToggle('slow');
-       });}, 300);
+          });}, 300);
         $scope.products = products.products;
         $scope.isLoggedIn = auth.isLoggedIn;
         //setting title to blank here to prevent empty products
         $scope.title = '';
-
         $scope.subtract = function(product, newProduct) {
             products.subtract(product, newProduct);
             alert('Restado Confirmado!');
         };
-
         $scope.add = function(product, newProduct) {
             products.add(product, newProduct);
             alert('Suma Exitosa!');
 
         };
-
         $scope.hoverIn = function() {
             this.hoverEdit = true;
         };
-
         $scope.hoverOut = function() {
             this.hoverEdit = false;
         };
@@ -882,26 +878,122 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.post = post;
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
-      //  $scope.dateAcabadosDisplay = post.dateAcabado.toISOString().substring(0, 10);
-      //  $scope.dateImpresionDisplay = post.dateImpresion.toISOString().substring(0, 10);
-      //  $scope.dateSalidaDisplay = post.dateSalida.toISOString().substring(0, 10);
-
-      $scope.DateComparer = function(){
-        //dateSalida = dateSalida.replace("T00:00:00.000Z", "");
-        //  var dateSalida = post.dateSalida.replace(/-/g,'/');
-        var dateSalida = new Date(post.dateSalida);
-        var dateCurrent = new Date();
-        var diff = dateSalida - dateCurrent;
-        var day = 0;
-        if(diff > 0){
-          var day = Math.abs(diff/86400000).toFixed(2);
-        }else{
-
+        $scope.EnableVentas = function(currentUser){
+          if(currentUser === 'ventas'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
         }
-        return day;
-      }
+        $scope.EnableDiseno = function(currentUser){
+          if(currentUser === 'diseno'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnablePre = function(currentUser){
+          if(currentUser === 'preprensa'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnablePlaneacion = function(currentUser){
+          if(currentUser === 'planeacion'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnableAlmacen = function(currentUser){
+          if(currentUser === 'almacen'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnablePrensa = function(currentUser){
+          if(currentUser === 'prensa'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnableAcabados = function(currentUser){
+          if(currentUser === 'acabados'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnableCalidad = function(currentUser){
+          if(currentUser === 'calidad'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnableProductoTer = function(currentUser){
+          if(currentUser === 'productoTer'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnableEntregas = function(currentUser){
+          if(currentUser === 'entregas'){
+            return false;
+          }else if(currentUser === 'admin'){
+            return false;
+          }else{
+            return true
+          }
+        }
+        $scope.EnableCancel = function(currentUser){
+          if(currentUser === 'planeacion'){
+            return true;
+          }else if(currentUser === 'admin'){
+            return true;
+          }else{
+            return false;
+          }
+        }
 
 
+
+        $scope.DateComparer = function(){
+          //dateSalida = dateSalida.replace("T00:00:00.000Z", "");
+          //  var dateSalida = post.dateSalida.replace(/-/g,'/');
+          var dateSalida = new Date(post.dateSalida);
+          var dateCurrent = new Date();
+          var diff = dateSalida - dateCurrent;
+          var day = 0;
+          if(diff > 0){
+            var day = Math.abs(diff/86400000).toFixed(2);
+          }else{
+
+          }
+          return day;
+        }
         $scope.editPost = function() {
             console.log('Edit Post Form Pressed!');
             posts.editPost(post, {
@@ -914,14 +1006,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             });
             alert('Orden Editada');
         };
-          /*
-            posts.editPost(post._id,{
-              title: $scope.title,
-            }).success(function(post) {
-                //$scope.post.put(post);
-                console.log(post.title);
-            });
-            */
         $scope.addComment = function() {
             if ($scope.body === '') {
                 return;
@@ -948,41 +1032,30 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             }
 
         };
-
         $scope.ventasConfirmationCapture = function(post) {
             console.log('Ventas Job Done:' + post.ventasConfirmation);
             posts.ventasConfirmationCapture(post);
           //  window.location.reload(true);
         };
-
         $scope.disenoConfirmationCapture = function(post) {
             console.log('Diseno Job Done:' + post.disenoConfirmation);
             posts.disenoConfirmationCapture(post);
-      //      window.location.reload(true);
-
         };
-
         $scope.preConfirmationCapture = function(post) {
             console.log('Preprensa Job Done:' + post.preConfirmation);
             posts.preConfirmationCapture(post);
-        //    window.location.reload(true);
-
         };
-
         $scope.planeacionConfirmationCapture = function(post) {
             console.log('Preprensa Job Done:' + post.planeacionConfirmation);
             posts.planeacionConfirmationCapture(post);
           //  window.location.reload(true);
 
         };
-
         $scope.almacenConfirmationCapture = function(post) {
             console.log('Alamacen Job Done:' + post.alamcenConfirmation);
             posts.almacenConfirmationCapture(post);
             //window.location.reload(true);
-
         };
-
         $scope.prensaConfirmationCapture = function(post) {
             console.log('Prensa Job Done: ' + post.prensaConfirmation);
             posts.prensaConfirmationCapture(post);
@@ -1010,7 +1083,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             posts.entregasConfirmationCapture(post);
             //window.location.reload(true);
         };
-
         $scope.ventasStyle = function() {
             if (post.ventasConfirmation == true) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
@@ -1061,8 +1133,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
             }
         }
-
-
         $scope.department = function() {
             if (post.progress < 10) {
                 return "No a inicializado";
@@ -1147,8 +1217,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $('#datepicker4').bind("cut copy paste", function(event) {
             event.preventDefault();
         });
-
-
     }
 ]);
 

@@ -1,5 +1,5 @@
-var path = require('path');
 var mongoose = require('mongoose');
+var path = require('path');
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -29,7 +29,6 @@ var upload = multer({ dest: 'uploads/' })
 router.get('/', function(req, res) {
   res.render('index');
 });
-
 router.post('/testupload', upload.single('file'), function (req, res, next) {
   // req.files is array of `photos` files
   // req.body will contain the text fields, if there were any
@@ -49,7 +48,6 @@ router.post('/testupload', upload.single('file'), function (req, res, next) {
       res.redirect('/#/products');
   });
 });
-
 router.post('/upload', upload.single('file'), function (req, res, next) {
   // req.files is array of `photos` files
   // req.body will contain the text fields, if there were any
@@ -57,8 +55,6 @@ router.post('/upload', upload.single('file'), function (req, res, next) {
   console.log(req.body);
   res.json({success:true});
 });
-
-
 router.get('/posts', function(req, res, next) {
   Post.find(function(err, posts){
     if(err){
@@ -68,7 +64,6 @@ router.get('/posts', function(req, res, next) {
     res.json(posts);
   });
 });
-
 router.post('/posts', auth, function(req, res, next) {
   var post = new Post(req.body);
   post.author = req.payload.username;
@@ -79,7 +74,6 @@ router.post('/posts', auth, function(req, res, next) {
     res.json(post);
   });
 });
-
 router.param('post', function(req, res, next, id) {
   var query = Post.findById(id);
 
@@ -91,7 +85,6 @@ router.param('post', function(req, res, next, id) {
     return next();
   });
 });
-
 router.param('comment', function(req, res, next, id) {
   var query = Comment.findById(id);
 
@@ -113,7 +106,6 @@ router.get('/products', function(req, res, next) {
     res.json(products);
   });
 });
-
 router.post('/products', upload.single('image'),function(req, res, next) {
 
   var product = new Product(req.body);
@@ -124,7 +116,6 @@ router.post('/products', upload.single('image'),function(req, res, next) {
   });
 
 });
-
 router.param('product', function(req, res, next, id) {
   var query = Product.findById(id);
 
@@ -177,7 +168,6 @@ router.put('/endproducts/:endproduct/subtract', auth, function(req, res, next) {
     res.json(endproduct);
   });
 });
-
 router.put('/endproducts/:endproduct/edit', auth, function(req, res, next) {
   var newProduct = req.body;
   req.endproduct.edit(newProduct, function(err, endproduct){
@@ -335,6 +325,7 @@ router.put('/posts/:post/comments/:comment/downvote', auth, function(req, res, n
     res.json(comment);
   });
 })
+
 router.get('/products/:product', function(req, res, next) {
   req.product.populate('products', function(err, product) {
     res.json(product);
@@ -370,9 +361,11 @@ router.put('/products/:product/edit', auth, function(req, res, next) {
 router.delete('/products/:product', auth, function(req, res, next) {
   req.product.remove();
 });
+
 router.delete('/endproducts/:endproduct', auth, function(req, res, next) {
   req.endproduct.remove();
 });
+
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
@@ -397,16 +390,16 @@ router.post('/login', function(req, res, next){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
 
-console.log('calling passport)');
-  passport.authenticate('local', function(err, user, info){
-    if(err){ return next(err); }
+  console.log('calling passport)');
+    passport.authenticate('local', function(err, user, info){
+      if(err){ return next(err); }
 
-    if(user){
-      return res.json({token: user.generateJWT()});
-    } else {
-      return res.status(401).json(info);
-    }
-  })(req, res, next);
+      if(user){
+        return res.json({token: user.generateJWT()});
+      } else {
+        return res.status(401).json(info);
+      }
+    })(req, res, next);
 });
 
 module.exports = router;
