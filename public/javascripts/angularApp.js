@@ -594,7 +594,13 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
         $scope.downvote = function(post) {
             posts.downvote(post);
         };
-
+        $scope.EnableAddPost = function(currentUser){
+          if(currentUser === 'planeacion' || currentUser === 'ventas' || currentUser === 'admin'){
+            return true;
+          }else{
+            return false;
+          }
+        }
         $scope.BlinkerActivator = function(post){
           var dateSalida = new Date(post);
           var dateCurrent = new Date();

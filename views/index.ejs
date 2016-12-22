@@ -98,7 +98,7 @@
             </tbody>
         </table>
 
-        <form ng-submit="addPost()" ng-show="isLoggedIn() && currentUserType() == 'ventas' || currentUserType == 'planeacion'" style="margin-top:30px">
+        <form ng-submit="addPost()" ng-show="isLoggedIn() && EnableAddPost(currentUserType())" style="margin-top:30px">
             <h3>Agrega una Orden:</h3>
 
             <div class="form-group">
