@@ -72,7 +72,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody ng-repeat="post in posts | filter: filter">
+            <tbody ng-show="{{isLoggedIn()}}" ng-repeat="post in posts">
                 <tr>
                     <td><span>{{post.title}}</span></td>
                     <td>
@@ -86,7 +86,7 @@
                         <span ng-show="post.progress == 70 && post.cancelOrder == false"><b>Producto Terminado</b></span>
                         <span ng-show="post.progress == 80 && post.cancelOrder == false"><b>Calidad</b></span>
                         <span ng-show="post.progress == 90 && post.cancelOrder == false"><b>Entregas</b></span>
-                        <span ng-show="post.progress == 100 && post.cancelOrder == false"><b>Orden Completada</b></span>
+                        <span ng-show="post.progress == 100 && post.cancelOrder == false"><b>Completada</b></span>
                         <span ng-show="post.cancelOrder == true"><b style="color:red">CANCELADA</b></span>
                     </td>
                     <td>
