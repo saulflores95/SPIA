@@ -83,7 +83,7 @@
                         <span ng-show="post.progress == 50 && post.cancelOrder == false"><b>Almacen</b></span>
                         <span ng-show="post.progress == 60 && post.cancelOrder == false"><b>Prensa</b></span>
                         <span ng-show="post.progress == 65 && post.cancelOrder == false"><b>Acabados</b></span>
-                        <span ng-show="post.progress == 70 && post.cancelOrder == false"><b>Producto Terminado</b></span>
+                        <span ng-show="post.progress == 70 && post.cancelOrder == false"><b>Prod Term</b></span>
                         <span ng-show="post.progress == 80 && post.cancelOrder == false"><b>Calidad</b></span>
                         <span ng-show="post.progress == 90 && post.cancelOrder == false"><b>Entregas</b></span>
                         <span ng-show="post.progress == 100 && post.cancelOrder == false"><b>Completada</b></span>
@@ -92,7 +92,7 @@
                     <td>
                       {{post.nombreCliente}}
                     </td>
-                    <td><span ng-show="post.cancelOrder == false"><a href="#/posts/{{post._id}}">ver orden</a>({{post.comments.length}})</span></td>
+                    <td><span ng-show="post.cancelOrder == false"><a href="#/posts/{{post._id}}">info</a>({{post.comments.length}})</span></td>
                     <td><div ng-show="BlinkerActivator(post.dateSalida)" class="fa fa-circle text-danger Blink"></div></td>
                 </tr>
             </tbody>
