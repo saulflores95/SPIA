@@ -88,7 +88,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             controller: 'AuthCtrl',
             onEnter: ['$state', 'auth',
                 function($state, auth) {
-                    if (auth.isLoggedIn()) {
+                    if (!auth.isLoggedIn()) {
                         $state.go('home');
                     }
                 }

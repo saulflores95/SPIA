@@ -42,7 +42,7 @@
 
               <li ng-show="isLoggedIn()"><a href="#" ng-click="logOut()">Log Out</a></li>
               <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
-              <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+              <li ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
           </ul>
       </nav>
       <div class="row logo">
@@ -58,7 +58,7 @@
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
       </ul>
 
         <input type="text" class="form-control" ng-model="filter">
@@ -149,7 +149,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' ||currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
 
       </ul>
         <div class="page-header">
@@ -308,7 +308,7 @@
             <button type="submit" class="btn btn-primary">Post</button>
         </form>
         <div ng-hide="isLoggedIn()">
-            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can comment.</h3>
+            <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Registrar</a> before you can comment.</h3>
         </div>
     </script>
 
@@ -317,7 +317,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
 
       </ul>
         <div class="row" style="margin-top:30px">
@@ -362,7 +362,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill "><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
       </ul>
         <div class="form-group" style="padding-top:50px;">
           <div class="row">
@@ -548,7 +548,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' ||  currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
       </ul>
       <div class="form-group" style="padding-top:50px;">
         <div class="row">
@@ -697,7 +697,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
 
       </ul>
 
@@ -731,7 +731,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
       </ul>
           <div class="page-header">
               <h1></h1>
@@ -770,7 +770,7 @@
               <div class="form-group">
                   <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
               </div>
-              <button type="submit" class="btn btn-primary">Register</button>
+              <button type="submit" class="btn btn-primary">Registrar</button>
           </form>
     </script>
 
@@ -779,7 +779,7 @@
         <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'planeacion' || currentUserType() == 'almacen' || currentUserType() == 'productoTer'}}"><a  href="/#/products">Catalogo</a></li>
           <li class="navPill"><a href="/#/home">Ordenes</a></li>
           <li class="navPill" ng-show="{{currentUserType() == 'admin' || currentUserType() == 'ventas' || currentUserType() == 'productoTer' || currentUserType() == 'planeacion' || currentUserType() == 'prensa' || currentUserType() == 'almacen' || currentUserType() == 'acabados' || currentUserType() == 'calidad' || currentUserType() == 'entregas' || currentUserType() == 'almacen'}}"><a href="/#/endproducts">Producto Terminado</a></li>
-          <li class="navPill"><a href="/#/register">Agregar Usuario</a></li>
+          <li class="navPill" ng-show="currentUserType() == 'admin'"><a href="/#/register">Registrar</a></li>
       </ul>
 
         <div ng-show="error" class="alert alert-danger row">
