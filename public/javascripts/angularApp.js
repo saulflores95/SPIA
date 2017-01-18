@@ -1162,10 +1162,10 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 return "Acabdos";
             }
             if (post.progress == 70) {
-                return "Producto Terminado";
+                return "Calidad";
             }
             if (post.progress == 80) {
-                return "Calidad";
+                return "Producto Terminado";
             }
             if (post.progress == 90) {
                 return "Entregas";
