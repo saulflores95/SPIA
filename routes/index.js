@@ -16,8 +16,8 @@ var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 var fs = require('fs');
 var S3FS = require('s3fs');
 var s3fsImpl = new S3FS('spiaimagebuckit',{
-  accessKeyId : 'AKIAJCWADR7A2YLOIWOA',
-  secretAccessKey :  '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'
+  accessKeyId : 'AKIAILPNHJA5IYG7NWWA',
+  secretAccessKey :  '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'
 });
 
 s3fsImpl.create();

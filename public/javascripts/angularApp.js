@@ -441,6 +441,9 @@ app.factory('posts', ['$http', 'auth',
               post.dateImpresion = newPost.dateAcabado;
               post.nombreCliente = newPost.nombreCliente;
               post.dateSalida = newPost.dateSalida;
+              post.quantity= newPost.quantity;
+              post.partNumber= newPost.partNumber;
+              post.price= newPost.price;
             });
         };
         //comments, once again using expresss
@@ -576,7 +579,10 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
                 dateEntrada: $scope.dateEntrada,
                 dateImpresion: $scope.dateImpresion,
                 dateAcabado: $scope.dateAcabado,
-                dateSalida: $scope.dateSalida
+                dateSalida: $scope.dateSalida,
+                quantity:$scope.quantity,
+                partNumber:$scope.partNumber,
+                price:$scope.price,
             });
             //clear the values
             $scope.title = '';
@@ -585,6 +591,9 @@ app.controller('MainCtrl', ['$scope', 'posts', 'auth',
             $scope.dateAcabado = '';
             $scope.dateSalida = '';
             $scope.dateImpresion = '';
+            $scope.quantity = '';
+            $scope.numberPart = '';
+            $scope.price = '';
             alert('Orden agregada');
 
         };
@@ -887,7 +896,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.EnableVentas = function(currentUser){
           if(currentUser === 'ventas'){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
             return false;
           }else{
             return true
@@ -896,7 +905,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.EnableDiseno = function(currentUser){
           if(currentUser === 'diseno'){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
             return false;
           }else{
             return true
@@ -905,7 +914,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.EnablePre = function(currentUser){
           if(currentUser === 'preprensa'){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
             return false;
           }else{
             return true
@@ -923,7 +932,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.EnableAlmacen = function(currentUser){
           if(currentUser === 'almacen'){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
             return false;
           }else{
             return true
@@ -983,9 +992,6 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             return false;
           }
         }
-
-
-
         $scope.DateComparer = function(){
           //dateSalida = dateSalida.replace("T00:00:00.000Z", "");
           //  var dateSalida = post.dateSalida.replace(/-/g,'/');
@@ -1008,7 +1014,10 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
                 dateEntrada: $scope.post.dateEntrada,
                 dateImpresion: $scope.post.dateImpresion,
                 dateAcabado: $scope.post.dateAcabado,
-                dateSalida: $scope.post.dateSalida
+                dateSalida: $scope.post.dateSalida,
+                quantity:$scope.post.quantity,
+                partNumber:$scope.post.partNumber,
+                price:$scope.post.price,
             });
             alert('Orden Editada');
         };

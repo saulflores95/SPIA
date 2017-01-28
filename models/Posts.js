@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 var PostSchema = new mongoose.Schema({
   title: String,
   nombreCliente: String,
-  link: String,
+  partNumber:String,
+  quantity: {type: Number, default: 0},
+  price: {type: Number, default: 0},
   upvotes: {type: Number, default: 0},
   cancelOrder: {type: Boolean, default: false},
   ventasConfirmation: {type: Boolean, default: false},
@@ -111,6 +113,8 @@ PostSchema.methods.edit = function (newPost ,cb) {
   this.dateImpresion = newPost.dateImpresion;
   this.dateAcabado = newPost.dateAcabado;
   this.dateSalida = newPost.dateSalida;
+  this.partNumber = newPost.partNumber;
+  this.quantity = newPost.quantity;
   this.save(cb);
 };
 
