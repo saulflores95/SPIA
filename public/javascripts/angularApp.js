@@ -313,8 +313,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.ventasConfirmation = true;
-                post.progress += 10;
+                if (post.ventasConfirmation == 0) {
+                  post.ventasConfirmation++;
+                  post.progress += 10;
+                }else if (post.ventasConfirmation == 1) {
+                  post.ventasConfirmation++;
+                }else {
+                  post.ventasConfirmation = 2;
+                }
             });
         };
         o.disenoConfirmationCapture = function(post) {
@@ -323,8 +329,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.disenoConfirmation = true;
-                post.progress += 10;
+                if (post.disenoConfirmation == 0) {
+                  post.disenoConfirmation++;
+                  post.progress += 10;
+                }else if (post.disenoConfirmation == 1) {
+                  post.disenoConfirmation++;
+                }else {
+                  post.disenoConfirmation = 2;
+                }
             });
         };
         o.preConfirmationCapture = function(post) {
@@ -333,8 +345,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.preConfirmation = true;
-                post.progress +=10;
+                if (post.preConfirmation == 0) {
+                  post.preConfirmation++;
+                  post.progress += 10;
+                }else if (post.preConfirmation == 1) {
+                  post.preConfirmation++;
+                }else {
+                  post.preConfirmation = 2;
+                }
             });
         };
         o.planeacionConfirmationCapture = function(post) {
@@ -343,8 +361,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.planeacionConfirmation = true;
-                post.progress += 20;
+                if (post.planeacionConfirmation == 0) {
+                  post.planeacionConfirmation++;
+                  post.progress += 20;
+                }else if (post.planeacionConfirmation == 1) {
+                  post.planeacionConfirmation++;
+                }else {
+                  post.planeacionConfirmation = 2;
+                }
             });
         };
         o.almacenConfirmationCapture = function(post) {
@@ -353,8 +377,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.almacenConfirmation = true;
-                post.progress += 10;
+                if (post.almacenConfirmation == 0) {
+                  post.almacenConfirmation++;
+                  post.progress += 10;
+                }else if (post.almacenConfirmation == 1) {
+                  post.almacenConfirmation++;
+                }else {
+                  post.almacenConfirmation = 2;
+                }
             });
         };
         o.prensaConfirmationCapture = function(post) {
@@ -363,9 +393,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.prensaConfirmation = true;
-                post.progress += 5;
-
+                if (post.prensaConfirmation == 0) {
+                  post.prensaConfirmation++;
+                  post.progress += 5;
+                }else if (post.prensaConfirmation == 1) {
+                  post.prensaConfirmation++;
+                }else {
+                  post.prensaConfirmation = 2;
+                }
             });
         };
         o.acabadosConfirmationCapture = function(post) {
@@ -374,8 +409,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.acabadosConfirmation = true;
-                post.progress += 5;
+                if (post.acabadosConfirmation == 0) {
+                  post.acabadosConfirmation++;
+                  post.progress += 5;
+                }else if (post.acabadosConfirmation == 1) {
+                  post.acabadosConfirmation++;
+                }else {
+                  post.acabadosConfirmation = 2;
+                }
             });
         };
         o.calidadConfirmationCapture = function(post) {
@@ -384,8 +425,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.calidadConfirmation = true;
-                post.progress += 10;
+                if (post.calidadConfirmation == 0) {
+                  post.calidadConfirmation++;
+                  post.progress += 10;
+                }else if (post.calidadConfirmation == 1) {
+                  post.calidadConfirmation++;
+                }else {
+                  post.calidadConfirmation = 2;
+                }
             });
         };
         o.productoTerConfirmationCapture = function(post) {
@@ -394,8 +441,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.productoTerConfirmation = true;
-                post.progress += 10;
+                if (post.productoTerConfirmation == 0) {
+                  post.productoTerConfirmation++;
+                  post.progress += 10;
+                }else if (post.productoTerConfirmation == 1) {
+                  post.productoTerConfirmation++;
+                }else {
+                  post.productoTerConfirmation = 2;
+                }
             });
         };
         o.entregasConfirmationCapture = function(post) {
@@ -404,8 +457,14 @@ app.factory('posts', ['$http', 'auth',
                     Authorization: 'Bearer ' + auth.getToken()
                 }
             }).success(function(data) {
-                post.entregasConfirmation = true;
-                post.progress += 10;
+                if (post.entregasConfirmation == 0) {
+                  post.entregasConfirmation++;
+                  post.progress += 10;
+                }else if (post.entregasConfirmation == 1) {
+                  post.entregasConfirmation++;
+                }else {
+                  post.entregasConfirmation = 2;
+                }
             });
         };
         //downvotes
@@ -894,90 +953,118 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.currentUserType = auth.currentUserType;
         $scope.EnableVentas = function(currentUser){
-          if(currentUser === 'ventas'){
+          if(currentUser === 'ventas' && post.ventasConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
+          }else if(currentUser === 'admin' && post.ventasConfirmation < 2){
+            return false;
+          }else if(currentUser === 'planeacion' && post.ventasConfirmation < 2){
             return false;
           }else{
             return true
           }
         }
         $scope.EnableDiseno = function(currentUser){
-          if(currentUser === 'diseno'){
+          if(post.ventasConfirmation < 1){
+            return true;
+          }else if(currentUser === 'diseno' && post.disenoConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
+          }else if(currentUser === 'admin'){
+            return false;
+          }else if(currentUser === 'planeacion' && post.disenoConfirmation < 2){
             return false;
           }else{
-            return true
+            return true;
           }
         }
         $scope.EnablePre = function(currentUser){
-          if(currentUser === 'preprensa'){
+          if(post.disenoConfirmation < 1){
+            return true;
+          }else if(currentUser === 'preprensa' && post.preConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
+          }else if(currentUser === 'admin'){
             return false;
+          }else if(currentUser === 'planeacion' && post.preConfirmation < 2){
+            return false;
+          }else if(post.disenoConfirmation < 1){
+            return true;
           }else{
-            return true
+            return true;
           }
         }
         $scope.EnablePlaneacion = function(currentUser){
-          if(currentUser === 'planeacion'){
+          if(post.preConfirmation < 1){
+            return true;
+          }else if(currentUser === 'planeacion' && post.planeacionConfirmation < 2){
             return false;
           }else if(currentUser === 'admin'){
             return false;
           }else{
-            return true
+            return true;
           }
         }
         $scope.EnableAlmacen = function(currentUser){
-          if(currentUser === 'almacen'){
+          if(post.planeacionConfirmation < 1){
+            return true;
+          }else if(currentUser === 'almacen' && post.almacenConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin' || currentUser === 'planeacion'){
+          }else if(currentUser === 'admin'){
+            return false;
+          }else if(currentUser === 'planeacion' && post.almacenConfirmation < 2){
             return false;
           }else{
-            return true
+            return true;
           }
         }
         $scope.EnablePrensa = function(currentUser){
-          if(currentUser === 'prensa'){
+          if(post.almacenConfirmation < 1){
+            return true;
+          }else if(currentUser === 'prensa' && post.prensaConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' && post.prensaConfirmation < 2){
             return false;
           }else{
             return true
           }
         }
         $scope.EnableAcabados = function(currentUser){
-          if(currentUser === 'acabados'){
+          if(post.prensaConfirmation < 1){
+            return true;
+          }else if(currentUser === 'acabados' && post.acabadosConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' && post.acabadosConfirmation < 2){
             return false;
           }else{
             return true
           }
         }
         $scope.EnableCalidad = function(currentUser){
-          if(currentUser === 'calidad'){
+          if(post.acabadosConfirmation < 1){
+            return true;
+          }else if(currentUser === 'calidad' && post.calidadConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' && post.calidadConfirmation < 2){
             return false;
           }else{
             return true
           }
         }
         $scope.EnableProductoTer = function(currentUser){
-          if(currentUser === 'productoTer'){
+          if(post.calidadConfirmation < 1){
+            return true;
+          }else if(currentUser === 'productoTer' && post.productoTerConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' && post.productoTerConfirmation < 2){
             return false;
           }else{
             return true
           }
         }
         $scope.EnableEntregas = function(currentUser){
-          if(currentUser === 'entregas'){
+          if(post.productoTerConfirmation < 1){
+            return true;
+          }else if(currentUser === 'entregas' && post.entregasConfirmation < 2){
             return false;
-          }else if(currentUser === 'admin'){
+          }else if(currentUser === 'admin' && post.entregasConfirmation < 2){
             return false;
           }else{
             return true
@@ -1099,53 +1186,73 @@ app.controller('PostsCtrl', ['$scope', 'posts', 'post', 'auth',
             //window.location.reload(true);
         };
         $scope.ventasStyle = function() {
-            if (post.ventasConfirmation == true) {
+            if (post.ventasConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.ventasConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.disenoStyle = function() {
-            if (post.disenoConfirmation == true) {
+            if (post.disenoConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.disenoConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.preStyle = function() {
-            if (post.preConfirmation == true) {
+            if (post.preConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.preConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.planeacionStyle = function() {
-            if (post.planeacionConfirmation == true) {
+            if (post.planeacionConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.planeacionConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.alamcenStyle = function() {
-            if (post.almacenConfirmation == true) {
+            if (post.almacenConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.almacenConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.prensaStyle = function() {
-            if (post.prensaConfirmation == true) {
+            if (post.prensaConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.prensaConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.acabadosStyle = function() {
-            if (post.acabadosConfirmation == true) {
+            if (post.acabadosConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.acabadosConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.calidadStyle = function() {
-            if (post.calidadConfirmation == true) {
+            if (post.calidadConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.calidadConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.productoTerStyle = function() {
-            if (post.productoTerConfirmation == true) {
+            if (post.productoTerConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.productoTerConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.entregasStyle = function() {
-            if (post.entregasConfirmation == true) {
+            if (post.entregasConfirmation == 2) {
                 return "border-color:green; color: green; box-shadow: 0 0 10px green;";
+            }else if(post.entregasConfirmation == 1){
+              return "border-color:yellow; color: black; box-shadow: 0 0 10px yellow;";
             }
         }
         $scope.department = function() {

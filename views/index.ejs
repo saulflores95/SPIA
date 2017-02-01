@@ -263,26 +263,26 @@
         </div>
         <div class="row" id="progressButtonOneRow">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{ventasStyle()}}" ng-disabled="EnableVentas(currentUserType()) || post.ventasConfirmation == true" ng-click="ventasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{ventasStyle()}}" ng-disabled="EnableVentas(currentUserType())" ng-click="ventasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Ventas</small></h5>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{disenoStyle()}}" ng-disabled="EnableDisneo(currentUserType()) || post.disenoConfirmation == true || post.ventasConfirmation == false" ng-click="disenoConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{disenoStyle()}}" ng-disabled="EnableDiseno(currentUserType())" ng-click="disenoConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Diseno</small></h5>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{preStyle()}}" ng-disabled="EnablePre(currentUserType()) || post.preConfirmation == true || post.disenoConfirmation == false" ng-click="preConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{preStyle()}}" ng-disabled="EnablePre(currentUserType())" ng-click="preConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Preprensa</small></h5>
 
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{planeacionStyle()}}" ng-disabled="EnablePlanacion(currentUserType()) || post.planeacionConfirmation == true || post.preConfirmation == false" ng-click="planeacionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{planeacionStyle()}}" ng-disabled="EnablePlaneacion(currentUserType())" ng-click="planeacionConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Planeacion</small></h5>
 
             </div>
             <!--ERROR HERE IN PRODDUCTION LIMITANT -->
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{alamcenStyle()}}" ng-disabled="EnableAlmacen(currentUserType()) || post.almacenConfirmation == true || post.planeacionConfirmation == false" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{alamcenStyle()}}" ng-disabled="EnableAlmacen(currentUserType())" ng-click="almacenConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Almacen</small></h5>
             </div>
         </div>
@@ -295,23 +295,23 @@
         </div>
         <div class="row" id="progressButtonTwoRow">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{prensaStyle()}}" ng-disabled="EnablePrensa(currentUserType()) || post.prensaConfirmation == true || post.almacenConfirmation == false" ng-click="prensaConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{prensaStyle()}}" ng-disabled="EnablePrensa(currentUserType())" ng-click="prensaConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Prensa</small></h5>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{acabadosStyle()}}" ng-disabled="EnableAcabados(currentUserType()) || post.acabadosConfirmation == true || post.prensaConfirmation == false" ng-click="acabadosConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{acabadosStyle()}}" ng-disabled="EnableAcabados(currentUserType())" ng-click="acabadosConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Acabados</small></h5>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <button style="{{calidadStyle()}}" ng-disabled="EnableCalidad(currentUserType()) || post.calidadConfirmation == true || post.acabadosConfirmation == false" ng-click="calidadConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{calidadStyle()}}" ng-disabled="EnableCalidad(currentUserType())" ng-click="calidadConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Calidad</small></h5>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{productoTerStyle()}}" ng-disabled="EnableProductoTer(currentUserType()) || post.productoTerConfirmation == true || post.calidadConfirmation == false" ng-click="productoTerConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{productoTerStyle()}}" ng-disabled="EnableProductoTer(currentUserType())" ng-click="productoTerConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Almacen PT</small></h5>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <button style="{{entregasStyle()}}" ng-disabled="EnableEntregas(currentUserType()) || post.entregasConfirmation == true || post.productoTerConfirmation == false" ng-click="entregasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+                <button style="{{entregasStyle()}}" ng-disabled="EnableEntregas(currentUserType())" ng-click="entregasConfirmationCapture(post)" type="button" class="btn btn-default btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
                 <h5><small>Entregas</small></h5>
             </div>
         </div>

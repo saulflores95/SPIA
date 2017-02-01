@@ -8,16 +8,16 @@ var PostSchema = new mongoose.Schema({
   price: {type: Number, default: 0},
   upvotes: {type: Number, default: 0},
   cancelOrder: {type: Boolean, default: false},
-  ventasConfirmation: {type: Boolean, default: false},
-  disenoConfirmation: {type: Boolean, default: false},
-  almacenConfirmation: {type: Boolean, default: false},
-  preConfirmation: {type: Boolean, default: false},
-  acabadosConfirmation: {type: Boolean, default: false},
-  planeacionConfirmation: {type: Boolean, default: false},
-  calidadConfirmation: {type: Boolean, default: false},
-  productoTerConfirmation: {type: Boolean, default: false},
-  prensaConfirmation: {type: Boolean, default: false},
-  entregasConfirmation: {type: Boolean, default: false},
+  ventasConfirmation: {type: Number, default: 0},
+  disenoConfirmation: {type: Number, default: 0},
+  almacenConfirmation: {type: Number, default: 0},
+  preConfirmation: {type: Number, default: 0},
+  acabadosConfirmation: {type: Number, default: 0},
+  planeacionConfirmation: {type: Number, default: 0},
+  calidadConfirmation: {type: Number, default: 0},
+  productoTerConfirmation: {type: Number, default: 0},
+  prensaConfirmation: {type: Number, default: 0},
+  entregasConfirmation: {type: Number, default: 0},
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   progress: {type: Number, default:0},
   dateEntrada: { type: Date, default: Date.now },
@@ -29,65 +29,136 @@ var PostSchema = new mongoose.Schema({
 });
 
 PostSchema.methods.ventasConfirmationCapture = function(cb) {
-  this.ventasConfirmation = true;
-  this.progress += 10;
+  if(this.ventasConfirmation === 0){
+    this.progress += 10;
+    this.ventasConfirmation++;
+  }else if (this.ventasConfirmation === 1) {
+    this.ventasConfirmation++;
+  }else{
+    this.ventasConfirmation =  2
+  }
+  console.log(this.ventasConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.disenoConfirmationCapture = function(cb) {
-  this.disenoConfirmation = true;
-  this.progress += 10;
+  if(this.disenoConfirmation === 0){
+    this.progress += 10;
+    this.disenoConfirmation++;
+  }else if (this.disenoConfirmation === 1) {
+    this.disenoConfirmation++;
+  }else{
+    this.disenoConfirmation =  2
+  }
+  console.log(this.disenoConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.preConfirmationCapture = function(cb) {
-  this.preConfirmation = true;
-  this.progress += 10;
+  if(this.preConfirmation === 0){
+    this.progress += 10;
+    this.preConfirmation++;
+  }else if (this.preConfirmation === 1) {
+    this.preConfirmation++;
+  }else{
+    this.preConfirmation =  2
+  }
+  console.log(this.preConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.planeacionConfirmationCapture = function(cb) {
-  this.planeacionConfirmation = true;
-  this.progress += 20;
+  if(this.planeacionConfirmation === 0){
+    this.progress += 20;
+    this.planeacionConfirmation++;
+  }else if (this.planeacionConfirmation === 1) {
+    this.planeacionConfirmation++;
+  }else{
+    this.planeacionConfirmation =  2
+  }
+  console.log(this.planeacionConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.almacenConfirmationCapture = function(cb) {
-  this.almacenConfirmation = true;
-  this.progress += 10;
+  if(this.almacenConfirmation === 0){
+    this.progress += 10;
+    this.almacenConfirmation++;
+  }else if (this.almacenConfirmation === 1) {
+    this.almacenConfirmation++;
+  }else{
+    this.almacenConfirmation =  2
+  }
+  console.log(this.almacenConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.prensaConfirmationCapture = function(cb) {
-  this.prensaConfirmation = true;
-  this.progress += 5;
+  if(this.prensaConfirmation === 0){
+    this.progress += 5;
+    this.prensaConfirmation++;
+  }else if (this.prensaConfirmation === 1) {
+    this.prensaConfirmation++;
+  }else{
+    this.prensaConfirmation =  2
+  }
+  console.log(this.prensaConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.acabadosConfirmationCapture = function(cb) {
-  this.acabadosConfirmation = true;
-  this.progress += 5;
+  if(this.acabadosConfirmation === 0){
+    this.progress += 5;
+    this.acabadosConfirmation++;
+  }else if (this.acabadosConfirmation === 1) {
+    this.acabadosConfirmation++;
+  }else{
+    this.acabadosConfirmation =  2
+  }
+  console.log(this.prensaConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.calidadConfirmationCapture = function(cb) {
-  this.calidadConfirmation = true;
-  this.progress += 10;
+  if(this.calidadConfirmation === 0){
+    this.progress += 10;
+    this.calidadConfirmation++;
+  }else if (this.calidadConfirmation === 1) {
+    this.calidadConfirmation++;
+  }else{
+    this.calidadConfirmation =  2
+  }
+  console.log(this.calidadConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.productoTerConfirmationCapture = function(cb) {
-  this.productoTerConfirmation = true;
-  this.progress += 10;
+  if(this.productoTerConfirmation === 0){
+    this.productoTerConfirmation++;
+    this.progress += 10;
+  }else if (this.productoTerConfirmation === 1) {
+    this.productoTerConfirmation++;
+  }else{
+    this.productoTerConfirmation =  2
+  }
+  console.log(this.productoTerConfirmation);
   this.save(cb);
 };
 
 PostSchema.methods.entregasConfirmationCapture = function(cb) {
-  this.entregasConfirmation = true;
-  this.progress += 10;
+  if(this.entregasConfirmation === 0){
+    this.progress += 10;
+    this.entregasConfirmation++;
+  }else if (this.entregasConfirmation === 1) {
+    this.entregasConfirmation++;
+  }else{
+    this.entregasConfirmation =  2
+  }
+
   if(this.progress > 100){
       this.progress = 100;
   }
+  console.log(this.entregasConfirmation);
   this.save(cb);
 };
 
